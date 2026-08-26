@@ -86,30 +86,63 @@ def get_vertical_description(dz):
 
 
 # --------------------------------------------------
-# 3. 電子基準点マスターデータ（北海道の主要点拡充 ＋ 本州〜沖縄）
+# 3. 地震速報チェック機能（P2P地震情報API連携）
+# --------------------------------------------------
+def check_and_send_earthquake_alert():
+    """1時間ごとの巡回時に、直近の地震情報を取得して震度4以上の場合にLINEへ通知する"""
+    api_url = "https://api.p2pquake.net/v2/history?limit=1"
+
+    try:
+        response = requests.get(api_url, timeout=5)
+        if response.status_code != 200:
+            return
+
+        data = response.json()
+        if not data:
+            return
+
+        quake = data[0]
+        earthquake_info = quake.get("earthquake", {})
+        time = earthquake_info.get("time", "不明")
+        hypocenter = earthquake_info.get("hypocenter", {})
+        place = hypocenter.get("name", "不明")
+        magnitude = hypocenter.get("magnitude", 0.0)
+        max_scale = earthquake_info.get("maxScale", -1)
+
+        # 閾値判定: maxScale >= 40 (震度4以上)
+        # ※ 震度3以上にしたい場合は 30 に変更してください
+        if max_scale >= 40:
+            scale_text = "震度4以上"
+            if max_scale == 45:
+                scale_text = "震度5弱"
+            elif max_scale == 50:
+                scale_text = "震度5強"
+            elif max_scale >= 55:
+                scale_text = "震度6弱以上"
+
+            msg = (
+                f"🚨【緊急地震速報 / 地震情報】🚨\n"
+                f"発生時刻: {time}\n"
+                f"震源地: {place}\n"
+                f"規模: M{magnitude} / 最大{scale_text}"
+            )
+            send_line_alert(msg)
+            print("✅ 地震速報をLINEに送信しました。")
+
+    except Exception as e:
+        print(f"⚠️ 地震情報の取得中にエラーが発生しました: {e}")
+
+
+# --------------------------------------------------
+# 4. 電子基準点マスターデータ（北海道〜沖縄）
 # --------------------------------------------------
 STATIONS = [
-    # --- 北海道（エリア強化：稚内、札幌、釧路、函館など） ---
+    # --- 北海道 ---
     {"point_id": "940001", "name": "稚内（北海道）", "lat": 45.4156, "lng": 141.6731},
-    {
-        "point_id": "020882",
-        "name": "札幌２（北海道）",
-        "lat": 43.1250,
-        "lng": 141.2350,
-    },  # 👈 追加：札幌周辺
-    {
-        "point_id": "940010",
-        "name": "釧路市（北海道）",
-        "lat": 42.9847,
-        "lng": 144.3814,
-    },  # 👈 追加：道東・釧路
+    {"point_id": "020882", "name": "札幌２（北海道）", "lat": 43.1250, "lng": 141.2350},
+    {"point_id": "940010", "name": "釧路市（北海道）", "lat": 42.9847, "lng": 144.3814},
     {"point_id": "940002", "name": "興部（北海道）", "lat": 44.4711, "lng": 143.1389},
-    {
-        "point_id": "020885",
-        "name": "北海道日高（北海道）",
-        "lat": 42.4830,
-        "lng": 142.5410,
-    },  # 👈 追加：日高地方
+    {"point_id": "020885", "name": "北海道日高（北海道）", "lat": 42.4830, "lng": 142.5410},
     # --- 東北 ---
     {"point_id": "950150", "name": "青森（青森）", "lat": 40.8244, "lng": 140.7400},
     {"point_id": "950152", "name": "盛岡（岩手）", "lat": 39.7036, "lng": 141.1525},
@@ -166,7 +199,7 @@ STATIONS = [
 
 
 # --------------------------------------------------
-# 4. 実データの取得・計算処理（高速化対応：timeout=2秒）
+# 5. GNSSデータ取得
 # --------------------------------------------------
 def fetch_real_gnss_data():
     results = []
@@ -229,8 +262,12 @@ def fetch_real_gnss_data():
 
 
 # --------------------------------------------------
-# 5. 地図作成・データマッピング
+# 6. メイン実行・地図作成
 # --------------------------------------------------
+# 1. 1時間ごとの巡回時に地震速報のチェック＆LINE通知を実行
+check_and_send_earthquake_alert()
+
+# 2. 地殻変動データの取得
 df = fetch_real_gnss_data()
 
 THRESHOLD_H = 10.0
@@ -239,7 +276,6 @@ THRESHOLD_V = 20.0
 m = folium.Map(location=[37.5, 137.5], zoom_start=5)
 alert_messages = []
 
-# --- 電子基準点のプロット ---
 for _, row in df.iterrows():
     is_h_alert = row["shift_h_mm"] >= THRESHOLD_H
     is_v_alert = abs(row["dz"]) >= THRESHOLD_V
@@ -267,7 +303,6 @@ for _, row in df.iterrows():
 
         alert_messages.append(f"・{row['name']}: " + " / ".join(reasons))
 
-    # ポップアップテキスト
     popup_text = f"""
     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">
         <b style="font-size:13px; color:#333;">観測点: {row['name']}</b><br>
@@ -298,9 +333,7 @@ for _, row in df.iterrows():
 
     marker.add_to(m)
 
-# --------------------------------------------------
-# 凡例（説明ボックス）
-# --------------------------------------------------
+# 凡例
 legend_html = f"""
 <div style="
     position: fixed; 
@@ -321,9 +354,7 @@ legend_html = f"""
 """
 m.get_root().html.add_child(folium.Element(legend_html))
 
-# --------------------------------------------------
-# 6. LINE通知処理 & 保存
-# --------------------------------------------------
+# 地殻変動アラート通知
 if alert_messages:
     msg_body = "\n".join(alert_messages)
     line_message = (
