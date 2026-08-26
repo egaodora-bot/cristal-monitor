@@ -2,36 +2,40 @@ name: Hourly Crustal Monitor Run
 
 on:
   schedule:
-    # 毎時0分（1時間ごと）に自動実行する設定
-    - cron: '0 * * * *'
-  workflow_dispatch: # 手動実行用ボタン
+    - cron: '0 * * * *'  # 1時間ごとに自動実行
+  workflow_dispatch:      # 手動実行ボタンを有効化
 
 jobs:
-  run-script:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+    permissions:
+      contents: write
 
-      - name: Pythonの準備
-        uses: actions/setup-python@v4
+    steps:
+      # 最新の checkout (v4) に更新
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 最新の setup-python (v5) に更新
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: 必要なツールのインストール
+      - name: Install dependencies
         run: |
-          pip install pandas folium numpy requests
+          python -m pip install --upgrade pip
+          pip install requests pandas numpy folium
 
-      - name: 解析プログラムを実行
+      - name: Run crustal monitoring script
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
-        run: |
-          python main.py
+        run: python main.py
 
-      - name: 生成したデータを保存
+      - name: Commit and push updated files
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          git commit -m "Auto update: $(date)" || exit 0
-          git push
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html previous_gnss_data.csv *_gnss_alert.csv || true
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update GNSS map and alert data" && git push)
