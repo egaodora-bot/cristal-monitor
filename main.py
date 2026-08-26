@@ -249,18 +249,17 @@ for _, row in df.iterrows():
 
         reasons = []
         if is_h_alert:
-            reasons.append(
-                f"水平 {row['shift_h_mm']}mm（{dir_name}方向）"
-            )
+            reasons.append(f"水平 {row['shift_h_mm']}mm（{dir_name}）")
         if is_v_alert:
             reasons.append(f"垂直 {v_desc}")
 
         alert_messages.append(f"・{row['name']}: " + " / ".join(reasons))
 
+    # ポップアップに「水平」と「垂直（上下）」を明記
     popup_text = f"""
-    <div style="font-family: sans-serif; font-size:12px; line-height:1.4;">
+    <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">
         <b style="font-size:13px; color:#333;">観測点: {row['name']}</b><br>
-        <small style="color:#777;">ID: {row['point_id']}</small><hr style="margin:4px 0;">
+        <small style="color:#777;">ID: {row['point_id']}</small><hr style="margin:5px 0;">
         <b>↔️ 水平変動:</b> {row['shift_h_mm']} mm（{dir_arrow} {dir_name}）<br>
         <b>↕️ 垂直変動:</b> {v_desc}
     </div>
@@ -268,14 +267,21 @@ for _, row in df.iterrows():
 
     marker = folium.Marker(
         location=[row["lat"], row["lng"]],
-        popup=folium.Popup(popup_text, max_width=260),
+        popup=folium.Popup(popup_text, max_width=280),
         icon=folium.Icon(
             color=color, icon="warning" if is_alert else "info-sign", prefix="fa"
         ),
     )
 
+    # 警戒点には常時吹き出しを表示（水平＋垂直）
     if is_alert:
-        tooltip_html = f"⚠️ <b>{row['name']}</b>: 水平{row['shift_h_mm']}mm({dir_name}) / {v_desc}"
+        tooltip_html = f"""
+        <div style="font-size:11px; font-weight:bold;">
+            ⚠️ {row['name']}<br>
+            ↔️ 水平: {row['shift_h_mm']}mm ({dir_name})<br>
+            ↕️ 垂直: {v_desc}
+        </div>
+        """
         folium.Tooltip(tooltip_html, permanent=True, direction="top").add_to(marker)
 
     marker.add_to(gnss_group)
@@ -292,7 +298,6 @@ for eq in earthquakes:
         <b>深さ:</b> {eq['depth']} km
     </div>
     """
-    # 半径を従来の約半分（2〜3px程度）、透明度をアップ（0.3）にしてスッキリ表示
     folium.CircleMarker(
         location=[eq["lat"], eq["lng"]],
         radius=max(eq["mag"] * 0.8, 2.0),
@@ -309,23 +314,23 @@ for eq in earthquakes:
 folium.LayerControl(collapsed=False).add_to(m)
 
 # --------------------------------------------------
-# コンパクト凡例（説明ボックス）
+# 凡例（説明ボックス）
 # --------------------------------------------------
 legend_html = f"""
 <div style="
     position: fixed; 
-    bottom: 20px; left: 10px; width: 170px;
+    bottom: 20px; left: 10px; width: 190px;
     background-color: rgba(255, 255, 255, 0.92); z-index:9999; font-size:11px;
-    border:1px solid #ccc; border-radius:6px; padding: 6px 10px;
+    border:1px solid #ccc; border-radius:6px; padding: 8px 10px;
     box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-    font-family: sans-serif; line-height: 1.3;
+    font-family: sans-serif; line-height: 1.4;
     ">
-    <b style="font-size:11px; color:#333;">🗺️ 地殻変動 & 地震</b><hr style="margin:3px 0;">
-    <div style="margin-bottom:2px;">
-        <span style="color:blue; font-weight:bold;">🔵 正常</span>: 水平<{THRESHOLD_H}mm
+    <b style="font-size:11px; color:#333;">🗺️ 地殻変動 & 地震</b><hr style="margin:4px 0;">
+    <div style="margin-bottom:3px;">
+        <span style="color:blue; font-weight:bold;">🔵 正常</span>: 水平<{THRESHOLD_H}mm / 垂直<{THRESHOLD_V}mm
     </div>
-    <div style="margin-bottom:2px;">
-        <span style="color:red; font-weight:bold;">🔴 警戒</span>: 水平≥{THRESHOLD_H}mm
+    <div style="margin-bottom:3px;">
+        <span style="color:red; font-weight:bold;">🔴 警戒</span>: 水平≥{THRESHOLD_H}mm または 垂直≥{THRESHOLD_V}mm
     </div>
     <div>
         <span style="color:#e67e22; font-weight:bold;">🟠 過去1年M5+地震</span>
