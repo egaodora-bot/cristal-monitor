@@ -1,4 +1,5 @@
 from datetime import datetime
+import math
 import os
 import folium
 import numpy as np
@@ -43,7 +44,50 @@ def send_line_alert(message_text):
 
 
 # --------------------------------------------------
-# 2. 主要電子基準点マスターデータ
+# 2. 方位・上下動計算用の補助関数
+# --------------------------------------------------
+def calculate_cardinal_direction(dx, dy):
+    """dx(東西), dy(南北)から移動方位と矢印文字を取得"""
+    if dx == 0 and dy == 0:
+        return "静止", "・"
+
+    # 方位角計算 (北を0度とし時計回り)
+    angle = math.degrees(math.atan2(dx, dy)) % 360
+
+    directions = [
+        ("北", "⬆️"),
+        ("北北東", "↗️"),
+        ("北東", "↗️"),
+        ("東北東", "↗️"),
+        ("東", "➡️"),
+        ("東南東", "↘️"),
+        ("南東", "↘️"),
+        ("南南東", "↘️"),
+        ("南", "⬇️"),
+        ("南南西", "↙️"),
+        ("南西", "↙️"),
+        ("西南西", "↙️"),
+        ("西", "⬅️"),
+        ("西北西", "↖️"),
+        ("北西", "↖️"),
+        ("北北西", "↖️"),
+    ]
+    idx = int((angle + 11.25) / 22.5) % 16
+    return directions[idx][0], directions[idx][1]
+
+
+def get_vertical_description(dz):
+    """dz(上下)から隆起・沈下の判定文字列を取得"""
+    if dz > 0:
+        return f"⬆️ 隆起 (+{abs(dz)} mm)"
+    elif dz < 0:
+        return f"⬇️ 沈下 (-{abs(dz)} mm)"
+    else:
+        return "変動なし (0.0 mm)"
+
+
+# --------------------------------------------------
+# 3. 主要電子基準点マスターデータ
 # --------------------------------------------------
 STATIONS = [
     {"point_id": "940001", "name": "稚内（北海道）", "lat": 45.4156, "lng": 141.6731},
@@ -58,7 +102,7 @@ STATIONS = [
 
 
 # --------------------------------------------------
-# 3. 実データの取得・計算処理
+# 4. 実データの取得・計算処理
 # --------------------------------------------------
 def fetch_real_gnss_data():
     results = []
@@ -117,7 +161,7 @@ def fetch_real_gnss_data():
 
 
 # --------------------------------------------------
-# 4. データ取得・マップ作成・凡例追加
+# 5. データ取得・マップ作成・詳細ポップアップ構成
 # --------------------------------------------------
 df = fetch_real_gnss_data()
 
@@ -134,6 +178,10 @@ for _, row in df.iterrows():
 
     color = "red" if is_alert else "blue"
 
+    # 方位と垂直方向（隆起/沈下）の判定
+    dir_name, dir_arrow = calculate_cardinal_direction(row["dx"], row["dy"])
+    v_desc = get_vertical_description(row["dz"])
+
     if is_alert:
         folium.Circle(
             location=[row["lat"], row["lng"]],
@@ -146,22 +194,29 @@ for _, row in df.iterrows():
 
         reasons = []
         if is_h_alert:
-            reasons.append(f"水平 {row['shift_h_mm']} mm")
+            reasons.append(
+                f"水平 {row['shift_h_mm']}mm（{dir_name}方向）"
+            )
         if is_v_alert:
-            direction = "隆起" if row["dz"] > 0 else "沈下"
-            reasons.append(f"垂直({direction}) {abs(row['dz'])} mm")
+            reasons.append(f"垂直 {v_desc}")
 
         alert_messages.append(f"・{row['name']}: " + " / ".join(reasons))
 
-    popup_text = (
-        f"<b>観測点: {row['name']}</b><br>"
-        f"・観測点ID: {row['point_id']}<br>"
-        f"・水平変動: <b>{row['shift_h_mm']} mm</b><br>"
-        f"・垂直変動: <b>{row['dz']} mm</b>"
-    )
+    # 詳細ポップアップ（方位・隆起/沈下を含む）
+    popup_text = f"""
+    <div style="font-family: sans-serif; font-size:13px; line-height:1.5;">
+        <b style="font-size:14px; color:#333;">観測点: {row['name']}</b><br>
+        <small style="color:#777;">ID: {row['point_id']}</small><hr style="margin:5px 0;">
+        <b>↔️ 水平変動（横）:</b><br>
+        &nbsp;&nbsp;・移動量: <b>{row['shift_h_mm']} mm</b><br>
+        &nbsp;&nbsp;・移動方向: <b>{dir_arrow} {dir_name}</b><br>
+        <b style="margin-top:5px; display:inline-block;">↕️ 垂直変動（たて）:</b><br>
+        &nbsp;&nbsp;・状態: <b>{v_desc}</b>
+    </div>
+    """
     folium.Marker(
         location=[row["lat"], row["lng"]],
-        popup=folium.Popup(popup_text, max_width=250),
+        popup=folium.Popup(popup_text, max_width=260),
         icon=folium.Icon(
             color=color, icon="warning" if is_alert else "info-sign", prefix="fa"
         ),
@@ -193,7 +248,7 @@ legend_html = f"""
 m.get_root().html.add_child(folium.Element(legend_html))
 
 # --------------------------------------------------
-# 5. LINE通知処理 & 保存
+# 6. LINE通知処理 & 保存
 # --------------------------------------------------
 if alert_messages:
     msg_body = "\n".join(alert_messages)
