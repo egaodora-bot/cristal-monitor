@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import math
 import os
 import folium
@@ -44,7 +44,7 @@ def send_line_alert(message_text):
 
 
 # --------------------------------------------------
-# 2. 方位・上下動計算用の補助関数
+# 2. 補助関数（方位・上下動・過去1年M5+地震取得）
 # --------------------------------------------------
 def calculate_cardinal_direction(dx, dy):
     """dx(東西), dy(南北)から移動方位と矢印文字を取得"""
@@ -85,17 +85,69 @@ def get_vertical_description(dz):
         return "変動なし (0.0 mm)"
 
 
+def fetch_past_year_m5_earthquakes():
+    """USGS APIから日本近海の過去1年間のM5.0以上地震データを取得"""
+    end_time = datetime.now()
+    start_time = end_time - timedelta(days=365)
+
+    url = "https://earthquake.usgs.gov/fdsnws/event/1/query"
+    params = {
+        "format": "geojson",
+        "starttime": start_time.strftime("%Y-%m-%d"),
+        "endtime": end_time.strftime("%Y-%m-%d"),
+        "minmagnitude": "5.0",
+        "minlatitude": "20.0",
+        "maxlatitude": "46.0",
+        "minlongitude": "122.0",
+        "maxlongitude": "154.0",
+    }
+
+    try:
+        res = requests.get(url, params=params, timeout=10)
+        if res.status_code == 200:
+            data = res.json()
+            eq_list = []
+            for feature in data["features"]:
+                props = feature["properties"]
+                geom = feature["geometry"]
+                eq_time = datetime.fromtimestamp(props["time"] / 1000.0)
+                eq_list.append(
+                    {
+                        "place": props.get("place", "日本近海"),
+                        "mag": props.get("mag", 5.0),
+                        "lat": geom["coordinates"][1],
+                        "lng": geom["coordinates"][0],
+                        "depth": geom["coordinates"][2],
+                        "time": eq_time.strftime("%Y-%m-%d %H:%M"),
+                    }
+                )
+            return eq_list
+    except Exception as e:
+        print(f"⚠️ 地震データの取得に失敗しました: {e}")
+    return []
+
+
 # --------------------------------------------------
-# 3. 主要電子基準点マスターデータ
+# 3. 電子基準点マスターデータ（全18箇所）
 # --------------------------------------------------
 STATIONS = [
     {"point_id": "940001", "name": "稚内（北海道）", "lat": 45.4156, "lng": 141.6731},
+    {"point_id": "950128", "name": "釧路（北海道）", "lat": 42.9848, "lng": 144.3816},
+    {"point_id": "950137", "name": "襟裳（北海道）", "lat": 42.0223, "lng": 143.1585},
     {"point_id": "950154", "name": "仙台（宮城）", "lat": 38.2688, "lng": 140.8721},
+    {"point_id": "950228", "name": "新潟（新潟）", "lat": 37.9022, "lng": 139.0232},
+    {"point_id": "950253", "name": "輪島/能登（石川）", "lat": 37.3934, "lng": 136.8993},
     {"point_id": "940042", "name": "足立（東京）", "lat": 35.7750, "lng": 139.8044},
+    {"point_id": "950222", "name": "館山（千葉）", "lat": 34.9961, "lng": 139.8698},
     {"point_id": "950241", "name": "富士（静岡）", "lat": 35.1613, "lng": 138.6763},
     {"point_id": "950322", "name": "名古屋（愛知）", "lat": 35.1815, "lng": 136.9064},
+    {"point_id": "950341", "name": "舞鶴（京都）", "lat": 35.4746, "lng": 135.3854},
+    {"point_id": "950381", "name": "鳥取（鳥取）", "lat": 35.5011, "lng": 134.2351},
     {"point_id": "950462", "name": "室戸1（高知）", "lat": 33.2478, "lng": 134.1750},
+    {"point_id": "950468", "name": "南海（徳島）", "lat": 33.6125, "lng": 134.3541},
+    {"point_id": "950480", "name": "宮崎/日向（宮崎）", "lat": 31.9111, "lng": 131.4239},
     {"point_id": "950482", "name": "鹿児島（鹿児島）", "lat": 31.5969, "lng": 130.5571},
+    {"point_id": "950388", "name": "父島（小笠原）", "lat": 27.0954, "lng": 142.1931},
     {"point_id": "950495", "name": "石垣（沖縄）", "lat": 24.3411, "lng": 124.1583},
 ]
 
@@ -160,23 +212,28 @@ def fetch_real_gnss_data():
 
 
 # --------------------------------------------------
-# 5. データ取得・マップ作成・詳細ポップアップ構成
+# 5. 地図作成・データマッピング
 # --------------------------------------------------
 df = fetch_real_gnss_data()
 
-THRESHOLD_H = 10.0  # 水平変動閾値 (10mm)
-THRESHOLD_V = 20.0  # 垂直変動閾値 (20mm)
+THRESHOLD_H = 10.0
+THRESHOLD_V = 20.0
 
 m = folium.Map(location=[37.5, 137.5], zoom_start=5)
+
+# レイヤーのグループ化（切替用）
+gnss_group = folium.FeatureGroup(name="📍 電子基準点（地殻変動）").add_to(m)
+eq_group = folium.FeatureGroup(name="⚡ 過去1年の地震（M5.0+）").add_to(m)
+
 alert_messages = []
 
+# --- 電子基準点（18箇所）のプロット ---
 for _, row in df.iterrows():
     is_h_alert = row["shift_h_mm"] >= THRESHOLD_H
     is_v_alert = abs(row["dz"]) >= THRESHOLD_V
     is_alert = is_h_alert or is_v_alert
 
     color = "red" if is_alert else "blue"
-
     dir_name, dir_arrow = calculate_cardinal_direction(row["dx"], row["dy"])
     v_desc = get_vertical_description(row["dz"])
 
@@ -186,9 +243,9 @@ for _, row in df.iterrows():
             radius=max(row["shift_h_mm"], abs(row["dz"])) * 3000,
             color="red",
             fill=True,
-            fill_opacity=0.3,
+            fill_opacity=0.25,
             popup=f"⚠️【警戒エリア】{row['name']} 周辺",
-        ).add_to(m)
+        ).add_to(gnss_group)
 
         reasons = []
         if is_h_alert:
@@ -200,12 +257,12 @@ for _, row in df.iterrows():
 
         alert_messages.append(f"・{row['name']}: " + " / ".join(reasons))
 
-    # ポップアップ用テキスト
     popup_text = f"""
     <div style="font-family: sans-serif; font-size:12px; line-height:1.4;">
-        <b style="font-size:13px; color:#d9534f;">⚠️ 警戒: {row['name']}</b><br>
-        <b>↔️ 水平:</b> {row['shift_h_mm']} mm（{dir_arrow} {dir_name}）<br>
-        <b>↕️ 垂直:</b> {v_desc}
+        <b style="font-size:13px; color:#333;">観測点: {row['name']}</b><br>
+        <small style="color:#777;">ID: {row['point_id']}</small><hr style="margin:4px 0;">
+        <b>↔️ 水平変動:</b> {row['shift_h_mm']} mm（{dir_arrow} {dir_name}）<br>
+        <b>↕️ 垂直変動:</b> {v_desc}
     </div>
     """
 
@@ -217,12 +274,37 @@ for _, row in df.iterrows():
         ),
     )
 
-    # 赤色（異常値）の場合はクリックしなくても自動で常時表示する（Tooltip Tooltip style）
     if is_alert:
-        tooltip_html = f"⚠️ <b>{row['name']}</b>: 水平{row['shift_h_mm']}mm({dir_name}) / 垂直:{v_desc}"
+        tooltip_html = f"⚠️ <b>{row['name']}</b>: 水平{row['shift_h_mm']}mm({dir_name}) / {v_desc}"
         folium.Tooltip(tooltip_html, permanent=True, direction="top").add_to(marker)
 
-    marker.add_to(m)
+    marker.add_to(gnss_group)
+
+# --- 過去1年間のM5.0以上地震データのプロット ---
+earthquakes = fetch_past_year_m5_earthquakes()
+for eq in earthquakes:
+    popup_eq = f"""
+    <div style="font-family: sans-serif; font-size:12px; line-height:1.4;">
+        <b style="font-size:13px; color:#e67e22;">⚡ 地震情報 (M{eq['mag']})</b><hr style="margin:4px 0;">
+        <b>場所:</b> {eq['place']}<br>
+        <b>日時:</b> {eq['time']}<br>
+        <b>規模:</b> M{eq['mag']}<br>
+        <b>深さ:</b> {eq['depth']} km
+    </div>
+    """
+    folium.CircleMarker(
+        location=[eq["lat"], eq["lng"]],
+        radius=max(eq["mag"] * 2.5, 4),
+        color="#e67e22",
+        fill=True,
+        fill_color="#f39c12",
+        fill_opacity=0.5,
+        popup=folium.Popup(popup_eq, max_width=240),
+        tooltip=f"⚡ M{eq['mag']} ({eq['time']})",
+    ).add_to(eq_group)
+
+# レイヤー切り替えコントロールを右上に追加
+folium.LayerControl(collapsed=False).add_to(m)
 
 # --------------------------------------------------
 # コンパクト凡例（説明ボックス）
@@ -230,20 +312,21 @@ for _, row in df.iterrows():
 legend_html = f"""
 <div style="
     position: fixed; 
-    bottom: 20px; left: 10px; width: 160px;
-    background-color: rgba(255, 255, 255, 0.9); z-index:9999; font-size:11px;
+    bottom: 20px; left: 10px; width: 170px;
+    background-color: rgba(255, 255, 255, 0.92); z-index:9999; font-size:11px;
     border:1px solid #ccc; border-radius:6px; padding: 6px 10px;
     box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
     font-family: sans-serif; line-height: 1.3;
     ">
-    <b style="font-size:11px; color:#333;">🗺️ 判定基準</b><hr style="margin:3px 0;">
-    <div style="margin-bottom:3px;">
-        <span style="color:blue; font-weight:bold;">🔵 正常</span><br>
-        <span style="color:#555;">水平 <{THRESHOLD_H}mm / 垂直 <{THRESHOLD_V}mm</span>
+    <b style="font-size:11px; color:#333;">🗺️ 地殻変動 & 地震</b><hr style="margin:3px 0;">
+    <div style="margin-bottom:2px;">
+        <span style="color:blue; font-weight:bold;">🔵 正常</span>: 水平<{THRESHOLD_H}mm
+    </div>
+    <div style="margin-bottom:2px;">
+        <span style="color:red; font-weight:bold;">🔴 警戒</span>: 水平≥{THRESHOLD_H}mm
     </div>
     <div>
-        <span style="color:red; font-weight:bold;">🔴 警戒（常時表示）</span><br>
-        <span style="color:#555;">水平 ≥{THRESHOLD_H}mm / 垂直 ≥±{THRESHOLD_V}mm</span>
+        <span style="color:#e67e22; font-weight:bold;">🟠 過去1年M5+地震</span>
     </div>
 </div>
 """
