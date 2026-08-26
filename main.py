@@ -86,10 +86,10 @@ def get_vertical_description(dz):
 
 
 # --------------------------------------------------
-# 3. 地震速報チェック機能（P2P地震情報API連携）
+# 3. 地震速報チェック機能（各地の震度一覧付き）
 # --------------------------------------------------
 def check_and_send_earthquake_alert():
-    """1時間ごとの巡回時に、直近の地震情報を取得して震度4以上の場合にLINEへ通知する"""
+    """1時間ごとの巡回時に、直近の地震情報を取得して震度4以上の場合に地域一覧付きでLINEへ通知する"""
     api_url = "https://api.p2pquake.net/v2/history?limit=1"
 
     try:
@@ -110,24 +110,60 @@ def check_and_send_earthquake_alert():
         max_scale = earthquake_info.get("maxScale", -1)
 
         # 閾値判定: maxScale >= 40 (震度4以上)
-        # ※ 震度3以上にしたい場合は 30 に変更してください
         if max_scale >= 40:
-            scale_text = "震度4以上"
+            scale_text = "震度4"
             if max_scale == 45:
                 scale_text = "震度5弱"
             elif max_scale == 50:
                 scale_text = "震度5強"
-            elif max_scale >= 55:
-                scale_text = "震度6弱以上"
+            elif max_scale == 55:
+                scale_text = "震度6弱"
+            elif max_scale == 60:
+                scale_text = "震度6強"
+            elif max_scale >= 65:
+                scale_text = "震度7"
 
+            # 基本メッセージの組み立て
             msg = (
                 f"🚨【緊急地震速報 / 地震情報】🚨\n"
                 f"発生時刻: {time}\n"
                 f"震源地: {place}\n"
-                f"規模: M{magnitude} / 最大{scale_text}"
+                f"規模: M{magnitude} / 最大{scale_text}\n"
             )
+
+            # 各地の震度データ（points）から震度4以上の地域を抽出し、震度ごとに整理する
+            points = quake.get("points", [])
+            if points:
+                # 震度の数値(scale)をキーにして市区町村名をまとめる辞書
+                scale_map = {
+                    55: "震度6弱以上",
+                    50: "震度5強",
+                    45: "震度5弱",
+                    40: "震度4",
+                }
+                grouped_points = {55: [], 50: [], 45: [], 40: []}
+
+                for p in points:
+                    s = p.get("scale", 0)
+                    addr = p.get("addr", "")
+                    if s in grouped_points and addr:
+                        grouped_points[s].append(addr)
+
+                # 震度が高い順にテキストを作成
+                detail_lines = []
+                for s_val in [55, 50, 45, 40]:
+                    cities = grouped_points[s_val]
+                    if cities:
+                        # 市町村名をつなげる（長すぎる場合は省略せず綺麗にカンマ区切り等に）
+                        city_str = "、".join(cities)
+                        label = scale_map[s_val]
+                        detail_lines.append(f"・{label}: {city_str}")
+
+                if detail_lines:
+                    msg += "\n【各地の震度4以上】\n" + "\n".join(detail_lines)
+
             send_line_alert(msg)
-            print("✅ 地震速報をLINEに送信しました。")
+            print("✅ 地震速報（地域一覧付き）をLINEに送信しました。")
 
     except Exception as e:
         print(f"⚠️ 地震情報の取得中にエラーが発生しました: {e}")
