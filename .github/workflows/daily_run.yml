@@ -3,22 +3,20 @@ name: Hourly Crustal Monitor Run
 on:
   schedule:
     - cron: '0 * * * *'  # 1時間ごとに自動実行
-  workflow_dispatch:      # 手動実行ボタンを有効化
+  workflow_dispatch:      # 手動実行ボタン
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
 
     steps:
-      # 最新の checkout (v4) に更新
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
-      # 最新の setup-python (v5) に更新
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.4.0
         with:
           python-version: '3.10'
 
