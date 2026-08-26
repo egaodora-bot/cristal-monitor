@@ -51,7 +51,6 @@ def calculate_cardinal_direction(dx, dy):
     if dx == 0 and dy == 0:
         return "静止", "・"
 
-    # 方位角計算 (北を0度とし時計回り)
     angle = math.degrees(math.atan2(dx, dy)) % 360
 
     directions = [
@@ -178,7 +177,6 @@ for _, row in df.iterrows():
 
     color = "red" if is_alert else "blue"
 
-    # 方位と垂直方向（隆起/沈下）の判定
     dir_name, dir_arrow = calculate_cardinal_direction(row["dx"], row["dy"])
     v_desc = get_vertical_description(row["dz"])
 
@@ -202,7 +200,6 @@ for _, row in df.iterrows():
 
         alert_messages.append(f"・{row['name']}: " + " / ".join(reasons))
 
-    # 詳細ポップアップ（方位・隆起/沈下を含む）
     popup_text = f"""
     <div style="font-family: sans-serif; font-size:13px; line-height:1.5;">
         <b style="font-size:14px; color:#333;">観測点: {row['name']}</b><br>
