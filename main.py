@@ -86,7 +86,7 @@ def get_vertical_description(dz):
 
 
 # --------------------------------------------------
-# 3. 電子基準点マスターデータ（全47都道府県）
+# 3. 電子基準点マスターデータ（47都道府県 ＋ 古河市）
 # --------------------------------------------------
 STATIONS = [
     # 北海道・東北
@@ -99,6 +99,7 @@ STATIONS = [
     {"point_id": "950167", "name": "福島（福島）", "lat": 37.7608, "lng": 140.4747},
     # 関東
     {"point_id": "950212", "name": "水戸（茨城）", "lat": 36.3417, "lng": 140.4467},
+    {"point_id": "020977", "name": "古河（茨城）", "lat": 36.1950, "lng": 139.7340},  # 👈 古河市を追加
     {"point_id": "950214", "name": "宇都宮（栃木）", "lat": 36.5658, "lng": 139.8836},
     {"point_id": "950216", "name": "前橋（群馬）", "lat": 36.3894, "lng": 139.0633},
     {"point_id": "950219", "name": "さいたま（埼玉）", "lat": 35.8569, "lng": 139.6489},
@@ -215,7 +216,7 @@ THRESHOLD_V = 20.0
 m = folium.Map(location=[37.5, 137.5], zoom_start=5)
 alert_messages = []
 
-# --- 電子基準点（47都道府県）のプロット ---
+# --- 電子基準点のプロット ---
 for _, row in df.iterrows():
     is_h_alert = row["shift_h_mm"] >= THRESHOLD_H
     is_v_alert = abs(row["dz"]) >= THRESHOLD_V
@@ -285,7 +286,7 @@ legend_html = f"""
     box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
     font-family: sans-serif; line-height: 1.4;
     ">
-    <b style="font-size:11px; color:#333;">🗺️ 全国地殻変動マップ (47都道府県)</b><hr style="margin:4px 0;">
+    <b style="font-size:11px; color:#333;">🗺️ 全国地殻変動マップ</b><hr style="margin:4px 0;">
     <div style="margin-bottom:3px;">
         <span style="color:blue; font-weight:bold;">🔵 正常</span>: 水平<{THRESHOLD_H}mm / 垂直<{THRESHOLD_V}mm
     </div>
