@@ -200,27 +200,32 @@ for _, row in df.iterrows():
 
         alert_messages.append(f"・{row['name']}: " + " / ".join(reasons))
 
+    # ポップアップ用テキスト
     popup_text = f"""
-    <div style="font-family: sans-serif; font-size:13px; line-height:1.5;">
-        <b style="font-size:14px; color:#333;">観測点: {row['name']}</b><br>
-        <small style="color:#777;">ID: {row['point_id']}</small><hr style="margin:5px 0;">
-        <b>↔️ 水平変動（横）:</b><br>
-        &nbsp;&nbsp;・移動量: <b>{row['shift_h_mm']} mm</b><br>
-        &nbsp;&nbsp;・移動方向: <b>{dir_arrow} {dir_name}</b><br>
-        <b style="margin-top:5px; display:inline-block;">↕️ 垂直変動（たて）:</b><br>
-        &nbsp;&nbsp;・状態: <b>{v_desc}</b>
+    <div style="font-family: sans-serif; font-size:12px; line-height:1.4;">
+        <b style="font-size:13px; color:#d9534f;">⚠️ 警戒: {row['name']}</b><br>
+        <b>↔️ 水平:</b> {row['shift_h_mm']} mm（{dir_arrow} {dir_name}）<br>
+        <b>↕️ 垂直:</b> {v_desc}
     </div>
     """
-    folium.Marker(
+
+    marker = folium.Marker(
         location=[row["lat"], row["lng"]],
         popup=folium.Popup(popup_text, max_width=260),
         icon=folium.Icon(
             color=color, icon="warning" if is_alert else "info-sign", prefix="fa"
         ),
-    ).add_to(m)
+    )
+
+    # 赤色（異常値）の場合はクリックしなくても自動で常時表示する（Tooltip Tooltip style）
+    if is_alert:
+        tooltip_html = f"⚠️ <b>{row['name']}</b>: 水平{row['shift_h_mm']}mm({dir_name}) / 垂直:{v_desc}"
+        folium.Tooltip(tooltip_html, permanent=True, direction="top").add_to(marker)
+
+    marker.add_to(m)
 
 # --------------------------------------------------
-# コンパクト化した凡例（説明ボックス）を地図左下に追加
+# コンパクト凡例（説明ボックス）
 # --------------------------------------------------
 legend_html = f"""
 <div style="
@@ -237,7 +242,7 @@ legend_html = f"""
         <span style="color:#555;">水平 <{THRESHOLD_H}mm / 垂直 <{THRESHOLD_V}mm</span>
     </div>
     <div>
-        <span style="color:red; font-weight:bold;">🔴 警戒</span><br>
+        <span style="color:red; font-weight:bold;">🔴 警戒（常時表示）</span><br>
         <span style="color:#555;">水平 ≥{THRESHOLD_H}mm / 垂直 ≥±{THRESHOLD_V}mm</span>
     </div>
 </div>
