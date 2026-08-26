@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_1d75533a208c08c3a0c73bfe290ad2f7 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_1d75533a208c08c3a0c73bfe290ad2f7" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_1d75533a208c08c3a0c73bfe290ad2f7 = L.map(
+                "map_1d75533a208c08c3a0c73bfe290ad2f7",
+                {
+                    center: [37.5, 137.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e57e93cd472d32c1be2db1ac55a59c9b = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e57e93cd472d32c1be2db1ac55a59c9b.addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+            var circle_4c3c43d1f85ad59c3ed8e518ee478fed = L.circle(
+                [35.1613, 138.6763],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 45000.0, "stroke": true, "weight": 3}
+            ).addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+        var popup_4efe0e97f6f0ed0a1b37286f65e4a23d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c903584ae7efe4d424994a798045f3b0 = $(`<div id="html_c903584ae7efe4d424994a798045f3b0" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】富士 周辺</div>`)[0];
+                popup_4efe0e97f6f0ed0a1b37286f65e4a23d.setContent(html_c903584ae7efe4d424994a798045f3b0);
+            
+        
+
+        circle_4c3c43d1f85ad59c3ed8e518ee478fed.bindPopup(popup_4efe0e97f6f0ed0a1b37286f65e4a23d)
+        ;
+
+        
+    
+    
+            var marker_0d0cdcc00a3d3e2d0181237c3a7f2bec = L.marker(
+                [35.1613, 138.6763],
+                {
+}
+            ).addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+            var icon_158702a2d117be5b65c3acfb8403dfc7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_de74ef24e40d721cf4fe7d06582da6d4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_fe5720c9fb42da700fe57d547a490922 = $(`<div id="html_fe5720c9fb42da700fe57d547a490922" style="width: 100.0%; height: 100.0%;"><b>観測点: 富士 (950241)</b><br>・合計変動量: <b>15.0 mm</b></div>`)[0];
+                popup_de74ef24e40d721cf4fe7d06582da6d4.setContent(html_fe5720c9fb42da700fe57d547a490922);
+            
+        
+
+        marker_0d0cdcc00a3d3e2d0181237c3a7f2bec.bindPopup(popup_de74ef24e40d721cf4fe7d06582da6d4)
+        ;
+
+        
+    
+    
+                marker_0d0cdcc00a3d3e2d0181237c3a7f2bec.setIcon(icon_158702a2d117be5b65c3acfb8403dfc7);
+            
+    
+            var marker_7bc87cbdb10717656f0683b84ceeb4ed = L.marker(
+                [35.775, 139.8044],
+                {
+}
+            ).addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+            var icon_091ce1e5608dd520649df46261205da9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ba527f3186787c8052f79669969b2015 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5c37b01d37f78093444072eb8704fb9f = $(`<div id="html_5c37b01d37f78093444072eb8704fb9f" style="width: 100.0%; height: 100.0%;"><b>観測点: 足立 (940042)</b><br>・合計変動量: <b>2.2 mm</b></div>`)[0];
+                popup_ba527f3186787c8052f79669969b2015.setContent(html_5c37b01d37f78093444072eb8704fb9f);
+            
+        
+
+        marker_7bc87cbdb10717656f0683b84ceeb4ed.bindPopup(popup_ba527f3186787c8052f79669969b2015)
+        ;
+
+        
+    
+    
+                marker_7bc87cbdb10717656f0683b84ceeb4ed.setIcon(icon_091ce1e5608dd520649df46261205da9);
+            
+    
+            var circle_5ac6472c7891170e9cb38e2cd94ae867 = L.circle(
+                [33.2478, 134.175],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 70800.0, "stroke": true, "weight": 3}
+            ).addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+        var popup_176c197b19e54e7afcfacb37d085a5d6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5dac2be134bb2a3faedcdc1d91f88f73 = $(`<div id="html_5dac2be134bb2a3faedcdc1d91f88f73" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】室戸1 周辺</div>`)[0];
+                popup_176c197b19e54e7afcfacb37d085a5d6.setContent(html_5dac2be134bb2a3faedcdc1d91f88f73);
+            
+        
+
+        circle_5ac6472c7891170e9cb38e2cd94ae867.bindPopup(popup_176c197b19e54e7afcfacb37d085a5d6)
+        ;
+
+        
+    
+    
+            var marker_fdf5e75035d9aa110187fa475f9a284b = L.marker(
+                [33.2478, 134.175],
+                {
+}
+            ).addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+            var icon_9c04671dd799295054ce3fc860a9423c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0586d8d5ef8334f5c1a46d5559f61339 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_228859192d9d00aaac0b2f560664b005 = $(`<div id="html_228859192d9d00aaac0b2f560664b005" style="width: 100.0%; height: 100.0%;"><b>観測点: 室戸1 (950462)</b><br>・合計変動量: <b>23.6 mm</b></div>`)[0];
+                popup_0586d8d5ef8334f5c1a46d5559f61339.setContent(html_228859192d9d00aaac0b2f560664b005);
+            
+        
+
+        marker_fdf5e75035d9aa110187fa475f9a284b.bindPopup(popup_0586d8d5ef8334f5c1a46d5559f61339)
+        ;
+
+        
+    
+    
+                marker_fdf5e75035d9aa110187fa475f9a284b.setIcon(icon_9c04671dd799295054ce3fc860a9423c);
+            
+    
+            var marker_11d64988da8b00578a47e44c474b19d1 = L.marker(
+                [35.1815, 136.9064],
+                {
+}
+            ).addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+            var icon_c7a10e456aebed455683689fd66932ad = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_171b7934d123012a1738dd5423723c8d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6afba577b45279342323201029751d79 = $(`<div id="html_6afba577b45279342323201029751d79" style="width: 100.0%; height: 100.0%;"><b>観測点: 名古屋 (950322)</b><br>・合計変動量: <b>3.9 mm</b></div>`)[0];
+                popup_171b7934d123012a1738dd5423723c8d.setContent(html_6afba577b45279342323201029751d79);
+            
+        
+
+        marker_11d64988da8b00578a47e44c474b19d1.bindPopup(popup_171b7934d123012a1738dd5423723c8d)
+        ;
+
+        
+    
+    
+                marker_11d64988da8b00578a47e44c474b19d1.setIcon(icon_c7a10e456aebed455683689fd66932ad);
+            
+    
+            var marker_2c808b0085e0003bc95810589229cf50 = L.marker(
+                [45.4156, 141.6731],
+                {
+}
+            ).addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+            var icon_daef44b29f21d16e725771fc4fbad681 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3420081a49c04ef532e095eae068b597 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_981b7684961a73a0b68d7056b9b03206 = $(`<div id="html_981b7684961a73a0b68d7056b9b03206" style="width: 100.0%; height: 100.0%;"><b>観測点: 稚内 (940001)</b><br>・合計変動量: <b>2.5 mm</b></div>`)[0];
+                popup_3420081a49c04ef532e095eae068b597.setContent(html_981b7684961a73a0b68d7056b9b03206);
+            
+        
+
+        marker_2c808b0085e0003bc95810589229cf50.bindPopup(popup_3420081a49c04ef532e095eae068b597)
+        ;
+
+        
+    
+    
+                marker_2c808b0085e0003bc95810589229cf50.setIcon(icon_daef44b29f21d16e725771fc4fbad681);
+            
+    
+            var circle_1756ad5f191f4eda7765b3cb0b768d65 = L.circle(
+                [31.5969, 130.5571],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 37800.0, "stroke": true, "weight": 3}
+            ).addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+        var popup_2cabd4cad595f3504b829bf8a772e1da = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f0c10f1e8e0a929ba7616e134ad0f298 = $(`<div id="html_f0c10f1e8e0a929ba7616e134ad0f298" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】鹿児島 周辺</div>`)[0];
+                popup_2cabd4cad595f3504b829bf8a772e1da.setContent(html_f0c10f1e8e0a929ba7616e134ad0f298);
+            
+        
+
+        circle_1756ad5f191f4eda7765b3cb0b768d65.bindPopup(popup_2cabd4cad595f3504b829bf8a772e1da)
+        ;
+
+        
+    
+    
+            var marker_9a5a170c350535ae30b4d97fee32096c = L.marker(
+                [31.5969, 130.5571],
+                {
+}
+            ).addTo(map_1d75533a208c08c3a0c73bfe290ad2f7);
+        
+    
+            var icon_4ae577f6b8f3d35f1e9539b9e652589f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f4dde74602f5ffb3ae88a79bb3eb6f44 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_fb71b9652f60574e1486ee03f7b344a7 = $(`<div id="html_fb71b9652f60574e1486ee03f7b344a7" style="width: 100.0%; height: 100.0%;"><b>観測点: 鹿児島 (950482)</b><br>・合計変動量: <b>12.6 mm</b></div>`)[0];
+                popup_f4dde74602f5ffb3ae88a79bb3eb6f44.setContent(html_fb71b9652f60574e1486ee03f7b344a7);
+            
+        
+
+        marker_9a5a170c350535ae30b4d97fee32096c.bindPopup(popup_f4dde74602f5ffb3ae88a79bb3eb6f44)
+        ;
+
+        
+    
+    
+                marker_9a5a170c350535ae30b4d97fee32096c.setIcon(icon_4ae577f6b8f3d35f1e9539b9e652589f);
+            
+</script>
+</html>
