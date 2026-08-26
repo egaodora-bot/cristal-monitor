@@ -220,25 +220,25 @@ for _, row in df.iterrows():
     ).add_to(m)
 
 # --------------------------------------------------
-# 凡例（説明ボックス）を地図左下に追加
+# コンパクト化した凡例（説明ボックス）を地図左下に追加
 # --------------------------------------------------
 legend_html = f"""
 <div style="
     position: fixed; 
-    bottom: 30px; left: 20px; width: 220px;
-    background-color: white; z-index:9999; font-size:13px;
-    border:2px solid #ccc; border-radius:8px; padding: 12px;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-    font-family: sans-serif;
+    bottom: 20px; left: 10px; width: 160px;
+    background-color: rgba(255, 255, 255, 0.9); z-index:9999; font-size:11px;
+    border:1px solid #ccc; border-radius:6px; padding: 6px 10px;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    font-family: sans-serif; line-height: 1.3;
     ">
-    <b style="font-size:14px; color:#333;">🗺️ 地殻変動判定基準</b><br><hr style="margin:5px 0;">
-    <div style="margin-bottom:6px;">
-        <span style="color:blue; font-weight:bold;">🔵 青ピン（正常）</span><br>
-        <small style="color:#555;">・水平: {THRESHOLD_H}mm 未満<br>・垂直: {THRESHOLD_V}mm 未満</small>
+    <b style="font-size:11px; color:#333;">🗺️ 判定基準</b><hr style="margin:3px 0;">
+    <div style="margin-bottom:3px;">
+        <span style="color:blue; font-weight:bold;">🔵 正常</span><br>
+        <span style="color:#555;">水平 <{THRESHOLD_H}mm / 垂直 <{THRESHOLD_V}mm</span>
     </div>
     <div>
-        <span style="color:red; font-weight:bold;">🔴 赤ピン（警戒）</span><br>
-        <small style="color:#555;">・水平: {THRESHOLD_H}mm 以上<br>・垂直: ±{THRESHOLD_V}mm 以上</small>
+        <span style="color:red; font-weight:bold;">🔴 警戒</span><br>
+        <span style="color:#555;">水平 ≥{THRESHOLD_H}mm / 垂直 ≥±{THRESHOLD_V}mm</span>
     </div>
 </div>
 """
