@@ -280,7 +280,7 @@ for _, row in df.iterrows():
 
     marker.add_to(gnss_group)
 
-# --- 過去1年間のM5.0以上地震データのプロット ---
+# --- 過去1年間のM5.0以上地震データのプロット（小型・半透明化） ---
 earthquakes = fetch_past_year_m5_earthquakes()
 for eq in earthquakes:
     popup_eq = f"""
@@ -292,13 +292,15 @@ for eq in earthquakes:
         <b>深さ:</b> {eq['depth']} km
     </div>
     """
+    # 半径を従来の約半分（2〜3px程度）、透明度をアップ（0.3）にしてスッキリ表示
     folium.CircleMarker(
         location=[eq["lat"], eq["lng"]],
-        radius=max(eq["mag"] * 2.5, 4),
+        radius=max(eq["mag"] * 0.8, 2.0),
         color="#e67e22",
+        weight=1,
         fill=True,
         fill_color="#f39c12",
-        fill_opacity=0.5,
+        fill_opacity=0.3,
         popup=folium.Popup(popup_eq, max_width=240),
         tooltip=f"⚡ M{eq['mag']} ({eq['time']})",
     ).add_to(eq_group)
