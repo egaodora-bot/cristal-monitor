@@ -58,10 +58,9 @@ STATIONS = [
 
 
 # --------------------------------------------------
-# 3. 実データの取得・計算処理（水平・垂直対応）
+# 3. 実データの取得・計算処理
 # --------------------------------------------------
 def fetch_real_gnss_data():
-    """国土地理院等の公開データから水平・垂直の変動量を算出"""
     results = []
     prev_file = "previous_gnss_data.csv"
     has_prev = os.path.exists(prev_file)
@@ -76,7 +75,6 @@ def fetch_real_gnss_data():
                 lines = res.text.splitlines()
                 last_line = [l for l in lines if not l.startswith("*")][-1]
                 cols = last_line.split()
-                # dx: 東西, dy: 南北, dz: 上下(垂直)
                 dx = float(cols[2]) * 1000.0
                 dy = float(cols[3]) * 1000.0
                 dz = float(cols[4]) * 1000.0
@@ -97,9 +95,7 @@ def fetch_real_gnss_data():
                 dy = round(float(np.random.uniform(-2.0, 2.0)), 2)
                 dz = round(float(np.random.uniform(-3.0, 3.0)), 2)
 
-        # 水平移動量 (shift_h_mm)
         shift_h_mm = round(float(np.sqrt(dx**2 + dy**2)), 1)
-        # 垂直移動量 (dz_mm)
         dz_mm = round(dz, 1)
 
         results.append(
@@ -121,13 +117,12 @@ def fetch_real_gnss_data():
 
 
 # --------------------------------------------------
-# 4. データ取得・マップ作成・複合アラート処理
+# 4. データ取得・マップ作成・凡例追加
 # --------------------------------------------------
 df = fetch_real_gnss_data()
 
-# 警戒閾値の設定
-THRESHOLD_H = 10.0  # 水平変動の閾値 (10.0 mm)
-THRESHOLD_V = 20.0  # 垂直変動の閾値 (20.0 mm)
+THRESHOLD_H = 10.0  # 水平変動閾値 (10mm)
+THRESHOLD_V = 20.0  # 垂直変動閾値 (20mm)
 
 m = folium.Map(location=[37.5, 137.5], zoom_start=5)
 alert_messages = []
@@ -140,7 +135,6 @@ for _, row in df.iterrows():
     color = "red" if is_alert else "blue"
 
     if is_alert:
-        # 地図に警戒エリアを表示
         folium.Circle(
             location=[row["lat"], row["lng"]],
             radius=max(row["shift_h_mm"], abs(row["dz"])) * 3000,
@@ -150,7 +144,6 @@ for _, row in df.iterrows():
             popup=f"⚠️【警戒エリア】{row['name']} 周辺",
         ).add_to(m)
 
-        # 通知テキストの作成
         reasons = []
         if is_h_alert:
             reasons.append(f"水平 {row['shift_h_mm']} mm")
@@ -175,7 +168,32 @@ for _, row in df.iterrows():
     ).add_to(m)
 
 # --------------------------------------------------
-# 5. LINE通知の送信判定
+# 凡例（説明ボックス）を地図左下に追加
+# --------------------------------------------------
+legend_html = f"""
+<div style="
+    position: fixed; 
+    bottom: 30px; left: 20px; width: 220px;
+    background-color: white; z-index:9999; font-size:13px;
+    border:2px solid #ccc; border-radius:8px; padding: 12px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    font-family: sans-serif;
+    ">
+    <b style="font-size:14px; color:#333;">🗺️ 地殻変動判定基準</b><br><hr style="margin:5px 0;">
+    <div style="margin-bottom:6px;">
+        <span style="color:blue; font-weight:bold;">🔵 青ピン（正常）</span><br>
+        <small style="color:#555;">・水平: {THRESHOLD_H}mm 未満<br>・垂直: {THRESHOLD_V}mm 未満</small>
+    </div>
+    <div>
+        <span style="color:red; font-weight:bold;">🔴 赤ピン（警戒）</span><br>
+        <small style="color:#555;">・水平: {THRESHOLD_H}mm 以上<br>・垂直: ±{THRESHOLD_V}mm 以上</small>
+    </div>
+</div>
+"""
+m.get_root().html.add_child(folium.Element(legend_html))
+
+# --------------------------------------------------
+# 5. LINE通知処理 & 保存
 # --------------------------------------------------
 if alert_messages:
     msg_body = "\n".join(alert_messages)
@@ -186,7 +204,6 @@ if alert_messages:
     )
     send_line_alert(line_message)
 
-# データ保存
 today_str = datetime.now().strftime("%Y-%m-%d")
 alert_df = df[(df["shift_h_mm"] >= THRESHOLD_H) | (df["dz"].abs() >= THRESHOLD_V)]
 
