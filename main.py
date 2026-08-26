@@ -99,7 +99,7 @@ STATIONS = [
     {"point_id": "950167", "name": "福島（福島）", "lat": 37.7608, "lng": 140.4747},
     # 関東
     {"point_id": "950212", "name": "水戸（茨城）", "lat": 36.3417, "lng": 140.4467},
-    {"point_id": "020977", "name": "古河（茨城）", "lat": 36.1950, "lng": 139.7340},  # 👈 古河市を追加
+    {"point_id": "020977", "name": "古河（茨城）", "lat": 36.1950, "lng": 139.7340},
     {"point_id": "950214", "name": "宇都宮（栃木）", "lat": 36.5658, "lng": 139.8836},
     {"point_id": "950216", "name": "前橋（群馬）", "lat": 36.3894, "lng": 139.0633},
     {"point_id": "950219", "name": "さいたま（埼玉）", "lat": 35.8569, "lng": 139.6489},
@@ -155,10 +155,15 @@ def fetch_real_gnss_data():
     has_prev = os.path.exists(prev_file)
     prev_df = pd.read_csv(prev_file) if has_prev else None
 
+    # 地理院アクセス用のヘッダー
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
+
     for st in STATIONS:
         try:
             url = f"https://terras.gsi.go.jp/geo_info/data/{st['point_id']}.pos"
-            res = requests.get(url, timeout=5)
+            res = requests.get(url, headers=headers, timeout=5)
 
             if res.status_code == 200:
                 lines = res.text.splitlines()
@@ -244,7 +249,7 @@ for _, row in df.iterrows():
 
         alert_messages.append(f"・{row['name']}: " + " / ".join(reasons))
 
-    # ポップアップに水平・垂直を表示
+    # ポップアップテキスト
     popup_text = f"""
     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">
         <b style="font-size:13px; color:#333;">観測点: {row['name']}</b><br>
@@ -254,11 +259,13 @@ for _, row in df.iterrows():
     </div>
     """
 
+    # 標準アイコン（info-sign / warning）を使用
     marker = folium.Marker(
         location=[row["lat"], row["lng"]],
         popup=folium.Popup(popup_text, max_width=280),
         icon=folium.Icon(
-            color=color, icon="warning" if is_alert else "info-sign", prefix="fa"
+            color=color,
+            icon="warning-sign" if is_alert else "info-sign",
         ),
     )
 
