@@ -86,7 +86,7 @@ def get_vertical_description(dz):
 
 
 # --------------------------------------------------
-# 3. 電子基準点マスターデータ（47都道府県 ＋ 古河）
+# 3. 電子基準点マスターデータ（47都道府県）
 # --------------------------------------------------
 STATIONS = [
     # 北海道・東北
@@ -99,12 +99,6 @@ STATIONS = [
     {"point_id": "950167", "name": "福島（福島）", "lat": 37.7608, "lng": 140.4747},
     # 関東
     {"point_id": "950212", "name": "水戸（茨城）", "lat": 36.3417, "lng": 140.4467},
-    {
-        "point_id": "93003",
-        "name": "古河/三和（茨城）",
-        "lat": 36.1706,
-        "lng": 139.8294,
-    },  # 👈 正しい古河市（三和）の電子基準点ID
     {"point_id": "950214", "name": "宇都宮（栃木）", "lat": 36.5658, "lng": 139.8836},
     {"point_id": "950216", "name": "前橋（群馬）", "lat": 36.3894, "lng": 139.0633},
     {"point_id": "950219", "name": "さいたま（埼玉）", "lat": 35.8569, "lng": 139.6489},
@@ -152,7 +146,7 @@ STATIONS = [
 
 
 # --------------------------------------------------
-# 4. 実データの取得・計算処理
+# 4. 実データの取得・計算処理（高速化対応：timeout=2秒）
 # --------------------------------------------------
 def fetch_real_gnss_data():
     results = []
@@ -167,7 +161,7 @@ def fetch_real_gnss_data():
     for st in STATIONS:
         try:
             url = f"https://terras.gsi.go.jp/geo_info/data/{st['point_id']}.pos"
-            res = requests.get(url, headers=headers, timeout=5)
+            res = requests.get(url, headers=headers, timeout=2)
 
             if res.status_code == 200:
                 lines = res.text.splitlines()
