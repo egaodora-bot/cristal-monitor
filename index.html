@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_4ee3ed3865e1f1e93478ab07575dd62f {
+                #map_8e6d06123af923f078de31b423d9a957 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -54,14 +54,14 @@
 <body>
     
     
-            <div class="folium-map" id="map_4ee3ed3865e1f1e93478ab07575dd62f" ></div>
+            <div class="folium-map" id="map_8e6d06123af923f078de31b423d9a957" ></div>
         
 </body>
 <script>
     
     
-            var map_4ee3ed3865e1f1e93478ab07575dd62f = L.map(
-                "map_4ee3ed3865e1f1e93478ab07575dd62f",
+            var map_8e6d06123af923f078de31b423d9a957 = L.map(
+                "map_8e6d06123af923f078de31b423d9a957",
                 {
                     center: [37.5, 137.5],
                     crs: L.CRS.EPSG3857,
@@ -78,7 +78,7 @@
 
         
     
-            var tile_layer_388d47d1f37d79dad00fcb91a918ebc7 = L.tileLayer(
+            var tile_layer_b56b0ff2cbb03b17461fbf7ac4a7a590 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -95,139 +95,78 @@
             );
         
     
-            tile_layer_388d47d1f37d79dad00fcb91a918ebc7.addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
+            tile_layer_b56b0ff2cbb03b17461fbf7ac4a7a590.addTo(map_8e6d06123af923f078de31b423d9a957);
         
     
-            var circle_9c30d393e5abf33b552cf4b82f4ae39c = L.circle(
-                [35.1613, 138.6763],
-                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 33600.0, "stroke": true, "weight": 3}
-            ).addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
-        
-    
-        var popup_ca2ffd70c548c99d8a40d58e901148c6 = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_9234d1c969fb98d645dd4671e9369538 = $(`<div id="html_9234d1c969fb98d645dd4671e9369538" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】富士 周辺</div>`)[0];
-                popup_ca2ffd70c548c99d8a40d58e901148c6.setContent(html_9234d1c969fb98d645dd4671e9369538);
-            
-        
-
-        circle_9c30d393e5abf33b552cf4b82f4ae39c.bindPopup(popup_ca2ffd70c548c99d8a40d58e901148c6)
-        ;
-
-        
-    
-    
-            var marker_b6f709163e2140b90de7c7218bb31766 = L.marker(
+            var marker_6f1dd123e7d91269238e29ef9c57bfbc = L.marker(
                 [35.1613, 138.6763],
                 {
 }
-            ).addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
         
     
-            var icon_664eed2c6abd3d26074d5ee43bb58204 = L.AwesomeMarkers.icon(
+            var icon_385a6b02762fc1e8eb7043e2cd6d6825 = L.AwesomeMarkers.icon(
                 {
-  "markerColor": "red",
+  "markerColor": "blue",
   "iconColor": "white",
-  "icon": "warning",
+  "icon": "info-sign",
   "prefix": "fa",
   "extraClasses": "fa-rotate-0",
 }
             );
         
     
-        var popup_cb1bf06bf09eca63d7978c07d4ea2b6f = L.popup({
+        var popup_77f63063f57f780c26dff0aaf6a7b602 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_2fa8ba368922aeedf3376c8e4aa88b6a = $(`<div id="html_2fa8ba368922aeedf3376c8e4aa88b6a" style="width: 100.0%; height: 100.0%;"><b>観測点: 富士 (950241)</b><br>・最新変動量: <b>11.2 mm</b></div>`)[0];
-                popup_cb1bf06bf09eca63d7978c07d4ea2b6f.setContent(html_2fa8ba368922aeedf3376c8e4aa88b6a);
+                var html_0ff3dd7f7c3fe508f7d8cdf91875f509 = $(`<div id="html_0ff3dd7f7c3fe508f7d8cdf91875f509" style="width: 100.0%; height: 100.0%;"><b>観測点: 富士 (950241)</b><br>・最新変動量: <b>9.1 mm</b></div>`)[0];
+                popup_77f63063f57f780c26dff0aaf6a7b602.setContent(html_0ff3dd7f7c3fe508f7d8cdf91875f509);
             
         
 
-        marker_b6f709163e2140b90de7c7218bb31766.bindPopup(popup_cb1bf06bf09eca63d7978c07d4ea2b6f)
+        marker_6f1dd123e7d91269238e29ef9c57bfbc.bindPopup(popup_77f63063f57f780c26dff0aaf6a7b602)
         ;
 
         
     
     
-                marker_b6f709163e2140b90de7c7218bb31766.setIcon(icon_664eed2c6abd3d26074d5ee43bb58204);
+                marker_6f1dd123e7d91269238e29ef9c57bfbc.setIcon(icon_385a6b02762fc1e8eb7043e2cd6d6825);
             
     
-            var marker_2539e24a675c9575ff55c79525af32da = L.marker(
+            var circle_be3772bf2eb157536dcd9672e04f27ac = L.circle(
+                [35.775, 139.8044],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 31500.0, "stroke": true, "weight": 3}
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
+        
+    
+        var popup_1b76859a5c0761f21ec796bf1acfd214 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8143c4510ef134bf3ee8ce55888b1976 = $(`<div id="html_8143c4510ef134bf3ee8ce55888b1976" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】足立 周辺</div>`)[0];
+                popup_1b76859a5c0761f21ec796bf1acfd214.setContent(html_8143c4510ef134bf3ee8ce55888b1976);
+            
+        
+
+        circle_be3772bf2eb157536dcd9672e04f27ac.bindPopup(popup_1b76859a5c0761f21ec796bf1acfd214)
+        ;
+
+        
+    
+    
+            var marker_267e40713c1e8cc86ed15bc6602ac632 = L.marker(
                 [35.775, 139.8044],
                 {
 }
-            ).addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
         
     
-            var icon_06e355190b41bd45de92ac2573b98ac8 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "blue",
-  "iconColor": "white",
-  "icon": "info-sign",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_d19dd5432ec970baf9dd0b35472e312b = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_d43d8419f366f5d87e9bccf18bbc31d6 = $(`<div id="html_d43d8419f366f5d87e9bccf18bbc31d6" style="width: 100.0%; height: 100.0%;"><b>観測点: 足立 (940042)</b><br>・最新変動量: <b>4.9 mm</b></div>`)[0];
-                popup_d19dd5432ec970baf9dd0b35472e312b.setContent(html_d43d8419f366f5d87e9bccf18bbc31d6);
-            
-        
-
-        marker_2539e24a675c9575ff55c79525af32da.bindPopup(popup_d19dd5432ec970baf9dd0b35472e312b)
-        ;
-
-        
-    
-    
-                marker_2539e24a675c9575ff55c79525af32da.setIcon(icon_06e355190b41bd45de92ac2573b98ac8);
-            
-    
-            var circle_c1f8a3916a3ca7386eb51a69adedc908 = L.circle(
-                [33.2478, 134.175],
-                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 50100.0, "stroke": true, "weight": 3}
-            ).addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
-        
-    
-        var popup_bc5ba3f128dc6f821c9f2a7bb6904170 = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_542db8db2d6df694e7ae7e0d1eb02d9d = $(`<div id="html_542db8db2d6df694e7ae7e0d1eb02d9d" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】室戸1 周辺</div>`)[0];
-                popup_bc5ba3f128dc6f821c9f2a7bb6904170.setContent(html_542db8db2d6df694e7ae7e0d1eb02d9d);
-            
-        
-
-        circle_c1f8a3916a3ca7386eb51a69adedc908.bindPopup(popup_bc5ba3f128dc6f821c9f2a7bb6904170)
-        ;
-
-        
-    
-    
-            var marker_107088517ccdf4b21dfb29625eacdd3d = L.marker(
-                [33.2478, 134.175],
-                {
-}
-            ).addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
-        
-    
-            var icon_5c6a8611aa2b350dd4a0c5cc39db5d70 = L.AwesomeMarkers.icon(
+            var icon_e8ffee11d405e922c560cce0c69a1823 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "red",
   "iconColor": "white",
@@ -238,57 +177,57 @@
             );
         
     
-        var popup_7c86384fba2418603b30d906b704be44 = L.popup({
+        var popup_51f26d0f7f0f89cbe613d39571abe83a = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_76ce96f9e4d3ab44fb297a3cf649e6ee = $(`<div id="html_76ce96f9e4d3ab44fb297a3cf649e6ee" style="width: 100.0%; height: 100.0%;"><b>観測点: 室戸1 (950462)</b><br>・最新変動量: <b>16.7 mm</b></div>`)[0];
-                popup_7c86384fba2418603b30d906b704be44.setContent(html_76ce96f9e4d3ab44fb297a3cf649e6ee);
+                var html_c2c3b6fa560153a6407a8437362ebc48 = $(`<div id="html_c2c3b6fa560153a6407a8437362ebc48" style="width: 100.0%; height: 100.0%;"><b>観測点: 足立 (940042)</b><br>・最新変動量: <b>10.5 mm</b></div>`)[0];
+                popup_51f26d0f7f0f89cbe613d39571abe83a.setContent(html_c2c3b6fa560153a6407a8437362ebc48);
             
         
 
-        marker_107088517ccdf4b21dfb29625eacdd3d.bindPopup(popup_7c86384fba2418603b30d906b704be44)
+        marker_267e40713c1e8cc86ed15bc6602ac632.bindPopup(popup_51f26d0f7f0f89cbe613d39571abe83a)
         ;
 
         
     
     
-                marker_107088517ccdf4b21dfb29625eacdd3d.setIcon(icon_5c6a8611aa2b350dd4a0c5cc39db5d70);
+                marker_267e40713c1e8cc86ed15bc6602ac632.setIcon(icon_e8ffee11d405e922c560cce0c69a1823);
             
     
-            var circle_6472bf58892fb8d0ed2f8edb2958e01c = L.circle(
-                [35.1815, 136.9064],
-                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 56400.0, "stroke": true, "weight": 3}
-            ).addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
+            var circle_5d708bd2c3a95630adaa409533f47563 = L.circle(
+                [33.2478, 134.175],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32700.0, "stroke": true, "weight": 3}
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
         
     
-        var popup_b65624327b39ce9b80300b50af0d4681 = L.popup({
+        var popup_9b9f0e89de6131ca9ff6a94cf40d812f = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_11ad820d2338faeed9ef90a0c2e5b0a5 = $(`<div id="html_11ad820d2338faeed9ef90a0c2e5b0a5" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】名古屋 周辺</div>`)[0];
-                popup_b65624327b39ce9b80300b50af0d4681.setContent(html_11ad820d2338faeed9ef90a0c2e5b0a5);
+                var html_3a0b3841806e3a91cb49b8c5762158cc = $(`<div id="html_3a0b3841806e3a91cb49b8c5762158cc" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】室戸1 周辺</div>`)[0];
+                popup_9b9f0e89de6131ca9ff6a94cf40d812f.setContent(html_3a0b3841806e3a91cb49b8c5762158cc);
             
         
 
-        circle_6472bf58892fb8d0ed2f8edb2958e01c.bindPopup(popup_b65624327b39ce9b80300b50af0d4681)
+        circle_5d708bd2c3a95630adaa409533f47563.bindPopup(popup_9b9f0e89de6131ca9ff6a94cf40d812f)
         ;
 
         
     
     
-            var marker_f8ce28f905ef88ac688cf1e30e94dda6 = L.marker(
-                [35.1815, 136.9064],
+            var marker_f713153bc08ac0655ea0f974e6af0d07 = L.marker(
+                [33.2478, 134.175],
                 {
 }
-            ).addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
         
     
-            var icon_7dbfaca83bafd5b00fbe2898c50b8807 = L.AwesomeMarkers.icon(
+            var icon_c13772a02cc27a3cd1ab6a213ba77de4 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "red",
   "iconColor": "white",
@@ -299,72 +238,156 @@
             );
         
     
-        var popup_41b900a42afd66a5543fa45a0d835f56 = L.popup({
+        var popup_d1930b902e3fb5038d6526e99b9bd197 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_73b9fd5c8529cc7d75d7484b4fc23401 = $(`<div id="html_73b9fd5c8529cc7d75d7484b4fc23401" style="width: 100.0%; height: 100.0%;"><b>観測点: 名古屋 (950322)</b><br>・最新変動量: <b>18.8 mm</b></div>`)[0];
-                popup_41b900a42afd66a5543fa45a0d835f56.setContent(html_73b9fd5c8529cc7d75d7484b4fc23401);
+                var html_c3f8c367721ae9505f2878e25633560c = $(`<div id="html_c3f8c367721ae9505f2878e25633560c" style="width: 100.0%; height: 100.0%;"><b>観測点: 室戸1 (950462)</b><br>・最新変動量: <b>10.9 mm</b></div>`)[0];
+                popup_d1930b902e3fb5038d6526e99b9bd197.setContent(html_c3f8c367721ae9505f2878e25633560c);
             
         
 
-        marker_f8ce28f905ef88ac688cf1e30e94dda6.bindPopup(popup_41b900a42afd66a5543fa45a0d835f56)
+        marker_f713153bc08ac0655ea0f974e6af0d07.bindPopup(popup_d1930b902e3fb5038d6526e99b9bd197)
         ;
 
         
     
     
-                marker_f8ce28f905ef88ac688cf1e30e94dda6.setIcon(icon_7dbfaca83bafd5b00fbe2898c50b8807);
+                marker_f713153bc08ac0655ea0f974e6af0d07.setIcon(icon_c13772a02cc27a3cd1ab6a213ba77de4);
             
     
-            var marker_c6545c647bfbb21e332903a826ae4560 = L.marker(
+            var circle_e02ec6785eb8ad7a603f4f5488a67c01 = L.circle(
+                [35.1815, 136.9064],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 46200.0, "stroke": true, "weight": 3}
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
+        
+    
+        var popup_4007785d3b8dbaafb4195b2cfbefcfdc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f5a5018ab9617c790cb124d5cb42a7b1 = $(`<div id="html_f5a5018ab9617c790cb124d5cb42a7b1" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】名古屋 周辺</div>`)[0];
+                popup_4007785d3b8dbaafb4195b2cfbefcfdc.setContent(html_f5a5018ab9617c790cb124d5cb42a7b1);
+            
+        
+
+        circle_e02ec6785eb8ad7a603f4f5488a67c01.bindPopup(popup_4007785d3b8dbaafb4195b2cfbefcfdc)
+        ;
+
+        
+    
+    
+            var marker_c4253da49900eff75013ea6969ccb15a = L.marker(
+                [35.1815, 136.9064],
+                {
+}
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
+        
+    
+            var icon_d3553269d10b6ca779e550ec2c5ea880 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_73fd8d53a514648a83b4b18201ec4093 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_091d46ec89c07d03164a006b3619dc6a = $(`<div id="html_091d46ec89c07d03164a006b3619dc6a" style="width: 100.0%; height: 100.0%;"><b>観測点: 名古屋 (950322)</b><br>・最新変動量: <b>15.4 mm</b></div>`)[0];
+                popup_73fd8d53a514648a83b4b18201ec4093.setContent(html_091d46ec89c07d03164a006b3619dc6a);
+            
+        
+
+        marker_c4253da49900eff75013ea6969ccb15a.bindPopup(popup_73fd8d53a514648a83b4b18201ec4093)
+        ;
+
+        
+    
+    
+                marker_c4253da49900eff75013ea6969ccb15a.setIcon(icon_d3553269d10b6ca779e550ec2c5ea880);
+            
+    
+            var circle_b8d8001d33e74c8fc97131493793e206 = L.circle(
+                [45.4156, 141.6731],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 44400.0, "stroke": true, "weight": 3}
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
+        
+    
+        var popup_ed4609738ea9ce9d82967a3f35a799f0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4b4377df87f18f4a43783efb29429203 = $(`<div id="html_4b4377df87f18f4a43783efb29429203" style="width: 100.0%; height: 100.0%;">⚠️【警戒エリア】稚内 周辺</div>`)[0];
+                popup_ed4609738ea9ce9d82967a3f35a799f0.setContent(html_4b4377df87f18f4a43783efb29429203);
+            
+        
+
+        circle_b8d8001d33e74c8fc97131493793e206.bindPopup(popup_ed4609738ea9ce9d82967a3f35a799f0)
+        ;
+
+        
+    
+    
+            var marker_47d24c99a40dad5c0f9e9a0477acfbcb = L.marker(
                 [45.4156, 141.6731],
                 {
 }
-            ).addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
         
     
-            var icon_c80e2bf82f98744534fa594c5683117e = L.AwesomeMarkers.icon(
+            var icon_d30ccdfe8d7a22fed86bd1f967c38180 = L.AwesomeMarkers.icon(
                 {
-  "markerColor": "blue",
+  "markerColor": "red",
   "iconColor": "white",
-  "icon": "info-sign",
+  "icon": "warning",
   "prefix": "fa",
   "extraClasses": "fa-rotate-0",
 }
             );
         
     
-        var popup_9bcbd8ed96cc02bc7419837e1a793c41 = L.popup({
+        var popup_3eb151ddf313946ef8cc4ea8525b9340 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_280365c75d4c7b536919d4b12f648fe6 = $(`<div id="html_280365c75d4c7b536919d4b12f648fe6" style="width: 100.0%; height: 100.0%;"><b>観測点: 稚内 (940001)</b><br>・最新変動量: <b>9.3 mm</b></div>`)[0];
-                popup_9bcbd8ed96cc02bc7419837e1a793c41.setContent(html_280365c75d4c7b536919d4b12f648fe6);
+                var html_c4d2bf9a5325da5dd6f0246df770b7f0 = $(`<div id="html_c4d2bf9a5325da5dd6f0246df770b7f0" style="width: 100.0%; height: 100.0%;"><b>観測点: 稚内 (940001)</b><br>・最新変動量: <b>14.8 mm</b></div>`)[0];
+                popup_3eb151ddf313946ef8cc4ea8525b9340.setContent(html_c4d2bf9a5325da5dd6f0246df770b7f0);
             
         
 
-        marker_c6545c647bfbb21e332903a826ae4560.bindPopup(popup_9bcbd8ed96cc02bc7419837e1a793c41)
+        marker_47d24c99a40dad5c0f9e9a0477acfbcb.bindPopup(popup_3eb151ddf313946ef8cc4ea8525b9340)
         ;
 
         
     
     
-                marker_c6545c647bfbb21e332903a826ae4560.setIcon(icon_c80e2bf82f98744534fa594c5683117e);
+                marker_47d24c99a40dad5c0f9e9a0477acfbcb.setIcon(icon_d30ccdfe8d7a22fed86bd1f967c38180);
             
     
-            var marker_de37afdaa031d7ba303f56c2972b2a34 = L.marker(
+            var marker_6611e6e8b03c1f73f6f25764fe2e800e = L.marker(
                 [31.5969, 130.5571],
                 {
 }
-            ).addTo(map_4ee3ed3865e1f1e93478ab07575dd62f);
+            ).addTo(map_8e6d06123af923f078de31b423d9a957);
         
     
-            var icon_9d4f3376eed73e3933b20684734897d2 = L.AwesomeMarkers.icon(
+            var icon_88e6e063bf48816a0af6aec23af4a9ec = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -375,24 +398,24 @@
             );
         
     
-        var popup_f03843515b62f50eb7c9d8702e2ec170 = L.popup({
+        var popup_c72428f747d8a5aa5e29b0aa56abdab7 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_83efd375d0cb855882f8f89eb64e7225 = $(`<div id="html_83efd375d0cb855882f8f89eb64e7225" style="width: 100.0%; height: 100.0%;"><b>観測点: 鹿児島 (950482)</b><br>・最新変動量: <b>4.7 mm</b></div>`)[0];
-                popup_f03843515b62f50eb7c9d8702e2ec170.setContent(html_83efd375d0cb855882f8f89eb64e7225);
+                var html_c6de5473fd355105ede698500efd5042 = $(`<div id="html_c6de5473fd355105ede698500efd5042" style="width: 100.0%; height: 100.0%;"><b>観測点: 鹿児島 (950482)</b><br>・最新変動量: <b>5.7 mm</b></div>`)[0];
+                popup_c72428f747d8a5aa5e29b0aa56abdab7.setContent(html_c6de5473fd355105ede698500efd5042);
             
         
 
-        marker_de37afdaa031d7ba303f56c2972b2a34.bindPopup(popup_f03843515b62f50eb7c9d8702e2ec170)
+        marker_6611e6e8b03c1f73f6f25764fe2e800e.bindPopup(popup_c72428f747d8a5aa5e29b0aa56abdab7)
         ;
 
         
     
     
-                marker_de37afdaa031d7ba303f56c2972b2a34.setIcon(icon_9d4f3376eed73e3933b20684734897d2);
+                marker_6611e6e8b03c1f73f6f25764fe2e800e.setIcon(icon_88e6e063bf48816a0af6aec23af4a9ec);
             
 </script>
 </html>
