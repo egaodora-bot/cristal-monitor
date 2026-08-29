@@ -276,6 +276,72 @@ html, body {
 })();
 </script>
 
+
+<script>
+(function () {
+    const MAP = map_9fc8ef7a4f69528183184475ef0aaf11;
+    if (!MAP) return;
+
+    const eqLayer = L.layerGroup().addTo(MAP);
+
+    const eqIcon = L.divIcon({
+        className: 'geonet-eq-marker',
+        html: '<div style="width:24px;height:24px;border-radius:50%;background:#e53935;border:3px solid #fff;box-shadow:0 1px 8px rgba(0,0,0,.45);"></div>',
+        iconSize: [30,30],
+        iconAnchor: [15,15]
+    });
+
+    const latest = {
+        place: '千葉県東方沖',
+        time: '2026/08/30 00:17頃',
+        lat: 35.8,
+        lon: 140.9,
+        depth: 30,
+        mag: 4.8,
+        maxIntensity: '4'
+    };
+
+    L.marker([latest.lat, latest.lon], {icon:eqIcon})
+      .bindPopup(
+        '<div style="font-family:sans-serif;line-height:1.6;min-width:220px">' +
+        '<b style="font-size:16px;color:#c62828">🔴 最新地震</b><hr>' +
+        '<b>震央:</b> ' + latest.place + '<br>' +
+        '<b>発生:</b> ' + latest.time + '<br>' +
+        '<b>M:</b> ' + latest.mag + '<br>' +
+        '<b>深さ:</b> ' + latest.depth + ' km<br>' +
+        '<b>最大震度:</b> ' + latest.maxIntensity +
+        '</div>'
+      ).addTo(eqLayer);
+
+    const panel = document.createElement('div');
+    panel.id = 'geonet-latest-eq-panel';
+    panel.style.cssText =
+      'position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:10001;' +
+      'background:rgba(255,255,255,.97);padding:9px 13px;border:2px solid #e53935;' +
+      'border-radius:9px;box-shadow:0 2px 10px rgba(0,0,0,.28);' +
+      'font:13px/1.45 sans-serif;text-align:center;min-width:250px;max-width:calc(100vw - 20px);';
+    panel.innerHTML =
+      '<b style="color:#c62828;font-size:15px">🔴 最新地震</b><br>' +
+      latest.place + '　M' + latest.mag + '　最大震度' + latest.maxIntensity + '<br>' +
+      latest.time + '　深さ' + latest.depth + 'km<br>' +
+      '<span style="font-size:11px;color:#666">地図上の赤丸をクリックで詳細</span>';
+    document.body.appendChild(panel);
+
+    L.control.layers(null, {
+        '🔴 最新地震': eqLayer
+    }, {
+        collapsed: true,
+        position: 'topright'
+    }).addTo(MAP);
+
+    function resize() {
+        try { MAP.invalidateSize(false); } catch(e) {}
+    }
+    window.addEventListener('resize', function(){ setTimeout(resize,150); });
+    window.addEventListener('orientationchange', function(){ setTimeout(resize,300); });
+})();
+</script>
+
 </body>
 <script>
     
