@@ -1,0 +1,107 @@
+name: Update earthquake data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-earthquake:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch latest JMA earthquake data
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          curl --fail --retry 4 --retry-delay 3 --connect-timeout 15 --max-time 45 \
+            -A "GEONET-monitor/1.0" \
+            "https://api.p2pquake.net/v2/jma/quake?codes=551&limit=20" \
+            -o /tmp/quake.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          src = Path("/tmp/quake.json")
+          data = json.loads(src.read_text(encoding="utf-8"))
+
+          if not isinstance(data, list) or not data:
+              raise SystemExit("No earthquake data returned")
+
+          q = data[0]
+          eq = q.get("earthquake", {})
+          h = eq.get("hypocenter", {})
+
+          def f(v):
+              try:
+                  return float(v)
+              except Exception:
+                  return None
+
+          points = q.get("points") or []
+          scales = []
+          for p in points:
+              try:
+                  scales.append(float(p.get("scale")))
+              except Exception:
+                  pass
+
+          scale_names = {
+              10: "1", 20: "2", 30: "3", 40: "4",
+              45: "5弱", 50: "5強",
+              55: "6弱", 60: "6強", 70: "7"
+          }
+
+          max_intensity = ""
+          if scales:
+              s = max(scales)
+              max_intensity = scale_names.get(int(s), str(s))
+
+          latest = {
+              "source": "JMA",
+              "received_time": q.get("time"),
+              "earthquake_time": eq.get("time"),
+              "place": h.get("name", ""),
+              "lat": f(h.get("latitude")),
+              "lon": f(h.get("longitude")),
+              "depth_km": f(h.get("depth")),
+              "magnitude": f(h.get("magnitude")),
+              "max_intensity": max_intensity
+          }
+
+          if latest["lat"] is None or latest["lon"] is None:
+              raise SystemExit("Latest earthquake has no hypocenter coordinates")
+
+          Path("latest_earthquake.json").write_text(
+              json.dumps(latest, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8"
+          )
+
+          print(json.dumps(latest, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit and push changed earthquake data
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add latest_earthquake.json
+
+          if git diff --cached --quiet; then
+            echo "No change in latest earthquake data."
+            exit 0
+          fi
+
+          git commit -m "Update latest earthquake data"
+          git push
