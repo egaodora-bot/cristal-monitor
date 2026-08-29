@@ -1,0 +1,88 @@
+name: Update earthquake data
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-earthquake:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Get latest earthquake data
+        run: |
+          python - <<'PY'
+          import json
+          import urllib.request
+
+          url = "https://api.p2pquake.net/v2/jma/quake?codes=551&limit=20"
+          req = urllib.request.Request(
+              url,
+              headers={"User-Agent": "GEONET-monitor/1.0"}
+          )
+
+          with urllib.request.urlopen(req, timeout=30) as r:
+              data = json.load(r)
+
+          latest = None
+
+          for q in data:
+              eq = q.get("earthquake", {})
+              h = eq.get("hypocenter", {})
+
+              try:
+                  lat = float(h.get("latitude"))
+                  lon = float(h.get("longitude"))
+              except Exception:
+                  continue
+
+              latest = {
+                  "source": "JMA/P2PQuake",
+                  "time": eq.get("time"),
+                  "place": h.get("name", ""),
+                  "lat": lat,
+                  "lon": lon,
+                  "depth_km": h.get("depth"),
+                  "magnitude": h.get("magnitude"),
+                  "max_intensity": ""
+              }
+              break
+
+          if latest is None:
+              latest = {
+                  "source": "JMA/P2PQuake",
+                  "time": None,
+                  "place": "",
+                  "lat": None,
+                  "lon": None,
+                  "depth_km": None,
+                  "magnitude": None,
+                  "max_intensity": ""
+              }
+
+          with open("latest_earthquake.json", "w", encoding="utf-8") as f:
+              json.dump(latest, f, ensure_ascii=False, indent=2)
+
+          print(json.dumps(latest, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit updated earthquake data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add latest_earthquake.json
+
+          if git diff --cached --quiet; then
+            echo "No earthquake data change."
+          else
+            git commit -m "Update latest earthquake data"
+            git push
+          fi
