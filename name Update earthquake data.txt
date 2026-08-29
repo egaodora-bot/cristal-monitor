@@ -1,0 +1,112 @@
+name: Update earthquake data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-earthquake:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch earthquake data
+        env:
+          API_URL: https://api.p2pquake.net/v2/history?codes=551&limit=20
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+          from pathlib import Path
+
+          url = os.environ["API_URL"]
+          req = urllib.request.Request(
+              url,
+              headers={"User-Agent": "GEONET-monitor/1.0"}
+          )
+
+          with urllib.request.urlopen(req, timeout=30) as response:
+              data = json.load(response)
+
+          if not isinstance(data, list) or not data:
+              raise SystemExit("P2PQuake returned no data")
+
+          latest = None
+
+          for item in data:
+              if item.get("code") != 551:
+                  continue
+
+              eq = item.get("earthquake") or {}
+              h = eq.get("hypocenter") or {}
+
+              try:
+                  lat = float(h.get("latitude"))
+                  lon = float(h.get("longitude"))
+              except (TypeError, ValueError):
+                  continue
+
+              if lat <= -100 or lon <= -100:
+                  continue
+
+              try:
+                  depth = float(h.get("depth"))
+              except (TypeError, ValueError):
+                  depth = None
+
+              try:
+                  magnitude = float(h.get("magnitude"))
+              except (TypeError, ValueError):
+                  magnitude = None
+
+              max_scale = h.get("maxScale", item.get("maxScale", -1))
+
+              scale_names = {
+                  10: "1", 20: "2", 30: "3", 40: "4",
+                  45: "5弱", 50: "5強",
+                  55: "6弱", 60: "6強", 70: "7"
+              }
+
+              latest = {
+                  "source": "JMA/P2PQuake",
+                  "earthquake_time": eq.get("time"),
+                  "issue_time": (item.get("issue") or {}).get("time"),
+                  "place": h.get("name", ""),
+                  "lat": lat,
+                  "lon": lon,
+                  "depth_km": depth,
+                  "magnitude": magnitude,
+                  "max_intensity": scale_names.get(int(max_scale), str(max_scale))
+              }
+              break
+
+          if latest is None:
+              raise SystemExit("No usable JMA earthquake record found")
+
+          Path("latest_earthquake.json").write_text(
+              json.dumps(latest, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8"
+          )
+
+          print(json.dumps(latest, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit earthquake data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add latest_earthquake.json
+
+          if git diff --cached --quiet; then
+            echo "No data change."
+          else
+            git commit -m "Update latest earthquake data"
+            git push
+          fi
