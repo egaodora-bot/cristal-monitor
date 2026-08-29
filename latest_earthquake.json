@@ -1,0 +1,11 @@
+{
+  "source": "JMA/P2PQuake",
+  "earthquake_time": "2026/08/30 00:17:00",
+  "issue_time": "2026/08/30 00:20:55",
+  "place": "千葉県東方沖",
+  "lat": 35.8,
+  "lon": 140.9,
+  "depth_km": 30.0,
+  "magnitude": 4.8,
+  "max_intensity": "-1"
+}
