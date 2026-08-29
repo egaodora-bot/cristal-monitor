@@ -2054,3 +2054,300 @@
             
 </script>
 </html>
+ <style>
+/* GEONET レスポンシブ統合表示 */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.folium-map {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.geonet-panel {
+    position: fixed;
+    z-index: 9999;
+    top: 10px;
+    right: 10px;
+    width: min(300px, calc(100vw - 20px));
+    max-height: calc(100vh - 20px);
+    overflow-y: auto;
+    padding: 12px;
+    background: rgba(255,255,255,.94);
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+.geonet-panel h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+
+.geonet-status {
+    margin: 6px 0;
+    padding: 6px;
+    border-radius: 6px;
+    background: #f1f3f5;
+}
+
+.geonet-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: -1px;
+}
+
+.geonet-blue { background:#1976d2; }
+.geonet-yellow { background:#f9a825; }
+.geonet-red { background:#d32f2f; }
+.geonet-purple { background:#7b1fa2; }
+
+@media (max-width: 600px) {
+    .geonet-panel {
+        top: auto;
+        bottom: 8px;
+        right: 8px;
+        left: 8px;
+        width: auto;
+        max-height: 38vh;
+        font-size: 12px;
+    }
+
+    .geonet-panel h3 {
+        font-size: 14px;
+    }
+}
+</style>
+
+<div class="geonet-panel" id="geonet-panel">
+    <h3>🌐 GEONET 全国統合監視</h3>
+
+    <div class="geonet-status">
+        <span class="geonet-dot geonet-blue"></span>
+        通常
+    </div>
+
+    <div class="geonet-status">
+        <span class="geonet-dot geonet-yellow"></span>
+        変動候補
+    </div>
+
+    <div class="geonet-status">
+        <span class="geonet-dot geonet-red"></span>
+        重点検証
+    </div>
+
+    <div class="geonet-status">
+        <span class="geonet-dot geonet-purple"></span>
+        極性境界候補
+    </div>
+
+    <div id="geonet-load-status">
+        データ確認中…
+    </div>
+
+    <div style="margin-top:8px;font-size:11px;">
+        ※現在の判定基準は変更していません。
+    </div>
+</div>
+
+<script>
+(function () {
+
+    var mapObj = null;
+
+    try {
+        mapObj = map_4203b1549b7e7ed910ddf5af7a230ff7;
+    } catch (e) {
+        console.warn("GEONET map not found");
+    }
+
+    function setStatus(text) {
+        var el = document.getElementById("geonet-load-status");
+        if (el) el.innerHTML = text;
+    }
+
+    /* 画面サイズ変更・スマホ回転 */
+    function resizeMap() {
+        if (mapObj && mapObj.invalidateSize) {
+            mapObj.invalidateSize(false);
+        }
+    }
+
+    window.addEventListener("resize", resizeMap);
+    window.addEventListener("orientationchange", function () {
+        setTimeout(resizeMap, 300);
+    });
+
+    setTimeout(resizeMap, 300);
+
+    /* 既存観測点の色分け */
+    function recolorStations() {
+
+        if (!mapObj) return;
+
+        var normal = 0;
+        var warning = 0;
+        var priority = 0;
+
+        mapObj.eachLayer(function (layer) {
+
+            if (!layer || !layer.getPopup || !layer.setIcon) return;
+
+            var popup = layer.getPopup();
+            if (!popup) return;
+
+            var html = String(popup.getContent());
+
+            if (
+                html.indexOf("観測点") === -1 &&
+                html.indexOf("station") === -1 &&
+                html.indexOf("水平変動") === -1
+            ) {
+                return;
+            }
+
+            var h = 0;
+            var v = 0;
+
+            var hm = html.match(/水平変動[^0-9-]*([+-]?[0-9.]+)/);
+            var vm = html.match(/垂直変動[^0-9-]*([+-]?[0-9.]+)/);
+
+            if (hm) h = Math.abs(parseFloat(hm[1])) || 0;
+            if (vm) v = Math.abs(parseFloat(vm[1])) || 0;
+
+            var color = "blue";
+            var icon = "info-sign";
+
+            /*
+             * 現在の基準を変更しない。
+             * 水平10mm以上 または 垂直20mm以上を変動候補。
+             */
+            if (h >= 10 || v >= 20) {
+                color = "red";
+                icon = "exclamation-sign";
+                warning++;
+            } else if (h >= 5 || v >= 10) {
+                color = "orange";
+                icon = "warning-sign";
+                warning++;
+            } else {
+                normal++;
+            }
+
+            try {
+                layer.setIcon(
+                    L.AwesomeMarkers.icon({
+                        markerColor: color,
+                        iconColor: "white",
+                        icon: icon,
+                        prefix: "glyphicon"
+                    })
+                );
+            } catch (e) {}
+        });
+
+        setStatus(
+            "観測点表示：通常 " + normal +
+            " / 変動候補 " + warning +
+            "<br>境界候補データを確認中…"
+        );
+    }
+
+    /* 全国極性境界候補CSV */
+    function loadBoundaryCandidates() {
+
+        if (!mapObj) return;
+
+        fetch("./GEONET_national_polarity_boundary_candidates.csv")
+            .then(function (r) {
+                if (!r.ok) throw new Error("boundary CSV not found");
+                return r.text();
+            })
+            .then(function (text) {
+
+                var lines = text.trim().split(/\r?\n/);
+                if (lines.length < 2) {
+                    throw new Error("empty boundary CSV");
+                }
+
+                var count = 0;
+
+                for (var i = 1; i < lines.length; i++) {
+
+                    var c = lines[i].split(",");
+
+                    if (c.length < 6) continue;
+
+                    var plusLat = parseFloat(c[2]);
+                    var plusLon = parseFloat(c[3]);
+                    var minusLat = parseFloat(c[4]);
+                    var minusLon = parseFloat(c[5]);
+
+                    if (
+                        !isFinite(plusLat) ||
+                        !isFinite(plusLon) ||
+                        !isFinite(minusLat) ||
+                        !isFinite(minusLon)
+                    ) continue;
+
+                    L.polyline(
+                        [
+                            [plusLat, plusLon],
+                            [minusLat, minusLon]
+                        ],
+                        {
+                            color: "#7b1fa2",
+                            weight: 2,
+                            opacity: 0.75
+                        }
+                    )
+                    .bindPopup(
+                        "<b>極性境界候補</b><br>" +
+                        "＋観測点: " + c[0] + "<br>" +
+                        "－観測点: " + c[1] + "<br>" +
+                        "距離: " + parseFloat(c[6]).toFixed(2) + " km<br>" +
+                        "極性差: " + parseFloat(c[7]).toFixed(2) + " mm<br>" +
+                        "判定: " + c[c.length - 1]
+                    )
+                    .addTo(mapObj);
+
+                    count++;
+                }
+
+                setStatus(
+                    "観測点表示済み<br>" +
+                    "極性境界候補線: " + count + " 本"
+                );
+
+                resizeMap();
+            })
+            .catch(function () {
+
+                setStatus(
+                    "観測点表示済み<br>" +
+                    "極性境界CSVは未配置"
+                );
+
+            });
+    }
+
+    /* 起動 */
+    setTimeout(function () {
+        recolorStations();
+        loadBoundaryCandidates();
+        resizeMap();
+    }, 800);
+
+})();
+</script>
+</html>
