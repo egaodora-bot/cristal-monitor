@@ -467,6 +467,121 @@ html, body {
 })();
 </script>
 
+
+<script>
+(function () {
+    var MAP = window.map_9fc8ef7a4f69528183184475ef0aaf11;
+    if (!MAP) return;
+
+    var quakeLayer = L.layerGroup().addTo(MAP);
+
+    var latest = {
+        place: "千葉県東方沖",
+        earthquake_time: "2026/08/30 00:17頃",
+        lat: 35.8,
+        lon: 140.9,
+        depth_km: 30,
+        magnitude: 4.8,
+        max_intensity: "4"
+    };
+
+    var icon = L.divIcon({
+        className: "geonet-earthquake-v6",
+        html: '<div style="width:26px;height:26px;border-radius:50%;background:#e53935;border:3px solid #fff;box-shadow:0 0 0 4px rgba(229,57,53,.25),0 2px 10px rgba(0,0,0,.45);"></div>',
+        iconSize: [32,32],
+        iconAnchor: [16,16]
+    });
+
+    function esc(v) {
+        return String(v == null ? "" : v).replace(/[&<>"']/g, function(c) {
+            return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+        });
+    }
+
+    function showQuake(q, live) {
+        quakeLayer.clearLayers();
+
+        var lat = Number(q.lat);
+        var lon = Number(q.lon);
+        if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
+
+        L.marker([lat, lon], {icon: icon})
+          .bindPopup(
+            '<b style="color:#d32f2f;font-size:16px;">🔴 地震発生情報</b><hr>' +
+            '震央：' + esc(q.place || "不明") + '<br>' +
+            '発生時刻：' + esc(q.earthquake_time || "不明") + '<br>' +
+            'マグニチュード：M' + esc(q.magnitude == null ? "不明" : q.magnitude) + '<br>' +
+            '深さ：' + esc(q.depth_km == null ? "不明" : q.depth_km + " km") + '<br>' +
+            '最大震度：' + esc(q.max_intensity || "不明") + '<br>' +
+            '座標：' + lat.toFixed(4) + ', ' + lon.toFixed(4)
+          )
+          .addTo(quakeLayer);
+
+        L.circle([lat, lon], {
+            radius: 50000,
+            color: "#e53935",
+            weight: 2,
+            opacity: 0.45,
+            fillOpacity: 0.04
+        }).addTo(quakeLayer);
+
+        panel.innerHTML =
+            '<div style="font-size:17px;font-weight:700;color:#c62828;">🔴 地震発生情報</div>' +
+            '<div style="font-weight:700;">' + esc(q.place || "震央不明") +
+            '　M' + esc(q.magnitude == null ? "?" : q.magnitude) + '</div>' +
+            '<div>発生：' + esc(q.earthquake_time || "不明") + '</div>' +
+            '<div>深さ：' + esc(q.depth_km == null ? "不明" : q.depth_km + " km") +
+            '　最大震度：' + esc(q.max_intensity || "不明") + '</div>' +
+            '<div style="font-size:11px;color:' + (live ? "#2e7d32" : "#666") + ';">' +
+            (live ? "latest_earthquake.json 取得済み" : "直近確認済み地震を表示中") +
+            '</div>';
+    }
+
+    var panel = document.createElement("div");
+    panel.id = "geonet-earthquake-v6-panel";
+    panel.style.cssText =
+        "position:fixed;top:12px;left:50%;transform:translateX(-50%);" +
+        "z-index:2147483647;background:#fff;border:3px solid #d32f2f;" +
+        "border-radius:10px;box-shadow:0 3px 14px rgba(0,0,0,.35);" +
+        "padding:10px 14px;font:14px/1.5 Arial,sans-serif;" +
+        "text-align:left;min-width:290px;max-width:calc(100vw - 24px);" +
+        "box-sizing:border-box;";
+    document.body.appendChild(panel);
+
+    showQuake(latest, false);
+
+    try {
+        L.control.layers(null, {"🔴 地震発生情報": quakeLayer}, {
+            collapsed: false,
+            position: "topright"
+        }).addTo(MAP);
+    } catch (e) {}
+
+    function loadLatest() {
+        fetch("latest_earthquake.json?cb=" + Date.now(), {
+            cache: "no-store",
+            headers: {"Accept": "application/json"}
+        }).then(function (r) {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+        }).then(function (q) {
+            if (q && Number.isFinite(Number(q.lat)) && Number.isFinite(Number(q.lon))) {
+                showQuake(q, true);
+            }
+        }).catch(function () {});
+    }
+
+    loadLatest();
+    setInterval(loadLatest, 5 * 60 * 1000);
+
+    window.addEventListener("resize", function () {
+        setTimeout(function () {
+            try { MAP.invalidateSize(false); } catch(e) {}
+        }, 150);
+    });
+})();
+</script>
+
 </body>
 <script>
     
