@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/08/31 11:55:00",
-  "place": "奄美大島近海",
-  "lat": 27.7,
-  "lon": 128.7,
+  "earthquake_time": "2026/08/31 16:02:00",
+  "place": "熊本県天草・芦北地方",
+  "lat": 32.4,
+  "lon": 130.5,
   "depth_km": 10.0,
-  "magnitude": 3.5,
+  "magnitude": 3.1,
   "max_intensity": ""
 }
