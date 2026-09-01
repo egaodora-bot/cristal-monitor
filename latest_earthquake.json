@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/02 04:21:00",
-  "place": "浦河沖",
-  "lat": 41.6,
-  "lon": 142.1,
-  "depth_km": 50.0,
-  "magnitude": 4.3,
+  "earthquake_time": "2026/09/02 08:24:00",
+  "place": "日向灘",
+  "lat": 31.9,
+  "lon": 131.7,
+  "depth_km": 40.0,
+  "magnitude": 4.0,
   "max_intensity": ""
 }
