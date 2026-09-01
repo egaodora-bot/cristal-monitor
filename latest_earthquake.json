@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/08/31 18:49:00",
-  "place": "福島県中通り",
-  "lat": 37.1,
-  "lon": 140.4,
-  "depth_km": 80.0,
-  "magnitude": 3.3,
+  "earthquake_time": "2026/09/01 11:32:00",
+  "place": "熊本県熊本地方",
+  "lat": 32.8,
+  "lon": 130.8,
+  "depth_km": 10.0,
+  "magnitude": 2.7,
   "max_intensity": ""
 }
