@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/03 06:39:00",
-  "place": "熊本県天草・芦北地方",
-  "lat": 32.3,
-  "lon": 130.5,
+  "earthquake_time": "2026/09/03 08:22:00",
+  "place": "鹿児島県薩摩地方",
+  "lat": 32.2,
+  "lon": 130.2,
   "depth_km": 10.0,
-  "magnitude": 1.8,
+  "magnitude": 2.3,
   "max_intensity": ""
 }
