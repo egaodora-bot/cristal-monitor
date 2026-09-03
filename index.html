@@ -136,6 +136,31 @@
 }
 </style>
 
+
+<style>
+/* Flat, readable geospatial visualization */
+.leaflet-marker-icon { display: none !important; }
+.cm-corner {
+  position: fixed; z-index: 10000; background: rgba(255,255,255,.94);
+  border:1px solid #b7b7b7; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.18);
+  padding:9px 11px; font-family:sans-serif; color:#222; font-size:12px; line-height:1.45;
+}
+#cm-topleft { top:10px; left:55px; width:250px; }
+#cm-bottomleft { bottom:12px; left:10px; width:250px; }
+#cm-bottomright { bottom:12px; right:10px; width:260px; }
+.cm-legend-line { display:flex; align-items:center; gap:7px; margin:3px 0; }
+.cm-swatch { width:13px; height:13px; border-radius:50%; border:1px solid #777; display:inline-block; flex:0 0 auto; }
+.cm-arrow { font-size:18px; font-weight:700; display:inline-block; width:24px; text-align:center; line-height:1; }
+.cm-mini { font-size:10px; color:#666; }
+.cm-region { font-weight:700; }
+.cm-linkrow { cursor:pointer; }
+.cm-linkrow:hover { background:#f0f0f0; border-radius:6px; }
+@media(max-width:700px){
+  #cm-topleft { top:8px; left:50px; width:210px; font-size:11px; }
+  #cm-bottomleft { left:6px; bottom:8px; width:220px; }
+  #cm-bottomright { right:6px; bottom:8px; width:230px; }
+}
+</style>
 </head>
 <body>
     
@@ -2145,54 +2170,52 @@
   const MAP = map_5de67b24d57cce503b296b64197a2d37;
   const DATA_URL = 'GEONET_national_monitoring_candidates.json?_=' + Date.now();
   const LATEST_URL = 'latest_earthquake.json?_=' + Date.now();
+  const STATIONS = [{"lat": 45.4156, "lon": 141.6731, "name": "稚内（北海道）", "station": "940001", "h": 0.9, "dir": "↘️ 東南東", "vert": -0.1, "angle": 112.5}, {"lat": 42.483, "lon": 142.541, "name": "北海道日高（北海道）", "station": "020885", "h": 0.2, "dir": "↙️ 南西", "vert": -1.5, "angle": 225}, {"lat": 39.7036, "lon": 141.1525, "name": "盛岡（岩手）", "station": "950152", "h": 1.0, "dir": "⬆️ 北", "vert": -0.3, "angle": 0}, {"lat": 38.2688, "lon": 140.8721, "name": "仙台（宮城）", "station": "950154", "h": 1.8, "dir": "↘️ 東南東", "vert": -0.3, "angle": 112.5}, {"lat": 38.2404, "lon": 140.3633, "name": "山形（山形）", "station": "950156", "h": 1.3, "dir": "↙️ 西南西", "vert": -0.9, "angle": 247.5}, {"lat": 37.7608, "lon": 140.4747, "name": "福島（福島）", "station": "950167", "h": 1.6, "dir": "↙️ 南西", "vert": -0.8, "angle": 225}, {"lat": 35.8569, "lon": 139.6489, "name": "さいたま（埼玉）", "station": "950219", "h": 0.9, "dir": "↗️ 東北東", "vert": -0.3, "angle": 67.5}, {"lat": 35.605, "lon": 140.1233, "name": "千葉（千葉）", "station": "950222", "h": 0.5, "dir": "↖️ 西北西", "vert": -0.3, "angle": 292.5}, {"lat": 35.4439, "lon": 139.6381, "name": "横浜（神奈川）", "station": "950225", "h": 2.1, "dir": "↖️ 北西", "vert": -2.3, "angle": 315}, {"lat": 36.6953, "lon": 137.2114, "name": "富山（富山）", "station": "950247", "h": 0.6, "dir": "↘️ 南東", "vert": -1.9, "angle": 135}, {"lat": 35.6639, "lon": 138.5683, "name": "甲府（山梨）", "station": "950232", "h": 1.7, "dir": "↗️ 東北東", "vert": -2.7, "angle": 67.5}, {"lat": 36.6513, "lon": 138.1811, "name": "長野（長野）", "station": "950235", "h": 2.0, "dir": "↗️ 北北東", "vert": -2.4, "angle": 22.5}, {"lat": 35.4233, "lon": 136.7606, "name": "岐阜（岐阜）", "station": "950238", "h": 1.9, "dir": "↖️ 北西", "vert": -0.5, "angle": 315}, {"lat": 35.1815, "lon": 136.9064, "name": "名古屋（愛知）", "station": "950322", "h": 1.0, "dir": "⬆️ 北", "vert": -1.0, "angle": 0}, {"lat": 35.0044, "lon": 135.8686, "name": "大津（滋賀）", "station": "950340", "h": 2.6, "dir": "↗️ 北東", "vert": -1.5, "angle": 45}, {"lat": 34.6864, "lon": 135.52, "name": "大阪（大阪）", "station": "950346", "h": 1.9, "dir": "➡️ 東", "vert": -1.0, "angle": 0}, {"lat": 34.6914, "lon": 135.1831, "name": "神戸（兵庫）", "station": "950349", "h": 2.1, "dir": "↙️ 南南西", "vert": -0.5, "angle": 202.5}, {"lat": 34.6853, "lon": 135.8328, "name": "奈良（奈良）", "station": "950352", "h": 2.2, "dir": "↖️ 西北西", "vert": -1.4, "angle": 292.5}, {"lat": 34.2261, "lon": 135.1675, "name": "和歌山（和歌山）", "station": "950355", "h": 1.7, "dir": "⬇️ 南", "vert": -1.9, "angle": 180}, {"lat": 35.5011, "lon": 134.2351, "name": "鳥取（鳥取）", "station": "950381", "h": 2.0, "dir": "↗️ 北東", "vert": -1.6, "angle": 45}, {"lat": 34.1783, "lon": 131.4736, "name": "山口（山口）", "station": "950390", "h": 1.1, "dir": "↙️ 南西", "vert": -2.7, "angle": 225}, {"lat": 33.6125, "lon": 134.3541, "name": "徳島（徳島）", "station": "950468", "h": 1.1, "dir": "↙️ 南西", "vert": -0.6, "angle": 225}, {"lat": 34.3403, "lon": 134.0433, "name": "高松（香川）", "station": "950458", "h": 2.0, "dir": "↙️ 西南西", "vert": -2.6, "angle": 247.5}, {"lat": 33.8417, "lon": 132.7661, "name": "松山（愛媛）", "station": "950460", "h": 1.3, "dir": "↗️ 北北東", "vert": -2.9, "angle": 22.5}, {"lat": 33.2478, "lon": 134.175, "name": "高知（高知）", "station": "950462", "h": 1.9, "dir": "↘️ 南東", "vert": -0.7, "angle": 135}, {"lat": 33.2494, "lon": 130.2989, "name": "佐賀（佐賀）", "station": "950475", "h": 1.7, "dir": "↖️ 西北西", "vert": -1.7, "angle": 292.5}, {"lat": 32.7447, "lon": 129.8736, "name": "長崎（長崎）", "station": "950477", "h": 2.5, "dir": "↗️ 北東", "vert": -0.3, "angle": 45}];
 
-  const panel = document.createElement('div');
-  panel.id = 'cristal-monitor-panel';
-  panel.innerHTML = `
-    <div class="cm-card" id="cm-monitor-card">
-      <div class="cm-title">重点監視候補 TOP 5</div>
-      <div class="cm-sub">GNSS年間移動量＋極性境界近接度</div>
-      <div id="cm-monitor-list">読み込み中…</div>
-      <div class="cm-note">地震発生場所の確定予測ではなく、監視優先度の候補表示です。</div>
-    </div>
-    <div class="cm-card" id="cm-quake-card">
-      <div class="cm-title">地震発生情報（最新5件）</div>
-      <div class="cm-sub">GitHub上の最新地震データを自動取得</div>
-      <div id="cm-quake-list">読み込み中…</div>
-    </div>
-  `;
-  document.body.appendChild(panel);
+  // Existing icon markers are hidden; we render the observation data as flat circles/arrows.
+  document.body.insertAdjacentHTML('beforeend', `
+<div id="cm-topleft" class="cm-corner">
+  <b>水平変動</b><br>
+  <span class="cm-mini">矢印＝移動方向、円の大きさ＝移動量</span>
+  <div class="cm-legend-line"><span class="cm-arrow">↑</span> 北向き</div>
+  <div class="cm-legend-line"><span class="cm-arrow">→</span> 東向き</div>
+  <div class="cm-legend-line"><span class="cm-arrow">↓</span> 南向き</div>
+  <div class="cm-legend-line"><span class="cm-arrow">←</span> 西向き</div>
+</div>
+<div id="cm-bottomleft" class="cm-corner">
+  <b>隆起・沈降</b><br>
+  <div class="cm-legend-line"><span class="cm-swatch" style="background:#d73027"></span><b>隆起</b>　上昇量</div>
+  <div class="cm-legend-line"><span class="cm-swatch" style="background:#4575b4"></span><b>沈降</b>　下降量</div>
+  <div class="cm-mini">円が大きいほど変動量が大きい</div>
+</div>
+<div id="cm-bottomright" class="cm-corner">
+  <b>表示切替</b><br>
+  <label><input id="cm-toggle-horizontal" type="checkbox" checked> 水平変動</label><br>
+  <label><input id="cm-toggle-vertical" type="checkbox" checked> 隆起・沈降</label><br>
+  <label><input id="cm-toggle-monitor" type="checkbox" checked> 重点監視候補 TOP 10</label>
+</div>
+`);
 
+  const horizontalLayer = L.layerGroup().addTo(MAP);
+  const verticalLayer = L.layerGroup().addTo(MAP);
   const monitorLayer = L.layerGroup().addTo(MAP);
   const quakeLayer = L.layerGroup().addTo(MAP);
 
-  // GSI Active Fault Map tile. Available at zoom 11-16.
+  // GSI Active Fault Map
   const activeFaultLayer = L.tileLayer(
     'https://cyberjapandata.gsi.go.jp/xyz/afm/{z}/{x}/{y}.png',
     {
-      minZoom: 11,
-      maxZoom: 16,
-      opacity: 0.72,
+      minZoom: 11, maxZoom: 16, opacity: 0.72,
       attribution: '© 国土地理院 活断層図'
     }
   ).addTo(MAP);
 
-  const overlay = {
-    '重点監視候補': monitorLayer,
-    '地震（7日）': quakeLayer,
-    '活断層図（GSI）': activeFaultLayer
-  };
-  L.control.layers(null, overlay, {collapsed: true, position: 'topright'}).addTo(MAP);
-
   function esc(v) {
     return String(v ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   }
-
   function num(v, d=0) {
-    const n = Number(v);
-    return Number.isFinite(n) ? n : d;
+    const n = Number(v); return Number.isFinite(n) ? n : d;
   }
-
   function asArray(x) {
     if (Array.isArray(x)) return x;
     if (!x || typeof x !== 'object') return [];
@@ -2202,167 +2225,169 @@
     if (x.earthquake) return [x];
     return [];
   }
-
-  function quakeParts(ev) {
-    const q = ev && ev.earthquake ? ev.earthquake : ev;
-    const h = q && (q.hypocenter || q.hypocenterInfo || q.location || q) || {};
-    const timeRaw = ev.time || ev.datetime || ev.created_at || ev.createdAt || q.time || q.datetime || '';
-    const name = h.name || h.area || h.region || q.name || ev.name || '';
-    let lat = num(h.latitude, NaN);
-    let lon = num(h.longitude, NaN);
-    if (!Number.isFinite(lat)) lat = num(ev.latitude, NaN);
-    if (!Number.isFinite(lon)) lon = num(ev.longitude, NaN);
-    const mag = num(h.magnitude ?? q.magnitude ?? ev.magnitude, NaN);
-    let depth = h.depth ?? q.depth ?? ev.depth ?? '';
-    if (typeof depth === 'object' && depth !== null) depth = depth.value ?? depth.depth ?? '';
-    let maxInt = ev.maxIntensity ?? q.maxIntensity ?? ev.maxIntensityJma ?? q.maxScale ?? '';
-    if (ev.points && Array.isArray(ev.points)) {
-      // P2PQuake: calc max scale label from points if present
-      const scales = ev.points.map(p => Number(p.scale)).filter(Number.isFinite);
-      if (scales.length) maxInt = Math.max(...scales);
-    }
-    return {timeRaw, name, lat, lon, mag, depth, maxInt};
+  function regionName(lat, lon) {
+    if (lat >= 41.2) return '北海道';
+    if (lat >= 37.0 && lon >= 138.5) return '東北';
+    if (lat >= 35.0 && lon >= 137.0) return '関東・甲信';
+    if (lat >= 34.0 && lon >= 134.0) return '中部・近畿';
+    if (lat >= 32.5 && lon >= 132.0) return '中国・四国';
+    return '九州・沖縄';
+  }
+  function compassArrow(angle) {
+    const dirs=['↑','↗','→','↘','↓','↙','←','↖'];
+    return dirs[Math.round(angle/45)%8];
   }
 
-  function formatTime(s) {
-    if (!s) return '時刻不明';
-    const d = new Date(s);
-    if (Number.isNaN(d.getTime())) return String(s);
-    return d.toLocaleString('ja-JP', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
-  }
+  function drawObservations() {
+    horizontalLayer.clearLayers();
+    verticalLayer.clearLayers();
+    STATIONS.forEach(s => {
+      const h = Math.max(0, num(s.h));
+      const v = num(s.vert);
+      const rH = Math.max(4, Math.min(11, 4 + h * 1.7));
+      const rV = Math.max(4, Math.min(13, 4 + Math.abs(v) * 2.2));
 
-  async function getJson(url) {
-    const r = await fetch(url, {cache:'no-store'});
-    if (!r.ok) throw new Error(r.status + ' ' + url);
-    return await r.json();
+      const hpt = L.circleMarker([s.lat,s.lon], {
+        radius:rH, weight:1.2, opacity:.9, fillOpacity:.30
+      }).addTo(horizontalLayer);
+      hpt.bindPopup(
+        '<b>水平変動</b><br>観測点: '+esc(s.name)+'<br>ID: '+esc(s.station)+
+        '<br>水平: '+h.toFixed(1)+' mm<br>方向: '+esc(s.dir)
+      );
+
+      const arrow = L.marker([s.lat,s.lon], {
+        icon:L.divIcon({
+          className:'cm-direction-arrow',
+          html:'<div style="font:700 20px sans-serif;transform:rotate('+(s.angle)+'deg);text-align:center;width:24px;height:24px;line-height:24px;">↑</div>',
+          iconSize:[24,24], iconAnchor:[12,12]
+        }),
+        interactive:true
+      }).addTo(horizontalLayer);
+      arrow.bindPopup('<b>水平変動方向</b><br>'+esc(s.name)+'<br>'+esc(s.dir)+' / '+h.toFixed(1)+' mm');
+
+      const fill = v >= 0 ? '#d73027' : '#4575b4';
+      const vpt = L.circleMarker([s.lat,s.lon], {
+        radius:rV, color:fill, fillColor:fill, weight:1.2, opacity:.95, fillOpacity:.50
+      }).addTo(verticalLayer);
+      vpt.bindPopup(
+        '<b>'+ (v>=0 ? '隆起' : '沈降') +'</b><br>観測点: '+esc(s.name)+'<br>ID: '+esc(s.station)+
+        '<br>'+Math.abs(v).toFixed(1)+' mm'
+      );
+    });
+  }
+  drawObservations();
+
+  function monitorPointIcon(rank) {
+    return L.divIcon({
+      className:'',
+      html:'<div style="width:26px;height:26px;border:3px solid #7b1fa2;border-radius:50%;background:rgba(255,255,255,.92);color:#7b1fa2;font:700 12px sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.25);">'+rank+'</div>',
+      iconSize:[26,26],iconAnchor:[13,13]
+    });
   }
 
   function renderMonitors(data) {
     const all = Array.isArray(data) ? data : (data.top10 || data.all || []);
-    const top = all.slice(0,5);
+    const top = all.slice(0,10);
     const list = document.getElementById('cm-monitor-list');
-
-    monitorLayer.clearLayers();
-
-    if (!top.length) {
-      list.innerHTML = '<div class="cm-muted">重点監視候補データなし</div>';
-      return;
+    if (list) {
+      list.innerHTML = top.length ? top.map((r,i) => {
+        const reg = regionName(num(r.lat),num(r.lon));
+        return '<div class="cm-row cm-linkrow" data-rank="'+(i+1)+'">'+
+          '<span class="cm-badge">'+(i+1)+'</span><div><b class="cm-region">'+esc(reg)+'</b> <span class="cm-muted">('+esc(r.station)+')</span>'+
+          '<div class="cm-muted">Net3D '+num(r.net_3d_mm_per_year).toFixed(1)+' mm/年 ・境界 '+num(r.nearest_boundary_distance_km).toFixed(2)+' km</div></div>'+
+          '<span class="cm-score">'+num(r.score).toFixed(2)+'</span></div>';
+      }).join('') : '<div class="cm-muted">重点監視候補データなし</div>';
     }
-
-    list.innerHTML = top.map((r, i) => `
-      <div class="cm-row">
-        <span class="cm-badge">${i+1}</span>
-        <div>
-          <b>${esc(r.station)}</b>
-          <div class="cm-muted">Net3D ${num(r.net_3d_mm_per_year).toFixed(1)} mm/年 ・境界 ${num(r.nearest_boundary_distance_km).toFixed(2)} km</div>
-        </div>
-        <span class="cm-score">${num(r.score).toFixed(2)}</span>
-      </div>
-    `).join('');
-
-    top.forEach((r, i) => {
-      const marker = L.circleMarker(
-        [num(r.lat), num(r.lon)],
-        {
-          radius: 9,
-          weight: 2,
-          opacity: 1,
-          fillOpacity: 0.84
-        }
-      ).addTo(monitorLayer);
-
-      marker.bindPopup(`
-        <div style="font-family:sans-serif;font-size:12px;line-height:1.55;min-width:210px;">
-          <b style="font-size:14px;">重点監視候補 #${i+1}</b><hr style="margin:5px 0;">
-          <b>観測点:</b> ${esc(r.station)}<br>
-          <b>総合Score:</b> ${num(r.score).toFixed(2)}<br>
-          <b>年間Net 3D:</b> ${num(r.net_3d_mm_per_year).toFixed(2)} mm/年<br>
-          <b>年間累積3D:</b> ${num(r.cumulative_3d_mm_per_year).toFixed(2)} mm/年<br>
-          <b>極性境界距離:</b> ${num(r.nearest_boundary_distance_km).toFixed(2)} km<br>
-          <b>観測期間:</b> ${esc(r.start_date)} → ${esc(r.end_date)}<br>
-          <b>判定:</b> ${esc(r.label || '重点監視候補')}
-        </div>
-      `);
-
-      // clicking the list row is intentionally simple and mobile-friendly
+    monitorLayer.clearLayers();
+    top.forEach((r,i) => {
+      const lat=num(r.lat,NaN), lon=num(r.lon,NaN);
+      if (!Number.isFinite(lat)||!Number.isFinite(lon)) return;
+      const mk=L.marker([lat,lon],{icon:monitorPointIcon(i+1)}).addTo(monitorLayer);
+      mk.bindPopup('<b>重点監視候補 #'+(i+1)+'</b><hr style="margin:5px 0;">'+
+        '<b>地域:</b> '+esc(regionName(lat,lon))+'<br>'+
+        '<b>観測点:</b> '+esc(r.station)+'<br>'+
+        '<b>Score:</b> '+num(r.score).toFixed(2)+'<br>'+
+        '<b>年間Net 3D:</b> '+num(r.net_3d_mm_per_year).toFixed(2)+' mm/年<br>'+
+        '<b>累積3D:</b> '+num(r.cumulative_3d_mm_per_year).toFixed(2)+' mm/年<br>'+
+        '<b>極性境界距離:</b> '+num(r.nearest_boundary_distance_km).toFixed(2)+' km');
     });
   }
 
-  function renderQuakes(raw) {
-    let events = asArray(raw);
-    if (!events.length) {
-      document.getElementById('cm-quake-list').innerHTML = '<div class="cm-muted">地震履歴JSONが未取得です</div>';
-      return;
-    }
+  function quakeParts(ev) {
+    const q=ev&&ev.earthquake?ev.earthquake:ev;
+    const h=(q&&(q.hypocenter||q.hypocenterInfo||q.location||q))||{};
+    const timeRaw=ev.time||ev.datetime||q.time||q.datetime||'';
+    const name=h.name||h.area||h.region||q.name||ev.name||'';
+    const lat=num(h.latitude,NaN), lon=num(h.longitude,NaN);
+    const mag=num(h.magnitude??q.magnitude??ev.magnitude,NaN);
+    const depth=h.depth??q.depth??ev.depth??'';
+    return {timeRaw,name,lat,lon,mag,depth};
+  }
+  function formatTime(s) {
+    if(!s) return '時刻不明';
+    const d=new Date(s); if(Number.isNaN(d.getTime())) return String(s);
+    return d.toLocaleString('ja-JP',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  }
 
-    const parsed = events.map(quakeParts)
-      .filter(e => Number.isFinite(e.lat) && Number.isFinite(e.lon))
-      .sort((a,b) => new Date(b.timeRaw || 0) - new Date(a.timeRaw || 0));
-
-    quakeLayer.clearLayers();
-
-    parsed.forEach((e) => {
-      const marker = L.circleMarker([e.lat, e.lon], {
-        radius: Math.max(4, Math.min(9, Number.isFinite(e.mag) ? 3 + e.mag : 5)),
-        weight: 1.5,
-        opacity: 0.9,
-        fillOpacity: 0.55
-      }).addTo(quakeLayer);
-
-      marker.bindPopup(`
-        <div style="font-family:sans-serif;font-size:12px;line-height:1.5;min-width:200px;">
-          <b>地震発生情報</b><hr style="margin:5px 0;">
-          <b>時刻:</b> ${esc(formatTime(e.timeRaw))}<br>
-          <b>震源:</b> ${esc(e.name || '不明')}<br>
-          <b>M:</b> ${Number.isFinite(e.mag) ? e.mag.toFixed(1) : '不明'}<br>
-          <b>深さ:</b> ${esc(e.depth === '' ? '不明' : e.depth + (String(e.depth).includes('km') ? '' : ' km'))}<br>
-          <b>最大震度:</b> ${esc(e.maxInt === '' ? '不明' : e.maxInt)}
-        </div>
-      `);
-    });
-
-    document.getElementById('cm-quake-list').innerHTML =
-      parsed.slice(0,5).map((e) => `
-        <div class="cm-quake">
-          <span class="cm-quake-dot"></span>
-          <div>
-            <b>${esc(e.name || '震源不明')}</b>
-            <div class="cm-muted">${esc(formatTime(e.timeRaw))}</div>
-          </div>
-          <span><b>${Number.isFinite(e.mag) ? 'M'+e.mag.toFixed(1) : 'M-'}</b></span>
-        </div>
-      `).join('');
+  async function loadJson(url) {
+    const r=await fetch(url,{cache:'no-store'}); if(!r.ok) throw new Error(r.status); return r.json();
   }
 
   async function loadMonitor() {
+    const list=document.getElementById('cm-monitor-list');
     try {
-      const data = await getJson(DATA_URL);
-      renderMonitors(data);
-    } catch (err) {
-      document.getElementById('cm-monitor-list').innerHTML =
-        '<div class="cm-muted">重点監視データを取得できませんでした</div>';
-      console.warn('monitor JSON:', err);
+      const data=await loadJson(DATA_URL); renderMonitors(data);
+    } catch(e) {
+      if(list) list.innerHTML='<div class="cm-muted">重点監視データを取得できませんでした</div>';
+    }
+  }
+  async function loadQuakes() {
+    const list=document.getElementById('cm-quake-list');
+    try {
+      const raw=await loadJson(LATEST_URL);
+      const parsed=asArray(raw).map(quakeParts).filter(e=>Number.isFinite(e.lat)&&Number.isFinite(e.lon))
+        .sort((a,b)=>new Date(b.timeRaw||0)-new Date(a.timeRaw||0));
+      quakeLayer.clearLayers();
+      parsed.forEach(e=>{
+        const mk=L.circleMarker([e.lat,e.lon],{radius:Number.isFinite(e.mag)?Math.max(5,Math.min(11,3+e.mag*1.8)):6,weight:1.5,opacity:.95,fillOpacity:.60});
+        mk.addTo(quakeLayer);
+        mk.bindPopup('<b>地震発生情報</b><hr style="margin:5px 0;">時刻: '+esc(formatTime(e.timeRaw))+'<br>震源: '+esc(e.name||'不明')+'<br>M: '+(Number.isFinite(e.mag)?e.mag.toFixed(1):'不明')+'<br>深さ: '+esc(e.depth||'不明'));
+      });
+      if(list) list.innerHTML=parsed.slice(0,5).map(e=>'<div class="cm-quake"><span class="cm-quake-dot"></span><div><b>'+esc(e.name||'震源不明')+'</b><div class="cm-muted">'+esc(formatTime(e.timeRaw))+'</div></div><span><b>'+ (Number.isFinite(e.mag)?'M'+e.mag.toFixed(1):'M-') +'</b></span></div>').join('') || '<div class="cm-muted">最新地震データなし</div>';
+    } catch(e) {
+      if(list) list.innerHTML='<div class="cm-muted">最新地震データを取得できませんでした</div>';
     }
   }
 
-  async function loadQuakes() {
-    try {
-      const latest = await getJson(LATEST_URL);
-      renderQuakes(latest);
-    } catch (err) {
-      document.getElementById('cm-quake-list').innerHTML =
-        '<div class="cm-muted">最新地震データを取得できませんでした</div>';
-      console.warn('latest earthquake JSON:', err);
-    }
-  }
+  // Build panel compatible with existing CSS.
+  const panel=document.createElement('div');
+  panel.id='cristal-monitor-panel';
+  panel.innerHTML='<div class="cm-card" id="cm-monitor-card">'+
+    '<div class="cm-title">重点監視候補 TOP 10</div>'+
+    '<div class="cm-sub">地域名＋GNSS年間移動量＋極性境界近接度</div>'+
+    '<div id="cm-monitor-list">読み込み中…</div>'+
+    '<div class="cm-note">地震発生場所の確定予測ではなく、監視優先度の候補表示です。</div></div>'+
+    '<div class="cm-card" id="cm-quake-card"><div class="cm-title">地震発生情報（最新5件）</div>'+
+    '<div class="cm-sub">GitHub上の最新地震データを自動取得</div><div id="cm-quake-list">読み込み中…</div></div>';
+  document.body.appendChild(panel);
+
+  // Legend/layers
+  L.control.layers(null,{
+    '水平変動':horizontalLayer,
+    '隆起・沈降':verticalLayer,
+    '重点監視候補 TOP 10':monitorLayer,
+    '地震':quakeLayer,
+    '活断層図（GSI）':activeFaultLayer
+  },{collapsed:true,position:'topright'}).addTo(MAP);
+
+  document.getElementById('cm-toggle-horizontal').addEventListener('change',e=>{ if(e.target.checked) horizontalLayer.addTo(MAP); else MAP.removeLayer(horizontalLayer); });
+  document.getElementById('cm-toggle-vertical').addEventListener('change',e=>{ if(e.target.checked) verticalLayer.addTo(MAP); else MAP.removeLayer(verticalLayer); });
+  document.getElementById('cm-toggle-monitor').addEventListener('change',e=>{ if(e.target.checked) monitorLayer.addTo(MAP); else MAP.removeLayer(monitorLayer); });
 
   loadMonitor();
   loadQuakes();
-
-  // refresh dynamic feeds every 5 minutes
-  setInterval(loadMonitor, 300000);
-  setInterval(loadQuakes, 300000);
-  })();
+  setInterval(loadMonitor,300000);
+  setInterval(loadQuakes,300000);
+})();
 </script>
-
-\n<script>\n(function(){\n  const MAP = map_5de67b24d57cce503b296b64197a2d37;\n  const stations = [{"lat": 45.4156, "lon": 141.6731, "name": "稚内（北海道）", "station": "940001", "h": 0.9, "hdir": "↘️ 東南東", "vdir": "⬆️", "vtype": "隆起", "v": 1.4}, {"lat": 43.125, "lon": 141.235, "name": "札幌２（北海道）", "station": "020882", "h": 2.0, "hdir": "↙️ 南西", "vdir": "⬆️", "vtype": "隆起", "v": 2.0}, {"lat": 42.9847, "lon": 144.3814, "name": "釧路市（北海道）", "station": "940010", "h": 2.1, "hdir": "↖️ 西北西", "vdir": "⬆️", "vtype": "隆起", "v": 2.8}, {"lat": 44.4711, "lon": 143.1389, "name": "興部（北海道）", "station": "940002", "h": 0.6, "hdir": "↖️ 北北西", "vdir": "⬇️", "vtype": "沈下", "v": -0.1}, {"lat": 42.483, "lon": 142.541, "name": "北海道日高（北海道）", "station": "020885", "h": 0.2, "hdir": "↙️ 南西", "vdir": "⬆️", "vtype": "隆起", "v": 2.8}, {"lat": 40.8244, "lon": 140.74, "name": "青森（青森）", "station": "950150", "h": 0.8, "hdir": "↖️ 西北西", "vdir": "⬇️", "vtype": "沈下", "v": -1.5}, {"lat": 39.7036, "lon": 141.1525, "name": "盛岡（岩手）", "station": "950152", "h": 1.0, "hdir": "⬆️ 北", "vdir": "⬇️", "vtype": "沈下", "v": -0.3}, {"lat": 38.2688, "lon": 140.8721, "name": "仙台（宮城）", "station": "950154", "h": 1.8, "hdir": "↘️ 東南東", "vdir": "⬆️", "vtype": "隆起", "v": 1.3}, {"lat": 39.7186, "lon": 140.1025, "name": "秋田（秋田）", "station": "950153", "h": 1.1, "hdir": "↗️ 北北東", "vdir": "⬇️", "vtype": "沈下", "v": -0.3}, {"lat": 38.2404, "lon": 140.3633, "name": "山形（山形）", "station": "950156", "h": 1.3, "hdir": "↙️ 西南西", "vdir": "⬇️", "vtype": "沈下", "v": -0.9}, {"lat": 37.7608, "lon": 140.4747, "name": "福島（福島）", "station": "950167", "h": 1.6, "hdir": "↙️ 南西", "vdir": "⬆️", "vtype": "隆起", "v": 1.8}, {"lat": 36.3417, "lon": 140.4467, "name": "水戸（茨城）", "station": "950212", "h": 2.1, "hdir": "↖️ 北西", "vdir": "⬆️", "vtype": "隆起", "v": 2.6}, {"lat": 36.5658, "lon": 139.8836, "name": "宇都宮（栃木）", "station": "950214", "h": 2.0, "hdir": "⬇️ 南", "vdir": "⬆️", "vtype": "隆起", "v": 1.3}, {"lat": 36.3894, "lon": 139.0633, "name": "前橋（群馬）", "station": "950216", "h": 0.5, "hdir": "↙️ 西南西", "vdir": "⬇️", "vtype": "沈下", "v": -0.8}, {"lat": 35.8569, "lon": 139.6489, "name": "さいたま（埼玉）", "station": "950219", "h": 0.9, "hdir": "↗️ 東北東", "vdir": "⬇️", "vtype": "沈下", "v": -0.3}, {"lat": 35.605, "lon": 140.1233, "name": "千葉（千葉）", "station": "950222", "h": 0.5, "hdir": "↖️ 西北西", "vdir": "⬆️", "vtype": "隆起", "v": 0.1}, {"lat": 35.775, "lon": 139.8044, "name": "足立（東京）", "station": "940042", "h": 2.5, "hdir": "↖️ 北西", "vdir": "⬇️", "vtype": "沈下", "v": -0.3}, {"lat": 35.4439, "lon": 139.6381, "name": "横浜（神奈川）", "station": "950225", "h": 2.1, "hdir": "↖️ 北西", "vdir": "⬆️", "vtype": "隆起", "v": 0.6}, {"lat": 37.9022, "lon": 139.0232, "name": "新潟（新潟）", "station": "950228", "h": 0.8, "hdir": "↘️ 南南東", "vdir": "⬇️", "vtype": "沈下", "v": -2.3}, {"lat": 36.6953, "lon": 137.2114, "name": "富山（富山）", "station": "950247", "h": 0.6, "hdir": "↘️ 南東", "vdir": "⬆️", "vtype": "隆起", "v": 0.6}, {"lat": 37.3934, "lon": 136.8993, "name": "輪島/金沢（石川）", "station": "950253", "h": 1.8, "hdir": "↘️ 南南東", "vdir": "⬆️", "vtype": "隆起", "v": 0.8}, {"lat": 36.0652, "lon": 136.2217, "name": "福井（福井）", "station": "950256", "h": 2.1, "hdir": "↘️ 南南東", "vdir": "⬇️", "vtype": "沈下", "v": -1.9}, {"lat": 35.6639, "lon": 138.5683, "name": "甲府（山梨）", "station": "950232", "h": 1.7, "hdir": "↗️ 東北東", "vdir": "⬇️", "vtype": "沈下", "v": -2.7}, {"lat": 36.6513, "lon": 138.1811, "name": "長野（長野）", "station": "950235", "h": 2.0, "hdir": "↗️ 北北東", "vdir": "⬇️", "vtype": "沈下", "v": -2.4}, {"lat": 35.4233, "lon": 136.7606, "name": "岐阜（岐阜）", "station": "950238", "h": 1.9, "hdir": "↖️ 北西", "vdir": "⬆️", "vtype": "隆起", "v": 2.6}, {"lat": 35.1613, "lon": 138.6763, "name": "静岡（静岡）", "station": "950241", "h": 1.8, "hdir": "↗️ 北北東", "vdir": "⬇️", "vtype": "沈下", "v": -0.5}, {"lat": 35.1815, "lon": 136.9064, "name": "名古屋（愛知）", "station": "950322", "h": 1.0, "hdir": "⬆️ 北", "vdir": "⬆️", "vtype": "隆起", "v": 1.9}, {"lat": 34.7303, "lon": 136.5086, "name": "津（三重）", "station": "950338", "h": 0.5, "hdir": "↖️ 北西", "vdir": "⬇️", "vtype": "沈下", "v": -1.0}, {"lat": 35.0044, "lon": 135.8686, "name": "大津（滋賀）", "station": "950340", "h": 2.6, "hdir": "↗️ 北東", "vdir": "⬆️", "vtype": "隆起", "v": 1.7}, {"lat": 35.4746, "lon": 135.3854, "name": "京都（京都）", "station": "950341", "h": 1.8, "hdir": "↙️ 西南西", "vdir": "⬇️", "vtype": "沈下", "v": -1.5}, {"lat": 34.6864, "lon": 135.52, "name": "大阪（大阪）", "station": "950346", "h": 1.9, "hdir": "➡️ 東", "vdir": "⬇️", "vtype": "沈下", "v": -1.0}, {"lat": 34.6914, "lon": 135.1831, "name": "神戸（兵庫）", "station": "950349", "h": 2.1, "hdir": "↙️ 南南西", "vdir": "⬇️", "vtype": "沈下", "v": -0.5}, {"lat": 34.6853, "lon": 135.8328, "name": "奈良（奈良）", "station": "950352", "h": 2.2, "hdir": "↖️ 西北西", "vdir": "⬇️", "vtype": "沈下", "v": -1.4}, {"lat": 34.2261, "lon": 135.1675, "name": "和歌山（和歌山）", "station": "950355", "h": 1.7, "hdir": "⬇️ 南", "vdir": "⬇️", "vtype": "沈下", "v": -1.9}, {"lat": 35.5011, "lon": 134.2351, "name": "鳥取（鳥取）", "station": "950381", "h": 2.0, "hdir": "↗️ 北東", "vdir": "⬆️", "vtype": "隆起", "v": 0.2}, {"lat": 35.4722, "lon": 133.0506, "name": "松江（島根）", "station": "950383", "h": 1.1, "hdir": "↗️ 東北東", "vdir": "⬆️", "vtype": "隆起", "v": 1.5}, {"lat": 34.6617, "lon": 133.935, "name": "岡山（岡山）", "station": "950385", "h": 1.6, "hdir": "↙️ 南西", "vdir": "⬆️", "vtype": "隆起", "v": 1.6}, {"lat": 34.3964, "lon": 132.4594, "name": "広島（広島）", "station": "950387", "h": 1.3, "hdir": "➡️ 東", "vdir": "⬇️", "vtype": "沈下", "v": -1.6}, {"lat": 34.1783, "lon": 131.4736, "name": "山口（山口）", "station": "950390", "h": 1.1, "hdir": "↙️ 南西", "vdir": "⬇️", "vtype": "沈下", "v": -2.7}, {"lat": 33.6125, "lon": 134.3541, "name": "徳島（徳島）", "station": "950468", "h": 1.1, "hdir": "↙️ 南西", "vdir": "⬇️", "vtype": "沈下", "v": -0.6}, {"lat": 34.3403, "lon": 134.0433, "name": "高松（香川）", "station": "950458", "h": 2.0, "hdir": "↙️ 西南西", "vdir": "⬇️", "vtype": "沈下", "v": -2.6}, {"lat": 33.8417, "lon": 132.7661, "name": "松山（愛媛）", "station": "950460", "h": 1.3, "hdir": "↗️ 北北東", "vdir": "⬇️", "vtype": "沈下", "v": -2.9}, {"lat": 33.2478, "lon": 134.175, "name": "高知（高知）", "station": "950462", "h": 1.9, "hdir": "↘️ 南東", "vdir": "⬆️", "vtype": "隆起", "v": 2.8}, {"lat": 33.6067, "lon": 130.4183, "name": "福岡（福岡）", "station": "950473", "h": 2.1, "hdir": "↗️ 北東", "vdir": "⬇️", "vtype": "沈下", "v": -0.7}, {"lat": 33.2494, "lon": 130.2989, "name": "佐賀（佐賀）", "station": "950475", "h": 1.7, "hdir": "↖️ 西北西", "vdir": "⬇️", "vtype": "沈下", "v": -1.7}, {"lat": 32.7447, "lon": 129.8736, "name": "長崎（長崎）", "station": "950477", "h": 2.5, "hdir": "↗️ 北東", "vdir": "⬆️", "vtype": "隆起", "v": 2.2}, {"lat": 32.7897, "lon": 130.7417, "name": "熊本（熊本）", "station": "950479", "h": 1.5, "hdir": "↙️ 西南西", "vdir": "⬆️", "vtype": "隆起", "v": 2.7}, {"lat": 33.2381, "lon": 131.6125, "name": "大分（大分）", "station": "950481", "h": 2.0, "hdir": "↖️ 北北西", "vdir": "⬆️", "vtype": "隆起", "v": 2.8}, {"lat": 31.9111, "lon": 131.4239, "name": "宮崎（宮崎）", "station": "950480", "h": 2.2, "hdir": "↗️ 北東", "vdir": "⬆️", "vtype": "隆起", "v": 0.7}, {"lat": 31.5969, "lon": 130.5571, "name": "鹿児島（鹿児島）", "station": "950482", "h": 1.8, "hdir": "➡️ 東", "vdir": "⬇️", "vtype": "沈下", "v": -0.3}, {"lat": 26.2125, "lon": 127.6811, "name": "那覇/石垣（沖縄）", "station": "950495", "h": 1.5, "hdir": "↘️ 東南東", "vdir": "⬆️", "vtype": "隆起", "v": 0.4}];\n\n  // Remove the old blue pin-style station markers only.\n  MAP.eachLayer(function(layer){\n    try {\n      if (layer instanceof L.Marker && layer.getPopup && layer.getPopup()) {\n        const c = layer.getPopup().getContent();\n        if (typeof c === 'string' && c.indexOf('観測点:') !== -1) MAP.removeLayer(layer);\n      }\n    } catch(e) {}\n  });\n\n  const horizontalLayer = L.layerGroup().addTo(MAP);\n  const verticalLayer = L.layerGroup().addTo(MAP);\n\n  const bearing = {\n    '北':0,'北北東':22.5,'北東':45,'東北東':67.5,'東':90,'東南東':112.5,\n    '南東':135,'南南東':157.5,'南':180,'南南西':202.5,'南西':225,\n    '西南西':247.5,'西':270,'西北西':292.5,'北西':315,'北北西':337.5\n  };\n  function cleanDir(s){ return String(s||'').replace(/[↖↗↘↙⬆⬇⬅➡]/g,'').trim(); }\n  function num(v){ const n=Number(v); return Number.isFinite(n)?n:0; }\n  function makePopup(r){\n    const vsign = r.v > 0 ? '+' : '';\n    return `<div style="font-family:sans-serif;font-size:12px;line-height:1.55;min-width:215px;">\n      <b style="font-size:14px;">GEONET観測点</b><hr style="margin:5px 0;">\n      <b>地点:</b> ${r.name}<br>\n      <b>ID:</b> ${r.station}<br>\n      <b>水平変動:</b> ${r.h.toFixed(1)} mm ${r.hdir}<br>\n      <b>上下変動:</b> ${r.vtype} (${vsign}${r.v.toFixed(1)} mm)\n    </div>`;\n  }\n\n  stations.forEach(function(r){\n    // Horizontal: small circle + direction arrow. Arrow length is a visual scale, not distance.\n    const h = num(r.h);\n    const b = bearing[cleanDir(r.hdir)] ?? 0;\n    const color = h >= 2 ? '#1976d2' : h >= 1 ? '#42a5f5' : '#90caf9';\n    const size = Math.max(18, Math.min(34, 18 + h*5));\n    const icon = L.divIcon({\n      className:'cm-h-arrow', iconSize:[size,size], iconAnchor:[size/2,size/2],\n      html:`<div style="position:relative;width:${size}px;height:${size}px;">\n        <span style="position:absolute;left:50%;top:50%;width:${Math.max(7,size-6)}px;height:3px;background:${color};transform-origin:0 50%;transform:rotate(${b-90}deg);border-radius:3px;"></span>\n        <span style="position:absolute;left:calc(50% - 4px);top:calc(50% - 4px);width:8px;height:8px;background:${color};border-radius:50%;border:1px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.25);"></span>\n      </div>`\n    });\n    L.marker([r.lat,r.lon],{icon:icon,interactive:true,zIndexOffset:150}).bindPopup(makePopup(r)).addTo(horizontalLayer);\n\n    // Vertical: uplift red, subsidence blue; size by absolute magnitude.\n    const vv = num(r.v);\n    const vcolor = vv > 0.3 ? '#d32f2f' : vv < -0.3 ? '#1565c0' : '#757575';\n    const vr = Math.max(4, Math.min(11, 4 + Math.abs(vv)*2.2));\n    L.circleMarker([r.lat,r.lon],{radius:vr,color:'#fff',weight:1.5,fillColor:vcolor,fillOpacity:.82}).bindPopup(makePopup(r)).addTo(verticalLayer);\n  });\n\n  // Four-corner explanations.\n  const panels = [\n    {pos:'top:10px;left:58px;', html:`<b>↔ 水平変動</b><br><span style="color:#90caf9">●</span> 小 <span style="color:#42a5f5">●</span> 中 <span style="color:#1976d2">●</span> 大<br><small>矢印：移動方向</small>`},\n    {pos:'bottom:58px;left:10px;', html:`<b>↕ 隆起・沈降</b><br><span style="color:#d32f2f">● 隆起</span><br><span style="color:#1565c0">● 沈降</span><br><small>円が大きいほど変動量大</small>`},\n    {pos:'bottom:10px;right:10px;', html:`<b>表示切替</b><br><label><input id="cm-h-toggle" type="checkbox" checked> 水平変動</label><br><label><input id="cm-v-toggle" type="checkbox" checked> 隆起・沈降</label><br><small>上の説明を見ながら切替</small>`}\n  ];\n  panels.forEach(function(p){\n    const d=document.createElement('div'); d.style.cssText=`position:fixed;${p.pos}z-index:10001;background:rgba(255,255,255,.94);border:1px solid #bbb;border-radius:8px;padding:7px 9px;box-shadow:0 2px 8px rgba(0,0,0,.16);font:11px/1.45 sans-serif;color:#222;`; d.innerHTML=p.html; document.body.appendChild(d);\n  });\n  document.getElementById('cm-h-toggle').addEventListener('change',e=> e.target.checked ? horizontalLayer.addTo(MAP):MAP.removeLayer(horizontalLayer));\n  document.getElementById('cm-v-toggle').addEventListener('change',e=> e.target.checked ? verticalLayer.addTo(MAP):MAP.removeLayer(verticalLayer));\n\n  // Expand layer control with the new visual layers while preserving existing monitoring/quakes.\n  const switcher = {\n    '水平変動': horizontalLayer,\n    '隆起・沈降': verticalLayer\n  };\n  L.control.layers(null, switcher, {collapsed:true,position:'topright'}).addTo(MAP);\n})();\n</script>\n</html>
+</html>
