@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_bce6849eace98ec60699457563044905 {
+                #map_5de67b24d57cce503b296b64197a2d37 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -50,6 +50,92 @@
             </script>
 
         
+
+<style>
+#cristal-monitor-panel {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  width: 330px;
+  max-width: calc(100vw - 24px);
+  z-index: 10000;
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #222;
+}
+.cm-card {
+  background: rgba(255,255,255,.95);
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.cm-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+.cm-sub {
+  color: #666;
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+.cm-row {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  gap: 6px;
+  align-items: center;
+  padding: 5px 0;
+  border-top: 1px solid #eee;
+}
+.cm-row:first-child { border-top: 0; }
+.cm-badge {
+  display: inline-flex;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  background: #7b1fa2;
+  color: #fff;
+  font-size: 10px;
+}
+.cm-score { font-weight: 700; }
+.cm-muted { color: #666; font-size: 10px; }
+.cm-quake {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  gap: 7px;
+  align-items: center;
+  padding: 5px 0;
+  border-top: 1px solid #eee;
+}
+.cm-quake-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d32f2f;
+}
+.cm-note {
+  font-size: 10px;
+  color: #666;
+  line-height: 1.35;
+  margin-top: 7px;
+}
+@media (max-width: 700px) {
+  #cristal-monitor-panel {
+    top: 6px;
+    right: 6px;
+    width: 285px;
+    font-size: 11px;
+  }
+  .cm-card { padding: 8px 9px; }
+  .cm-title { font-size: 13px; }
+}
+</style>
+
 </head>
 <body>
     
@@ -71,14 +157,14 @@
     </div>
 </div>
     
-            <div class="folium-map" id="map_bce6849eace98ec60699457563044905" ></div>
+            <div class="folium-map" id="map_5de67b24d57cce503b296b64197a2d37" ></div>
         
 </body>
 <script>
     
     
-            var map_bce6849eace98ec60699457563044905 = L.map(
-                "map_bce6849eace98ec60699457563044905",
+            var map_5de67b24d57cce503b296b64197a2d37 = L.map(
+                "map_5de67b24d57cce503b296b64197a2d37",
                 {
                     center: [37.5, 137.5],
                     crs: L.CRS.EPSG3857,
@@ -95,7 +181,7 @@
 
         
     
-            var tile_layer_aa4e436f65a1d7ab9b54a5e3e1789b37 = L.tileLayer(
+            var tile_layer_86ccf78161d333e7076401d62e882b90 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -112,17 +198,17 @@
             );
         
     
-            tile_layer_aa4e436f65a1d7ab9b54a5e3e1789b37.addTo(map_bce6849eace98ec60699457563044905);
+            tile_layer_86ccf78161d333e7076401d62e882b90.addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var marker_53672ca53a2e6c589fb92275ac12ca9d = L.marker(
+            var marker_2fb019098125e5f5aefff22a4a094a9e = L.marker(
                 [45.4156, 141.6731],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_4b600eef8c38a6ef2d952a3ae40b3777 = L.AwesomeMarkers.icon(
+            var icon_9d115a276a249c9e79d5e371d5de339f = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -133,34 +219,34 @@
             );
         
     
-        var popup_ae7c268138165b84487d8b8d994e11a2 = L.popup({
+        var popup_34cc9539dda7fc2d7b698637a1e18019 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_f6146d023bcd4e69238458b36c973c59 = $(`<div id="html_f6146d023bcd4e69238458b36c973c59" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 稚内（北海道）</b><br>         <small style="color:#777;">ID: 940001</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.4 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.6 mm)     </div>     </div>`)[0];
-                popup_ae7c268138165b84487d8b8d994e11a2.setContent(html_f6146d023bcd4e69238458b36c973c59);
+                var html_0f8e84dfa9f3f55c6536475b4d36ad9e = $(`<div id="html_0f8e84dfa9f3f55c6536475b4d36ad9e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 稚内（北海道）</b><br>         <small style="color:#777;">ID: 940001</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.9 mm（↘️ 東南東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.4 mm)     </div>     </div>`)[0];
+                popup_34cc9539dda7fc2d7b698637a1e18019.setContent(html_0f8e84dfa9f3f55c6536475b4d36ad9e);
             
         
 
-        marker_53672ca53a2e6c589fb92275ac12ca9d.bindPopup(popup_ae7c268138165b84487d8b8d994e11a2)
+        marker_2fb019098125e5f5aefff22a4a094a9e.bindPopup(popup_34cc9539dda7fc2d7b698637a1e18019)
         ;
 
         
     
     
-                marker_53672ca53a2e6c589fb92275ac12ca9d.setIcon(icon_4b600eef8c38a6ef2d952a3ae40b3777);
+                marker_2fb019098125e5f5aefff22a4a094a9e.setIcon(icon_9d115a276a249c9e79d5e371d5de339f);
             
     
-            var marker_2536d20e9b1bf4665546abfb77259431 = L.marker(
+            var marker_2cc1c1c7779a18b5131207b0bdf6bcea = L.marker(
                 [43.125, 141.235],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_99296f6f8e8dfec3d27e99b7c4c2ef41 = L.AwesomeMarkers.icon(
+            var icon_66e9b617bbb04f72afe5ae1af8fa9cec = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -171,34 +257,34 @@
             );
         
     
-        var popup_fd0b76c721f2f7856af8d7fd9ca98963 = L.popup({
+        var popup_7891db1d3dbab6db31f79eeb97653dcd = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_5fc94cd1d2295c5ff3c78e8c53dd6673 = $(`<div id="html_5fc94cd1d2295c5ff3c78e8c53dd6673" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 札幌２（北海道）</b><br>         <small style="color:#777;">ID: 020882</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.8 mm（↘️ 南南東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.9 mm)     </div>     </div>`)[0];
-                popup_fd0b76c721f2f7856af8d7fd9ca98963.setContent(html_5fc94cd1d2295c5ff3c78e8c53dd6673);
+                var html_e5d5e4d9f4c1861b34760a370e01b9bb = $(`<div id="html_e5d5e4d9f4c1861b34760a370e01b9bb" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 札幌２（北海道）</b><br>         <small style="color:#777;">ID: 020882</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.0 mm（↙️ 南西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.0 mm)     </div>     </div>`)[0];
+                popup_7891db1d3dbab6db31f79eeb97653dcd.setContent(html_e5d5e4d9f4c1861b34760a370e01b9bb);
             
         
 
-        marker_2536d20e9b1bf4665546abfb77259431.bindPopup(popup_fd0b76c721f2f7856af8d7fd9ca98963)
+        marker_2cc1c1c7779a18b5131207b0bdf6bcea.bindPopup(popup_7891db1d3dbab6db31f79eeb97653dcd)
         ;
 
         
     
     
-                marker_2536d20e9b1bf4665546abfb77259431.setIcon(icon_99296f6f8e8dfec3d27e99b7c4c2ef41);
+                marker_2cc1c1c7779a18b5131207b0bdf6bcea.setIcon(icon_66e9b617bbb04f72afe5ae1af8fa9cec);
             
     
-            var marker_7e2938969c4a7580997ef01906f0ea47 = L.marker(
+            var marker_a4bd61c98ce752d4ca558c68bf517d46 = L.marker(
                 [42.9847, 144.3814],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_2755097c63eebbc1b4c2f969a91a3979 = L.AwesomeMarkers.icon(
+            var icon_3548c60397e00472deade2a417ed7b60 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -209,34 +295,34 @@
             );
         
     
-        var popup_2ff63eca4ecff36358a390523b526ac7 = L.popup({
+        var popup_c21485a2ba2124b01b7e04172dcd09f7 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_cb062d95068622320837d957c67311a9 = $(`<div id="html_cb062d95068622320837d957c67311a9" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 釧路市（北海道）</b><br>         <small style="color:#777;">ID: 940010</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↘️ 東南東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.8 mm)     </div>     </div>`)[0];
-                popup_2ff63eca4ecff36358a390523b526ac7.setContent(html_cb062d95068622320837d957c67311a9);
+                var html_6b6bf1de0d8852407c11e4d9cceb770c = $(`<div id="html_6b6bf1de0d8852407c11e4d9cceb770c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 釧路市（北海道）</b><br>         <small style="color:#777;">ID: 940010</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↖️ 西北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.8 mm)     </div>     </div>`)[0];
+                popup_c21485a2ba2124b01b7e04172dcd09f7.setContent(html_6b6bf1de0d8852407c11e4d9cceb770c);
             
         
 
-        marker_7e2938969c4a7580997ef01906f0ea47.bindPopup(popup_2ff63eca4ecff36358a390523b526ac7)
+        marker_a4bd61c98ce752d4ca558c68bf517d46.bindPopup(popup_c21485a2ba2124b01b7e04172dcd09f7)
         ;
 
         
     
     
-                marker_7e2938969c4a7580997ef01906f0ea47.setIcon(icon_2755097c63eebbc1b4c2f969a91a3979);
+                marker_a4bd61c98ce752d4ca558c68bf517d46.setIcon(icon_3548c60397e00472deade2a417ed7b60);
             
     
-            var marker_5b11b3fa55179f78f6a98415e4014785 = L.marker(
+            var marker_e2d1c3a127de5a2ec37711b5f3805dcc = L.marker(
                 [44.4711, 143.1389],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_8d6edf45847ace5055b0b64f9b4d6f43 = L.AwesomeMarkers.icon(
+            var icon_8508eaa09f142d1bfd831ce04e936a5d = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -247,34 +333,34 @@
             );
         
     
-        var popup_7c23f3c0596f871f7f6ee9312acfe6c7 = L.popup({
+        var popup_4ef43467d60913cd1d7ecf478d7b1998 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_c2ff01dc94a84f87015ed0254b461893 = $(`<div id="html_c2ff01dc94a84f87015ed0254b461893" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 興部（北海道）</b><br>         <small style="color:#777;">ID: 940002</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.3 mm（↖️ 北北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.5 mm)     </div>     </div>`)[0];
-                popup_7c23f3c0596f871f7f6ee9312acfe6c7.setContent(html_c2ff01dc94a84f87015ed0254b461893);
+                var html_0a62b795bfe318119b40edacff3283b7 = $(`<div id="html_0a62b795bfe318119b40edacff3283b7" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 興部（北海道）</b><br>         <small style="color:#777;">ID: 940002</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.6 mm（↖️ 北北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.1 mm)     </div>     </div>`)[0];
+                popup_4ef43467d60913cd1d7ecf478d7b1998.setContent(html_0a62b795bfe318119b40edacff3283b7);
             
         
 
-        marker_5b11b3fa55179f78f6a98415e4014785.bindPopup(popup_7c23f3c0596f871f7f6ee9312acfe6c7)
+        marker_e2d1c3a127de5a2ec37711b5f3805dcc.bindPopup(popup_4ef43467d60913cd1d7ecf478d7b1998)
         ;
 
         
     
     
-                marker_5b11b3fa55179f78f6a98415e4014785.setIcon(icon_8d6edf45847ace5055b0b64f9b4d6f43);
+                marker_e2d1c3a127de5a2ec37711b5f3805dcc.setIcon(icon_8508eaa09f142d1bfd831ce04e936a5d);
             
     
-            var marker_208d83da0ad60531737801c48198c90e = L.marker(
+            var marker_1eded26bff1d3ef19660923e5d52645b = L.marker(
                 [42.483, 142.541],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_52cb5cf1db44b093b7106ce7ec8e136e = L.AwesomeMarkers.icon(
+            var icon_3724130795226ce1513544f394ca3c0b = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -285,34 +371,34 @@
             );
         
     
-        var popup_e6ce93fd3c7252748e32430010122661 = L.popup({
+        var popup_ef4b49b3b3967c2514a474fefdf5c97e = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_1a2a8f2542e0779d617634162bbcdf6c = $(`<div id="html_1a2a8f2542e0779d617634162bbcdf6c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 北海道日高（北海道）</b><br>         <small style="color:#777;">ID: 020885</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.9 mm)     </div>     </div>`)[0];
-                popup_e6ce93fd3c7252748e32430010122661.setContent(html_1a2a8f2542e0779d617634162bbcdf6c);
+                var html_4f03aaa75f93d87d4d4fca6abf853ecf = $(`<div id="html_4f03aaa75f93d87d4d4fca6abf853ecf" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 北海道日高（北海道）</b><br>         <small style="color:#777;">ID: 020885</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.2 mm（↙️ 南西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.8 mm)     </div>     </div>`)[0];
+                popup_ef4b49b3b3967c2514a474fefdf5c97e.setContent(html_4f03aaa75f93d87d4d4fca6abf853ecf);
             
         
 
-        marker_208d83da0ad60531737801c48198c90e.bindPopup(popup_e6ce93fd3c7252748e32430010122661)
+        marker_1eded26bff1d3ef19660923e5d52645b.bindPopup(popup_ef4b49b3b3967c2514a474fefdf5c97e)
         ;
 
         
     
     
-                marker_208d83da0ad60531737801c48198c90e.setIcon(icon_52cb5cf1db44b093b7106ce7ec8e136e);
+                marker_1eded26bff1d3ef19660923e5d52645b.setIcon(icon_3724130795226ce1513544f394ca3c0b);
             
     
-            var marker_1970ccc2d5210452d982ff2eddaf7ea9 = L.marker(
+            var marker_a4b38bbc3e6b8942a1286bb8f9c8611c = L.marker(
                 [40.8244, 140.74],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_fa19cefede88166a4d98993ce50c43a5 = L.AwesomeMarkers.icon(
+            var icon_62aa7f99470ef887db8d90ca1084ed67 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -323,34 +409,34 @@
             );
         
     
-        var popup_7e1c23ba639d15eb161502f48131a2c3 = L.popup({
+        var popup_047a7e7a8918081763ad02d859436e18 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_c980fb701c252910b8410dea7a9e5a5e = $(`<div id="html_c980fb701c252910b8410dea7a9e5a5e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 青森（青森）</b><br>         <small style="color:#777;">ID: 950150</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.3 mm（➡️ 東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+3.0 mm)     </div>     </div>`)[0];
-                popup_7e1c23ba639d15eb161502f48131a2c3.setContent(html_c980fb701c252910b8410dea7a9e5a5e);
+                var html_f41bb1c97a8efe0fa15e0ee3de93c275 = $(`<div id="html_f41bb1c97a8efe0fa15e0ee3de93c275" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 青森（青森）</b><br>         <small style="color:#777;">ID: 950150</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.8 mm（↖️ 西北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.5 mm)     </div>     </div>`)[0];
+                popup_047a7e7a8918081763ad02d859436e18.setContent(html_f41bb1c97a8efe0fa15e0ee3de93c275);
             
         
 
-        marker_1970ccc2d5210452d982ff2eddaf7ea9.bindPopup(popup_7e1c23ba639d15eb161502f48131a2c3)
+        marker_a4b38bbc3e6b8942a1286bb8f9c8611c.bindPopup(popup_047a7e7a8918081763ad02d859436e18)
         ;
 
         
     
     
-                marker_1970ccc2d5210452d982ff2eddaf7ea9.setIcon(icon_fa19cefede88166a4d98993ce50c43a5);
+                marker_a4b38bbc3e6b8942a1286bb8f9c8611c.setIcon(icon_62aa7f99470ef887db8d90ca1084ed67);
             
     
-            var marker_c09850512f0e2c51ec114d17d6ce2d73 = L.marker(
+            var marker_ca6fc4127153958631f2b3504a824790 = L.marker(
                 [39.7036, 141.1525],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_ea953bed6d06b1fb62371157e63651ed = L.AwesomeMarkers.icon(
+            var icon_bfd51e47c9db7d1781e62b8a8c810361 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -361,34 +447,34 @@
             );
         
     
-        var popup_acce7c2ba1f8e2aa4c3bf7a4ddb6d8f5 = L.popup({
+        var popup_7db6a669269bc2652b3701c632c80d85 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_e517450f762c355eaaed41cc69286377 = $(`<div id="html_e517450f762c355eaaed41cc69286377" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 盛岡（岩手）</b><br>         <small style="color:#777;">ID: 950152</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.3 mm（➡️ 東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.3 mm)     </div>     </div>`)[0];
-                popup_acce7c2ba1f8e2aa4c3bf7a4ddb6d8f5.setContent(html_e517450f762c355eaaed41cc69286377);
+                var html_1b67b12f10701a6fb63c902aae31f9a4 = $(`<div id="html_1b67b12f10701a6fb63c902aae31f9a4" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 盛岡（岩手）</b><br>         <small style="color:#777;">ID: 950152</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.0 mm（⬆️ 北）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.3 mm)     </div>     </div>`)[0];
+                popup_7db6a669269bc2652b3701c632c80d85.setContent(html_1b67b12f10701a6fb63c902aae31f9a4);
             
         
 
-        marker_c09850512f0e2c51ec114d17d6ce2d73.bindPopup(popup_acce7c2ba1f8e2aa4c3bf7a4ddb6d8f5)
+        marker_ca6fc4127153958631f2b3504a824790.bindPopup(popup_7db6a669269bc2652b3701c632c80d85)
         ;
 
         
     
     
-                marker_c09850512f0e2c51ec114d17d6ce2d73.setIcon(icon_ea953bed6d06b1fb62371157e63651ed);
+                marker_ca6fc4127153958631f2b3504a824790.setIcon(icon_bfd51e47c9db7d1781e62b8a8c810361);
             
     
-            var marker_fc39d7ae45946b5e4032f709bd3ad0d2 = L.marker(
+            var marker_9c59044cd4e41e9eb6305e234226f348 = L.marker(
                 [38.2688, 140.8721],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_1877844cff8d2e60d2dbb17f502e60a5 = L.AwesomeMarkers.icon(
+            var icon_7c81d537703cacfb318a1eba4e360480 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -399,34 +485,34 @@
             );
         
     
-        var popup_a28ad6aa185cab3b50ef2465dd948013 = L.popup({
+        var popup_73f6202b61775c7ae6087415fce8889a = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_481f63683bf7a3ae2cd99ff82ba3e4c2 = $(`<div id="html_481f63683bf7a3ae2cd99ff82ba3e4c2" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 仙台（宮城）</b><br>         <small style="color:#777;">ID: 950154</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.6 mm（↖️ 北北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.3 mm)     </div>     </div>`)[0];
-                popup_a28ad6aa185cab3b50ef2465dd948013.setContent(html_481f63683bf7a3ae2cd99ff82ba3e4c2);
+                var html_4bd196220c185f7013e7c34edbe2970b = $(`<div id="html_4bd196220c185f7013e7c34edbe2970b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 仙台（宮城）</b><br>         <small style="color:#777;">ID: 950154</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.8 mm（↘️ 東南東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.3 mm)     </div>     </div>`)[0];
+                popup_73f6202b61775c7ae6087415fce8889a.setContent(html_4bd196220c185f7013e7c34edbe2970b);
             
         
 
-        marker_fc39d7ae45946b5e4032f709bd3ad0d2.bindPopup(popup_a28ad6aa185cab3b50ef2465dd948013)
+        marker_9c59044cd4e41e9eb6305e234226f348.bindPopup(popup_73f6202b61775c7ae6087415fce8889a)
         ;
 
         
     
     
-                marker_fc39d7ae45946b5e4032f709bd3ad0d2.setIcon(icon_1877844cff8d2e60d2dbb17f502e60a5);
+                marker_9c59044cd4e41e9eb6305e234226f348.setIcon(icon_7c81d537703cacfb318a1eba4e360480);
             
     
-            var marker_acde1fe6afca8eb1b8da34d0c8e2cbdb = L.marker(
+            var marker_dce6803016a204544000f08c2cdf1988 = L.marker(
                 [39.7186, 140.1025],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_ea6decc2f82892afa1cc6c2bd78607ea = L.AwesomeMarkers.icon(
+            var icon_b77fee698c9b409c1a337e300f256e93 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -437,34 +523,34 @@
             );
         
     
-        var popup_bfba245bb7d282b19395b08ffdc7c85b = L.popup({
+        var popup_a441ef7b3c48cf0859b69b0a1fd1308f = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_4515c0c3b95a1fd1c512cb1090350d85 = $(`<div id="html_4515c0c3b95a1fd1c512cb1090350d85" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 秋田（秋田）</b><br>         <small style="color:#777;">ID: 950153</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.6 mm（↘️ 南南東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.4 mm)     </div>     </div>`)[0];
-                popup_bfba245bb7d282b19395b08ffdc7c85b.setContent(html_4515c0c3b95a1fd1c512cb1090350d85);
+                var html_01692d167bbfb8a96dfda599ceca50b9 = $(`<div id="html_01692d167bbfb8a96dfda599ceca50b9" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 秋田（秋田）</b><br>         <small style="color:#777;">ID: 950153</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.1 mm（↗️ 北北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.3 mm)     </div>     </div>`)[0];
+                popup_a441ef7b3c48cf0859b69b0a1fd1308f.setContent(html_01692d167bbfb8a96dfda599ceca50b9);
             
         
 
-        marker_acde1fe6afca8eb1b8da34d0c8e2cbdb.bindPopup(popup_bfba245bb7d282b19395b08ffdc7c85b)
+        marker_dce6803016a204544000f08c2cdf1988.bindPopup(popup_a441ef7b3c48cf0859b69b0a1fd1308f)
         ;
 
         
     
     
-                marker_acde1fe6afca8eb1b8da34d0c8e2cbdb.setIcon(icon_ea6decc2f82892afa1cc6c2bd78607ea);
+                marker_dce6803016a204544000f08c2cdf1988.setIcon(icon_b77fee698c9b409c1a337e300f256e93);
             
     
-            var marker_01ff7311e9941b82756845fb6d847a7f = L.marker(
+            var marker_04ffb0cd6f08974b075f118c8ca9bfe9 = L.marker(
                 [38.2404, 140.3633],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_6710f4f30d4e75e78737cfda6edd292c = L.AwesomeMarkers.icon(
+            var icon_a58574163e532ab41532cd2bfcc1391a = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -475,34 +561,34 @@
             );
         
     
-        var popup_0e72905871726bc3a9537021938d20e2 = L.popup({
+        var popup_e9bd786fcf9d47b8548fd371e7a1944a = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_f86cf009f62e0a1965f6f4a294a5a119 = $(`<div id="html_f86cf009f62e0a1965f6f4a294a5a119" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 山形（山形）</b><br>         <small style="color:#777;">ID: 950156</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.5 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.7 mm)     </div>     </div>`)[0];
-                popup_0e72905871726bc3a9537021938d20e2.setContent(html_f86cf009f62e0a1965f6f4a294a5a119);
+                var html_a5c5000487319803551b821861e05462 = $(`<div id="html_a5c5000487319803551b821861e05462" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 山形（山形）</b><br>         <small style="color:#777;">ID: 950156</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.3 mm（↙️ 西南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.9 mm)     </div>     </div>`)[0];
+                popup_e9bd786fcf9d47b8548fd371e7a1944a.setContent(html_a5c5000487319803551b821861e05462);
             
         
 
-        marker_01ff7311e9941b82756845fb6d847a7f.bindPopup(popup_0e72905871726bc3a9537021938d20e2)
+        marker_04ffb0cd6f08974b075f118c8ca9bfe9.bindPopup(popup_e9bd786fcf9d47b8548fd371e7a1944a)
         ;
 
         
     
     
-                marker_01ff7311e9941b82756845fb6d847a7f.setIcon(icon_6710f4f30d4e75e78737cfda6edd292c);
+                marker_04ffb0cd6f08974b075f118c8ca9bfe9.setIcon(icon_a58574163e532ab41532cd2bfcc1391a);
             
     
-            var marker_31f4de0199f185eae06d07d205709d35 = L.marker(
+            var marker_cdd9dede05888dd093539205f0cb0d4e = L.marker(
                 [37.7608, 140.4747],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_febf68bc03155a00a9dde8f4dea53a2b = L.AwesomeMarkers.icon(
+            var icon_115801be70b58f61169d92b789c7e6c3 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -513,34 +599,34 @@
             );
         
     
-        var popup_ab58e969515a9527db64f030e9c31d88 = L.popup({
+        var popup_e09a50d1ddbfbc24d6e34c56f69cac38 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_c1644088ca70b8aeb3f5b2ed6b051932 = $(`<div id="html_c1644088ca70b8aeb3f5b2ed6b051932" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 福島（福島）</b><br>         <small style="color:#777;">ID: 950167</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.9 mm（➡️ 東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.1 mm)     </div>     </div>`)[0];
-                popup_ab58e969515a9527db64f030e9c31d88.setContent(html_c1644088ca70b8aeb3f5b2ed6b051932);
+                var html_67e76281753708f87a379c1a1487aaf4 = $(`<div id="html_67e76281753708f87a379c1a1487aaf4" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 福島（福島）</b><br>         <small style="color:#777;">ID: 950167</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.6 mm（↙️ 南西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.8 mm)     </div>     </div>`)[0];
+                popup_e09a50d1ddbfbc24d6e34c56f69cac38.setContent(html_67e76281753708f87a379c1a1487aaf4);
             
         
 
-        marker_31f4de0199f185eae06d07d205709d35.bindPopup(popup_ab58e969515a9527db64f030e9c31d88)
+        marker_cdd9dede05888dd093539205f0cb0d4e.bindPopup(popup_e09a50d1ddbfbc24d6e34c56f69cac38)
         ;
 
         
     
     
-                marker_31f4de0199f185eae06d07d205709d35.setIcon(icon_febf68bc03155a00a9dde8f4dea53a2b);
+                marker_cdd9dede05888dd093539205f0cb0d4e.setIcon(icon_115801be70b58f61169d92b789c7e6c3);
             
     
-            var marker_2df8cf3bed90da84598ad11c3bfbeea9 = L.marker(
+            var marker_0fadec601066f0e923b8f35d1380c206 = L.marker(
                 [36.3417, 140.4467],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_aab88a7d7e550018cccc0bdab88157aa = L.AwesomeMarkers.icon(
+            var icon_b2aba6d51610c739144632598f1ed3ee = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -551,34 +637,34 @@
             );
         
     
-        var popup_f07124ac36126e02eafde26c5be87670 = L.popup({
+        var popup_4832ce07631de56223fc5f343fa3ac8a = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_49689f52d4e51b9d196baaeb9ba28ff1 = $(`<div id="html_49689f52d4e51b9d196baaeb9ba28ff1" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 水戸（茨城）</b><br>         <small style="color:#777;">ID: 950212</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.1 mm（⬆️ 北）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.2 mm)     </div>     </div>`)[0];
-                popup_f07124ac36126e02eafde26c5be87670.setContent(html_49689f52d4e51b9d196baaeb9ba28ff1);
+                var html_c9a6ed0f415d783d37d72ee685975553 = $(`<div id="html_c9a6ed0f415d783d37d72ee685975553" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 水戸（茨城）</b><br>         <small style="color:#777;">ID: 950212</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.6 mm)     </div>     </div>`)[0];
+                popup_4832ce07631de56223fc5f343fa3ac8a.setContent(html_c9a6ed0f415d783d37d72ee685975553);
             
         
 
-        marker_2df8cf3bed90da84598ad11c3bfbeea9.bindPopup(popup_f07124ac36126e02eafde26c5be87670)
+        marker_0fadec601066f0e923b8f35d1380c206.bindPopup(popup_4832ce07631de56223fc5f343fa3ac8a)
         ;
 
         
     
     
-                marker_2df8cf3bed90da84598ad11c3bfbeea9.setIcon(icon_aab88a7d7e550018cccc0bdab88157aa);
+                marker_0fadec601066f0e923b8f35d1380c206.setIcon(icon_b2aba6d51610c739144632598f1ed3ee);
             
     
-            var marker_3f2e465ff201b4a16cb000ca4eab557d = L.marker(
+            var marker_4aabca4607bdf2d0855c7387b720d2cb = L.marker(
                 [36.5658, 139.8836],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_9d3d9ed5cfd5a583081796e024a47c57 = L.AwesomeMarkers.icon(
+            var icon_8e569208eeea9f6dc5c0e7801598267c = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -589,34 +675,34 @@
             );
         
     
-        var popup_49828d3094ca82962ca6a448445859bb = L.popup({
+        var popup_294c82768a78ad1aba1c26a327c2e0f8 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_3f082e5574154d41fed55f5f2c0ac84e = $(`<div id="html_3f082e5574154d41fed55f5f2c0ac84e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 宇都宮（栃木）</b><br>         <small style="color:#777;">ID: 950214</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.8 mm（↖️ 西北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.6 mm)     </div>     </div>`)[0];
-                popup_49828d3094ca82962ca6a448445859bb.setContent(html_3f082e5574154d41fed55f5f2c0ac84e);
+                var html_1ad7ef4c46509bdcbe8d7ad713c73fa1 = $(`<div id="html_1ad7ef4c46509bdcbe8d7ad713c73fa1" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 宇都宮（栃木）</b><br>         <small style="color:#777;">ID: 950214</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.0 mm（⬇️ 南）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.3 mm)     </div>     </div>`)[0];
+                popup_294c82768a78ad1aba1c26a327c2e0f8.setContent(html_1ad7ef4c46509bdcbe8d7ad713c73fa1);
             
         
 
-        marker_3f2e465ff201b4a16cb000ca4eab557d.bindPopup(popup_49828d3094ca82962ca6a448445859bb)
+        marker_4aabca4607bdf2d0855c7387b720d2cb.bindPopup(popup_294c82768a78ad1aba1c26a327c2e0f8)
         ;
 
         
     
     
-                marker_3f2e465ff201b4a16cb000ca4eab557d.setIcon(icon_9d3d9ed5cfd5a583081796e024a47c57);
+                marker_4aabca4607bdf2d0855c7387b720d2cb.setIcon(icon_8e569208eeea9f6dc5c0e7801598267c);
             
     
-            var marker_42a31ff85611ee595f2ea1c89f0d9e77 = L.marker(
+            var marker_38d996efa2646c5852bf50b2788a0ec3 = L.marker(
                 [36.3894, 139.0633],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_048a380c5105821faec982b974e74a0d = L.AwesomeMarkers.icon(
+            var icon_59bfcfc5ac774cc7bb40aa2a6497a5b9 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -627,34 +713,34 @@
             );
         
     
-        var popup_87caa0cb3f192da5a601fc4cb4802b18 = L.popup({
+        var popup_0d3b8a2bb4ecc6e631847e259bfc1bb1 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_5f3001f30c436b83458fee2f19fa9130 = $(`<div id="html_5f3001f30c436b83458fee2f19fa9130" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 前橋（群馬）</b><br>         <small style="color:#777;">ID: 950216</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.2 mm（↙️ 南南西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.5 mm)     </div>     </div>`)[0];
-                popup_87caa0cb3f192da5a601fc4cb4802b18.setContent(html_5f3001f30c436b83458fee2f19fa9130);
+                var html_f553e830c8f9775ad8c315bc4944e215 = $(`<div id="html_f553e830c8f9775ad8c315bc4944e215" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 前橋（群馬）</b><br>         <small style="color:#777;">ID: 950216</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.5 mm（↙️ 西南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.8 mm)     </div>     </div>`)[0];
+                popup_0d3b8a2bb4ecc6e631847e259bfc1bb1.setContent(html_f553e830c8f9775ad8c315bc4944e215);
             
         
 
-        marker_42a31ff85611ee595f2ea1c89f0d9e77.bindPopup(popup_87caa0cb3f192da5a601fc4cb4802b18)
+        marker_38d996efa2646c5852bf50b2788a0ec3.bindPopup(popup_0d3b8a2bb4ecc6e631847e259bfc1bb1)
         ;
 
         
     
     
-                marker_42a31ff85611ee595f2ea1c89f0d9e77.setIcon(icon_048a380c5105821faec982b974e74a0d);
+                marker_38d996efa2646c5852bf50b2788a0ec3.setIcon(icon_59bfcfc5ac774cc7bb40aa2a6497a5b9);
             
     
-            var marker_24f0a3182ede31563892c0e453eeb93f = L.marker(
+            var marker_e69574d611c93d81dc6eec7244c3fff2 = L.marker(
                 [35.8569, 139.6489],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_82c78c12e0a32e56dba7b50d54afb47e = L.AwesomeMarkers.icon(
+            var icon_550321a9c73516a72db6e1dc2b31b499 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -665,34 +751,34 @@
             );
         
     
-        var popup_c195fa0a77868393238b575c654ba5e1 = L.popup({
+        var popup_7a9971d25047063a87033a260901f2aa = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_78509af5d0769f4c29b3f37395e8d269 = $(`<div id="html_78509af5d0769f4c29b3f37395e8d269" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: さいたま（埼玉）</b><br>         <small style="color:#777;">ID: 950219</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.6 mm（↗️ 東北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.9 mm)     </div>     </div>`)[0];
-                popup_c195fa0a77868393238b575c654ba5e1.setContent(html_78509af5d0769f4c29b3f37395e8d269);
+                var html_5c7ad737bebc1cddad2f9528c64ca528 = $(`<div id="html_5c7ad737bebc1cddad2f9528c64ca528" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: さいたま（埼玉）</b><br>         <small style="color:#777;">ID: 950219</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.9 mm（↗️ 東北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.3 mm)     </div>     </div>`)[0];
+                popup_7a9971d25047063a87033a260901f2aa.setContent(html_5c7ad737bebc1cddad2f9528c64ca528);
             
         
 
-        marker_24f0a3182ede31563892c0e453eeb93f.bindPopup(popup_c195fa0a77868393238b575c654ba5e1)
+        marker_e69574d611c93d81dc6eec7244c3fff2.bindPopup(popup_7a9971d25047063a87033a260901f2aa)
         ;
 
         
     
     
-                marker_24f0a3182ede31563892c0e453eeb93f.setIcon(icon_82c78c12e0a32e56dba7b50d54afb47e);
+                marker_e69574d611c93d81dc6eec7244c3fff2.setIcon(icon_550321a9c73516a72db6e1dc2b31b499);
             
     
-            var marker_d44ef3c10e9053cf3bee00af67f7ea02 = L.marker(
+            var marker_8a08605b7a466042710684905d675c57 = L.marker(
                 [35.605, 140.1233],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_21348af6ed31d86807b187e9169ca23c = L.AwesomeMarkers.icon(
+            var icon_cd9541cd83f2d182c296cb26ac27a262 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -703,34 +789,34 @@
             );
         
     
-        var popup_b81982c39f9f93a6564a96d5334b2743 = L.popup({
+        var popup_b97870bec26e890a9b7a82a658a7c9be = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_c1e508754ab33bfd72dc0109dda33e92 = $(`<div id="html_c1e508754ab33bfd72dc0109dda33e92" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 千葉（千葉）</b><br>         <small style="color:#777;">ID: 950222</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.8 mm)     </div>     </div>`)[0];
-                popup_b81982c39f9f93a6564a96d5334b2743.setContent(html_c1e508754ab33bfd72dc0109dda33e92);
+                var html_a3b08ba0d46fe61b7e47e593d15149e6 = $(`<div id="html_a3b08ba0d46fe61b7e47e593d15149e6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 千葉（千葉）</b><br>         <small style="color:#777;">ID: 950222</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.5 mm（↖️ 西北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.1 mm)     </div>     </div>`)[0];
+                popup_b97870bec26e890a9b7a82a658a7c9be.setContent(html_a3b08ba0d46fe61b7e47e593d15149e6);
             
         
 
-        marker_d44ef3c10e9053cf3bee00af67f7ea02.bindPopup(popup_b81982c39f9f93a6564a96d5334b2743)
+        marker_8a08605b7a466042710684905d675c57.bindPopup(popup_b97870bec26e890a9b7a82a658a7c9be)
         ;
 
         
     
     
-                marker_d44ef3c10e9053cf3bee00af67f7ea02.setIcon(icon_21348af6ed31d86807b187e9169ca23c);
+                marker_8a08605b7a466042710684905d675c57.setIcon(icon_cd9541cd83f2d182c296cb26ac27a262);
             
     
-            var marker_92cad34669e9a7991810d0fd0d4fd32b = L.marker(
+            var marker_7f4b7fe2bd368b5bc8c61aff275d485d = L.marker(
                 [35.775, 139.8044],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_49405c98172bb90c0561e2b6284bf11c = L.AwesomeMarkers.icon(
+            var icon_afef027f9be7db9c2a9f5e82836c57a9 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -741,34 +827,34 @@
             );
         
     
-        var popup_32e6e980cf23a96d0437e09b92a9c4bd = L.popup({
+        var popup_99eb2b3ebccd33affabe7da102508109 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_c24b6548a0534fc5a536f239d1d5965c = $(`<div id="html_c24b6548a0534fc5a536f239d1d5965c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 足立（東京）</b><br>         <small style="color:#777;">ID: 940042</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↖️ 北北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.0 mm)     </div>     </div>`)[0];
-                popup_32e6e980cf23a96d0437e09b92a9c4bd.setContent(html_c24b6548a0534fc5a536f239d1d5965c);
+                var html_bfaf376f0f1c99a4f1ada03c4ca013f7 = $(`<div id="html_bfaf376f0f1c99a4f1ada03c4ca013f7" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 足立（東京）</b><br>         <small style="color:#777;">ID: 940042</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.5 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.3 mm)     </div>     </div>`)[0];
+                popup_99eb2b3ebccd33affabe7da102508109.setContent(html_bfaf376f0f1c99a4f1ada03c4ca013f7);
             
         
 
-        marker_92cad34669e9a7991810d0fd0d4fd32b.bindPopup(popup_32e6e980cf23a96d0437e09b92a9c4bd)
+        marker_7f4b7fe2bd368b5bc8c61aff275d485d.bindPopup(popup_99eb2b3ebccd33affabe7da102508109)
         ;
 
         
     
     
-                marker_92cad34669e9a7991810d0fd0d4fd32b.setIcon(icon_49405c98172bb90c0561e2b6284bf11c);
+                marker_7f4b7fe2bd368b5bc8c61aff275d485d.setIcon(icon_afef027f9be7db9c2a9f5e82836c57a9);
             
     
-            var marker_81970bcdc647f1da1ab65d040a7bebb2 = L.marker(
+            var marker_98ac3bf1e519ec09306e2ebfd7dd6a01 = L.marker(
                 [35.4439, 139.6381],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_d058854ac2c9f8040c7f1585203361c8 = L.AwesomeMarkers.icon(
+            var icon_89f941b25b096736ba746355fef313fe = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -779,34 +865,34 @@
             );
         
     
-        var popup_ebee0cab9486fd731dff92d69ac37f59 = L.popup({
+        var popup_11d7c95bf429511064c09dd010e3b04d = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_6e4d14b5cb48985136a62b3036e40d08 = $(`<div id="html_6e4d14b5cb48985136a62b3036e40d08" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 横浜（神奈川）</b><br>         <small style="color:#777;">ID: 950225</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.9 mm（↗️ 北北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.9 mm)     </div>     </div>`)[0];
-                popup_ebee0cab9486fd731dff92d69ac37f59.setContent(html_6e4d14b5cb48985136a62b3036e40d08);
+                var html_81dbb3a61e91182fb8b75ae5f62c9576 = $(`<div id="html_81dbb3a61e91182fb8b75ae5f62c9576" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 横浜（神奈川）</b><br>         <small style="color:#777;">ID: 950225</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.6 mm)     </div>     </div>`)[0];
+                popup_11d7c95bf429511064c09dd010e3b04d.setContent(html_81dbb3a61e91182fb8b75ae5f62c9576);
             
         
 
-        marker_81970bcdc647f1da1ab65d040a7bebb2.bindPopup(popup_ebee0cab9486fd731dff92d69ac37f59)
+        marker_98ac3bf1e519ec09306e2ebfd7dd6a01.bindPopup(popup_11d7c95bf429511064c09dd010e3b04d)
         ;
 
         
     
     
-                marker_81970bcdc647f1da1ab65d040a7bebb2.setIcon(icon_d058854ac2c9f8040c7f1585203361c8);
+                marker_98ac3bf1e519ec09306e2ebfd7dd6a01.setIcon(icon_89f941b25b096736ba746355fef313fe);
             
     
-            var marker_2f414a53a8f8487518f156defa1c014a = L.marker(
+            var marker_e1a17b7bc310adcf48e6d9733cf8e87d = L.marker(
                 [37.9022, 139.0232],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_270aa4e9de4ed1182650e9b83b07dde0 = L.AwesomeMarkers.icon(
+            var icon_9550bfcdff5c9e9db194b9174b1f1255 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -817,34 +903,34 @@
             );
         
     
-        var popup_aef5570670907a177e08d5c8d89bbb39 = L.popup({
+        var popup_b983c212a732726ec56254c268062ce0 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_da4feff2bc6b609d6e6db29d61ac8e85 = $(`<div id="html_da4feff2bc6b609d6e6db29d61ac8e85" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 新潟（新潟）</b><br>         <small style="color:#777;">ID: 950228</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.2 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.4 mm)     </div>     </div>`)[0];
-                popup_aef5570670907a177e08d5c8d89bbb39.setContent(html_da4feff2bc6b609d6e6db29d61ac8e85);
+                var html_d61199cfce1022e1cd50907f3bed5610 = $(`<div id="html_d61199cfce1022e1cd50907f3bed5610" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 新潟（新潟）</b><br>         <small style="color:#777;">ID: 950228</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.8 mm（↘️ 南南東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.3 mm)     </div>     </div>`)[0];
+                popup_b983c212a732726ec56254c268062ce0.setContent(html_d61199cfce1022e1cd50907f3bed5610);
             
         
 
-        marker_2f414a53a8f8487518f156defa1c014a.bindPopup(popup_aef5570670907a177e08d5c8d89bbb39)
+        marker_e1a17b7bc310adcf48e6d9733cf8e87d.bindPopup(popup_b983c212a732726ec56254c268062ce0)
         ;
 
         
     
     
-                marker_2f414a53a8f8487518f156defa1c014a.setIcon(icon_270aa4e9de4ed1182650e9b83b07dde0);
+                marker_e1a17b7bc310adcf48e6d9733cf8e87d.setIcon(icon_9550bfcdff5c9e9db194b9174b1f1255);
             
     
-            var marker_263925ddda3d1040f679bb02f9dcc00c = L.marker(
+            var marker_9d5f828fffe4c8c3db850cea1904a2f1 = L.marker(
                 [36.6953, 137.2114],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_7665ee7a568bda19b6f6211748d35aa2 = L.AwesomeMarkers.icon(
+            var icon_feeac6d3807c14ac62f0420bc786d6bf = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -855,34 +941,34 @@
             );
         
     
-        var popup_38ab1000bfc6235164ae29569df4f932 = L.popup({
+        var popup_6d6f4aa9c50590ec914d3e49a6f3dc8c = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_3c8e5939775d1d256caa1d178d613424 = $(`<div id="html_3c8e5939775d1d256caa1d178d613424" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 富山（富山）</b><br>         <small style="color:#777;">ID: 950247</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↘️ 南南東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.3 mm)     </div>     </div>`)[0];
-                popup_38ab1000bfc6235164ae29569df4f932.setContent(html_3c8e5939775d1d256caa1d178d613424);
+                var html_584eebf1ecb63e03d25f568055303a07 = $(`<div id="html_584eebf1ecb63e03d25f568055303a07" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 富山（富山）</b><br>         <small style="color:#777;">ID: 950247</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.6 mm（↘️ 南東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.6 mm)     </div>     </div>`)[0];
+                popup_6d6f4aa9c50590ec914d3e49a6f3dc8c.setContent(html_584eebf1ecb63e03d25f568055303a07);
             
         
 
-        marker_263925ddda3d1040f679bb02f9dcc00c.bindPopup(popup_38ab1000bfc6235164ae29569df4f932)
+        marker_9d5f828fffe4c8c3db850cea1904a2f1.bindPopup(popup_6d6f4aa9c50590ec914d3e49a6f3dc8c)
         ;
 
         
     
     
-                marker_263925ddda3d1040f679bb02f9dcc00c.setIcon(icon_7665ee7a568bda19b6f6211748d35aa2);
+                marker_9d5f828fffe4c8c3db850cea1904a2f1.setIcon(icon_feeac6d3807c14ac62f0420bc786d6bf);
             
     
-            var marker_b721c11a088d7d9f3ad66835cff6d2e2 = L.marker(
+            var marker_be59c9d1e2bfb15e48e8bc725450384f = L.marker(
                 [37.3934, 136.8993],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_989849bb85e49224358e7aa2957f10c8 = L.AwesomeMarkers.icon(
+            var icon_7516fb81a1d0f1ad1504bccd00d5a5ff = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -893,34 +979,34 @@
             );
         
     
-        var popup_906dd92aaba05074bbb891080d8382fc = L.popup({
+        var popup_c02b43af1f9d06232ef07b3267276b04 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_d10ada118586b5d3add00b08a4f9ffea = $(`<div id="html_d10ada118586b5d3add00b08a4f9ffea" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 輪島/金沢（石川）</b><br>         <small style="color:#777;">ID: 950253</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.5 mm（↖️ 北北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.3 mm)     </div>     </div>`)[0];
-                popup_906dd92aaba05074bbb891080d8382fc.setContent(html_d10ada118586b5d3add00b08a4f9ffea);
+                var html_884abc33b8e2b551a4c7ac409518b11e = $(`<div id="html_884abc33b8e2b551a4c7ac409518b11e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 輪島/金沢（石川）</b><br>         <small style="color:#777;">ID: 950253</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.8 mm（↘️ 南南東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.8 mm)     </div>     </div>`)[0];
+                popup_c02b43af1f9d06232ef07b3267276b04.setContent(html_884abc33b8e2b551a4c7ac409518b11e);
             
         
 
-        marker_b721c11a088d7d9f3ad66835cff6d2e2.bindPopup(popup_906dd92aaba05074bbb891080d8382fc)
+        marker_be59c9d1e2bfb15e48e8bc725450384f.bindPopup(popup_c02b43af1f9d06232ef07b3267276b04)
         ;
 
         
     
     
-                marker_b721c11a088d7d9f3ad66835cff6d2e2.setIcon(icon_989849bb85e49224358e7aa2957f10c8);
+                marker_be59c9d1e2bfb15e48e8bc725450384f.setIcon(icon_7516fb81a1d0f1ad1504bccd00d5a5ff);
             
     
-            var marker_5479ae93f82cbd8f55eb0210bd49b8b7 = L.marker(
+            var marker_82f20acb2c04fa4026ea817e5baf11d7 = L.marker(
                 [36.0652, 136.2217],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_7209d26b29287d3938c0a36bce37023f = L.AwesomeMarkers.icon(
+            var icon_d407b664cd10986d624c2eada72c01ed = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -931,34 +1017,34 @@
             );
         
     
-        var popup_624bacd3df63e508152fe087b56981b7 = L.popup({
+        var popup_7c8f462f2ef5b622e51c6077340904dc = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_336ea92001e12b4b88fa3a6ad3b89433 = $(`<div id="html_336ea92001e12b4b88fa3a6ad3b89433" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 福井（福井）</b><br>         <small style="color:#777;">ID: 950256</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.6 mm（↙️ 南南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.7 mm)     </div>     </div>`)[0];
-                popup_624bacd3df63e508152fe087b56981b7.setContent(html_336ea92001e12b4b88fa3a6ad3b89433);
+                var html_cfda214dc393550dc9b7c74eb8c71371 = $(`<div id="html_cfda214dc393550dc9b7c74eb8c71371" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 福井（福井）</b><br>         <small style="color:#777;">ID: 950256</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↘️ 南南東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.9 mm)     </div>     </div>`)[0];
+                popup_7c8f462f2ef5b622e51c6077340904dc.setContent(html_cfda214dc393550dc9b7c74eb8c71371);
             
         
 
-        marker_5479ae93f82cbd8f55eb0210bd49b8b7.bindPopup(popup_624bacd3df63e508152fe087b56981b7)
+        marker_82f20acb2c04fa4026ea817e5baf11d7.bindPopup(popup_7c8f462f2ef5b622e51c6077340904dc)
         ;
 
         
     
     
-                marker_5479ae93f82cbd8f55eb0210bd49b8b7.setIcon(icon_7209d26b29287d3938c0a36bce37023f);
+                marker_82f20acb2c04fa4026ea817e5baf11d7.setIcon(icon_d407b664cd10986d624c2eada72c01ed);
             
     
-            var marker_1645f32c6126db9e350a6cda1e4430fb = L.marker(
+            var marker_16fa2cc4f535480efcf05c459700b276 = L.marker(
                 [35.6639, 138.5683],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_cc2c9b5a9206c8aaafbd5a29adc0a724 = L.AwesomeMarkers.icon(
+            var icon_6b83a9f7d7616caa7fa3e519c8f0a37f = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -969,34 +1055,34 @@
             );
         
     
-        var popup_527f1771d5cda268d76a918bd3060349 = L.popup({
+        var popup_96570c0581fa3b0b2cf070d09f2779ff = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_0a904a1cbd4137fa197ba82bb8c8b173 = $(`<div id="html_0a904a1cbd4137fa197ba82bb8c8b173" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 甲府（山梨）</b><br>         <small style="color:#777;">ID: 950232</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.1 mm（↗️ 北北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.5 mm)     </div>     </div>`)[0];
-                popup_527f1771d5cda268d76a918bd3060349.setContent(html_0a904a1cbd4137fa197ba82bb8c8b173);
+                var html_f112a959ae74aa0791dbe948fd84f932 = $(`<div id="html_f112a959ae74aa0791dbe948fd84f932" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 甲府（山梨）</b><br>         <small style="color:#777;">ID: 950232</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.7 mm（↗️ 東北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.7 mm)     </div>     </div>`)[0];
+                popup_96570c0581fa3b0b2cf070d09f2779ff.setContent(html_f112a959ae74aa0791dbe948fd84f932);
             
         
 
-        marker_1645f32c6126db9e350a6cda1e4430fb.bindPopup(popup_527f1771d5cda268d76a918bd3060349)
+        marker_16fa2cc4f535480efcf05c459700b276.bindPopup(popup_96570c0581fa3b0b2cf070d09f2779ff)
         ;
 
         
     
     
-                marker_1645f32c6126db9e350a6cda1e4430fb.setIcon(icon_cc2c9b5a9206c8aaafbd5a29adc0a724);
+                marker_16fa2cc4f535480efcf05c459700b276.setIcon(icon_6b83a9f7d7616caa7fa3e519c8f0a37f);
             
     
-            var marker_d3008503101c460f2777a83f493a7c9b = L.marker(
+            var marker_cc4a0b3755af64ec9f15d95cb200f06f = L.marker(
                 [36.6513, 138.1811],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_f6ed5bcb6739910968bad14f02dc7913 = L.AwesomeMarkers.icon(
+            var icon_bc35200396569666aee6fb09b078dcdf = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1007,34 +1093,34 @@
             );
         
     
-        var popup_685652f8460e27107a92e629c6dfb9cd = L.popup({
+        var popup_b3cdb7378a084032bab923c62f7b9d8f = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_6bb4c7ef1a6991c313f5fe66b2d61a85 = $(`<div id="html_6bb4c7ef1a6991c313f5fe66b2d61a85" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 長野（長野）</b><br>         <small style="color:#777;">ID: 950235</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.5 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.6 mm)     </div>     </div>`)[0];
-                popup_685652f8460e27107a92e629c6dfb9cd.setContent(html_6bb4c7ef1a6991c313f5fe66b2d61a85);
+                var html_e4e5963d97dd3d23e509b0122ed210d7 = $(`<div id="html_e4e5963d97dd3d23e509b0122ed210d7" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 長野（長野）</b><br>         <small style="color:#777;">ID: 950235</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.0 mm（↗️ 北北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.4 mm)     </div>     </div>`)[0];
+                popup_b3cdb7378a084032bab923c62f7b9d8f.setContent(html_e4e5963d97dd3d23e509b0122ed210d7);
             
         
 
-        marker_d3008503101c460f2777a83f493a7c9b.bindPopup(popup_685652f8460e27107a92e629c6dfb9cd)
+        marker_cc4a0b3755af64ec9f15d95cb200f06f.bindPopup(popup_b3cdb7378a084032bab923c62f7b9d8f)
         ;
 
         
     
     
-                marker_d3008503101c460f2777a83f493a7c9b.setIcon(icon_f6ed5bcb6739910968bad14f02dc7913);
+                marker_cc4a0b3755af64ec9f15d95cb200f06f.setIcon(icon_bc35200396569666aee6fb09b078dcdf);
             
     
-            var marker_89a6761f89db6a2180dda5d424c04da4 = L.marker(
+            var marker_1c136c1f8dad8a801232c548cdcc12fe = L.marker(
                 [35.4233, 136.7606],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_c65bbebbcd94e42735b4b0bd29746a06 = L.AwesomeMarkers.icon(
+            var icon_9e5810f863b801fac1f19d7f3fa614f6 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1045,34 +1131,34 @@
             );
         
     
-        var popup_ba66040c4107b6c3460ae2311250a0f9 = L.popup({
+        var popup_05eacff119289886baedef8edf369298 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_57afb23fd320a71fcb94427f98d7e28e = $(`<div id="html_57afb23fd320a71fcb94427f98d7e28e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 岐阜（岐阜）</b><br>         <small style="color:#777;">ID: 950238</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.3 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> 変動なし (0.0 mm)     </div>     </div>`)[0];
-                popup_ba66040c4107b6c3460ae2311250a0f9.setContent(html_57afb23fd320a71fcb94427f98d7e28e);
+                var html_628cd75dae290dc1fa16bf6aa9283d6c = $(`<div id="html_628cd75dae290dc1fa16bf6aa9283d6c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 岐阜（岐阜）</b><br>         <small style="color:#777;">ID: 950238</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.9 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.6 mm)     </div>     </div>`)[0];
+                popup_05eacff119289886baedef8edf369298.setContent(html_628cd75dae290dc1fa16bf6aa9283d6c);
             
         
 
-        marker_89a6761f89db6a2180dda5d424c04da4.bindPopup(popup_ba66040c4107b6c3460ae2311250a0f9)
+        marker_1c136c1f8dad8a801232c548cdcc12fe.bindPopup(popup_05eacff119289886baedef8edf369298)
         ;
 
         
     
     
-                marker_89a6761f89db6a2180dda5d424c04da4.setIcon(icon_c65bbebbcd94e42735b4b0bd29746a06);
+                marker_1c136c1f8dad8a801232c548cdcc12fe.setIcon(icon_9e5810f863b801fac1f19d7f3fa614f6);
             
     
-            var marker_a51e50cdc8dd339ecd5a2fd5f357ac57 = L.marker(
+            var marker_ddd86835296c97c288d25210775269a8 = L.marker(
                 [35.1613, 138.6763],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_622bd0552baad685e6ff93025fc69096 = L.AwesomeMarkers.icon(
+            var icon_ba2dbd2ead4c537d504a627554043b89 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1083,34 +1169,34 @@
             );
         
     
-        var popup_89d4224d6042554244ea36818214f4f8 = L.popup({
+        var popup_e6d91976bd624d31f45865d6fa3c7244 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_2d24ed45c170641df3602d3c214a4d98 = $(`<div id="html_2d24ed45c170641df3602d3c214a4d98" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 静岡（静岡）</b><br>         <small style="color:#777;">ID: 950241</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.6 mm（↗️ 東北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.4 mm)     </div>     </div>`)[0];
-                popup_89d4224d6042554244ea36818214f4f8.setContent(html_2d24ed45c170641df3602d3c214a4d98);
+                var html_a9de04cdfc4029261082da123f151b02 = $(`<div id="html_a9de04cdfc4029261082da123f151b02" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 静岡（静岡）</b><br>         <small style="color:#777;">ID: 950241</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.8 mm（↗️ 北北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.5 mm)     </div>     </div>`)[0];
+                popup_e6d91976bd624d31f45865d6fa3c7244.setContent(html_a9de04cdfc4029261082da123f151b02);
             
         
 
-        marker_a51e50cdc8dd339ecd5a2fd5f357ac57.bindPopup(popup_89d4224d6042554244ea36818214f4f8)
+        marker_ddd86835296c97c288d25210775269a8.bindPopup(popup_e6d91976bd624d31f45865d6fa3c7244)
         ;
 
         
     
     
-                marker_a51e50cdc8dd339ecd5a2fd5f357ac57.setIcon(icon_622bd0552baad685e6ff93025fc69096);
+                marker_ddd86835296c97c288d25210775269a8.setIcon(icon_ba2dbd2ead4c537d504a627554043b89);
             
     
-            var marker_b76f1743ed3e10bc75b2fd830ded2e47 = L.marker(
+            var marker_ad06370007102a0fe603ed27e6004297 = L.marker(
                 [35.1815, 136.9064],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_caf4c98c0a476290f93058642af77013 = L.AwesomeMarkers.icon(
+            var icon_c7d27105bdaa9933285bc9651589e611 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1121,34 +1207,34 @@
             );
         
     
-        var popup_0100001f58d8e1818a93e71ba3b03b69 = L.popup({
+        var popup_45d8159a348ccdbf14f16334dcba11ad = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_92a8a941f77c9e0120270939be89d2b0 = $(`<div id="html_92a8a941f77c9e0120270939be89d2b0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 名古屋（愛知）</b><br>         <small style="color:#777;">ID: 950322</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↘️ 東南東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.6 mm)     </div>     </div>`)[0];
-                popup_0100001f58d8e1818a93e71ba3b03b69.setContent(html_92a8a941f77c9e0120270939be89d2b0);
+                var html_93920aa1d68a5f25aa3d36cf1db66cd6 = $(`<div id="html_93920aa1d68a5f25aa3d36cf1db66cd6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 名古屋（愛知）</b><br>         <small style="color:#777;">ID: 950322</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.0 mm（⬆️ 北）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.9 mm)     </div>     </div>`)[0];
+                popup_45d8159a348ccdbf14f16334dcba11ad.setContent(html_93920aa1d68a5f25aa3d36cf1db66cd6);
             
         
 
-        marker_b76f1743ed3e10bc75b2fd830ded2e47.bindPopup(popup_0100001f58d8e1818a93e71ba3b03b69)
+        marker_ad06370007102a0fe603ed27e6004297.bindPopup(popup_45d8159a348ccdbf14f16334dcba11ad)
         ;
 
         
     
     
-                marker_b76f1743ed3e10bc75b2fd830ded2e47.setIcon(icon_caf4c98c0a476290f93058642af77013);
+                marker_ad06370007102a0fe603ed27e6004297.setIcon(icon_c7d27105bdaa9933285bc9651589e611);
             
     
-            var marker_f564a5d62f09c04b3ec642b33302e6e3 = L.marker(
+            var marker_aac913e655a55062081de44d7b70e90f = L.marker(
                 [34.7303, 136.5086],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_0f736f30a45c03e23e874e5c79174daa = L.AwesomeMarkers.icon(
+            var icon_ea57804c40e3718bc030ec05890730b4 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1159,34 +1245,34 @@
             );
         
     
-        var popup_ec2898aa214a848e42bdb4021b8343e8 = L.popup({
+        var popup_3eda2125b7084bff4845f1e2fd62e0f0 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_48d8cd854df3050616849de75fea171c = $(`<div id="html_48d8cd854df3050616849de75fea171c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 津（三重）</b><br>         <small style="color:#777;">ID: 950338</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.3 mm（⬇️ 南）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.6 mm)     </div>     </div>`)[0];
-                popup_ec2898aa214a848e42bdb4021b8343e8.setContent(html_48d8cd854df3050616849de75fea171c);
+                var html_24ca971606da19ab48b1cc37ff6c591d = $(`<div id="html_24ca971606da19ab48b1cc37ff6c591d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 津（三重）</b><br>         <small style="color:#777;">ID: 950338</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.5 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.0 mm)     </div>     </div>`)[0];
+                popup_3eda2125b7084bff4845f1e2fd62e0f0.setContent(html_24ca971606da19ab48b1cc37ff6c591d);
             
         
 
-        marker_f564a5d62f09c04b3ec642b33302e6e3.bindPopup(popup_ec2898aa214a848e42bdb4021b8343e8)
+        marker_aac913e655a55062081de44d7b70e90f.bindPopup(popup_3eda2125b7084bff4845f1e2fd62e0f0)
         ;
 
         
     
     
-                marker_f564a5d62f09c04b3ec642b33302e6e3.setIcon(icon_0f736f30a45c03e23e874e5c79174daa);
+                marker_aac913e655a55062081de44d7b70e90f.setIcon(icon_ea57804c40e3718bc030ec05890730b4);
             
     
-            var marker_c04620e79222c325e9805736263c28be = L.marker(
+            var marker_85bb257ce2a3398c8adf8a945b7e0b70 = L.marker(
                 [35.0044, 135.8686],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_e944ed77fb057bb1c3ef6fbf9e3d6873 = L.AwesomeMarkers.icon(
+            var icon_d93c9b2f5a712a59cc248e58aaf24fc0 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1197,34 +1283,34 @@
             );
         
     
-        var popup_a012fe04153ec40c862c1123d612f063 = L.popup({
+        var popup_0a126754b5c7afb539e1056263407295 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_276e01d3737b90caaaaf03b6c0b2a262 = $(`<div id="html_276e01d3737b90caaaaf03b6c0b2a262" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 大津（滋賀）</b><br>         <small style="color:#777;">ID: 950340</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.9 mm)     </div>     </div>`)[0];
-                popup_a012fe04153ec40c862c1123d612f063.setContent(html_276e01d3737b90caaaaf03b6c0b2a262);
+                var html_692cd00027c5934b5e0e88bf6b52b9f9 = $(`<div id="html_692cd00027c5934b5e0e88bf6b52b9f9" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 大津（滋賀）</b><br>         <small style="color:#777;">ID: 950340</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.6 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.7 mm)     </div>     </div>`)[0];
+                popup_0a126754b5c7afb539e1056263407295.setContent(html_692cd00027c5934b5e0e88bf6b52b9f9);
             
         
 
-        marker_c04620e79222c325e9805736263c28be.bindPopup(popup_a012fe04153ec40c862c1123d612f063)
+        marker_85bb257ce2a3398c8adf8a945b7e0b70.bindPopup(popup_0a126754b5c7afb539e1056263407295)
         ;
 
         
     
     
-                marker_c04620e79222c325e9805736263c28be.setIcon(icon_e944ed77fb057bb1c3ef6fbf9e3d6873);
+                marker_85bb257ce2a3398c8adf8a945b7e0b70.setIcon(icon_d93c9b2f5a712a59cc248e58aaf24fc0);
             
     
-            var marker_06073e30812f9bc0e00de8ea57a85ed6 = L.marker(
+            var marker_8894501e46967247d93606345a686c15 = L.marker(
                 [35.4746, 135.3854],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_ca85b11340582c54b2f3f8cc29149bd5 = L.AwesomeMarkers.icon(
+            var icon_1afdb64896c24cbe7d385cf97aaf258b = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1235,34 +1321,34 @@
             );
         
     
-        var popup_d18bb08580441a48767180fcdc9358a6 = L.popup({
+        var popup_f4e886e7bd6e7648c089aba3f7f5fcd1 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_2ec678633179a4d0b87febfcb00db64e = $(`<div id="html_2ec678633179a4d0b87febfcb00db64e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 京都（京都）</b><br>         <small style="color:#777;">ID: 950341</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.6 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.4 mm)     </div>     </div>`)[0];
-                popup_d18bb08580441a48767180fcdc9358a6.setContent(html_2ec678633179a4d0b87febfcb00db64e);
+                var html_65191f6c708273ec1cc8a2de00f6a56d = $(`<div id="html_65191f6c708273ec1cc8a2de00f6a56d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 京都（京都）</b><br>         <small style="color:#777;">ID: 950341</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.8 mm（↙️ 西南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.5 mm)     </div>     </div>`)[0];
+                popup_f4e886e7bd6e7648c089aba3f7f5fcd1.setContent(html_65191f6c708273ec1cc8a2de00f6a56d);
             
         
 
-        marker_06073e30812f9bc0e00de8ea57a85ed6.bindPopup(popup_d18bb08580441a48767180fcdc9358a6)
+        marker_8894501e46967247d93606345a686c15.bindPopup(popup_f4e886e7bd6e7648c089aba3f7f5fcd1)
         ;
 
         
     
     
-                marker_06073e30812f9bc0e00de8ea57a85ed6.setIcon(icon_ca85b11340582c54b2f3f8cc29149bd5);
+                marker_8894501e46967247d93606345a686c15.setIcon(icon_1afdb64896c24cbe7d385cf97aaf258b);
             
     
-            var marker_17884c0dada44af15c77fee9a2685968 = L.marker(
+            var marker_0da151c2b01083904a0221b1f9ff51d0 = L.marker(
                 [34.6864, 135.52],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_765a6b8f1f5fbe93e670817fda936b69 = L.AwesomeMarkers.icon(
+            var icon_b1467a2b34aa7728e9e0b12bb6309585 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1273,34 +1359,34 @@
             );
         
     
-        var popup_bff6d86e03d00b14b71abaab6f955628 = L.popup({
+        var popup_b585da94dd52935798ce4076d4cd9d8e = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_ed51ff1c7193c97bd339f98ad9c011b9 = $(`<div id="html_ed51ff1c7193c97bd339f98ad9c011b9" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 大阪（大阪）</b><br>         <small style="color:#777;">ID: 950346</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.7 mm（↘️ 東南東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.6 mm)     </div>     </div>`)[0];
-                popup_bff6d86e03d00b14b71abaab6f955628.setContent(html_ed51ff1c7193c97bd339f98ad9c011b9);
+                var html_89f670b5a145145b76624ebcd0f3b5cd = $(`<div id="html_89f670b5a145145b76624ebcd0f3b5cd" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 大阪（大阪）</b><br>         <small style="color:#777;">ID: 950346</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.9 mm（➡️ 東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.0 mm)     </div>     </div>`)[0];
+                popup_b585da94dd52935798ce4076d4cd9d8e.setContent(html_89f670b5a145145b76624ebcd0f3b5cd);
             
         
 
-        marker_17884c0dada44af15c77fee9a2685968.bindPopup(popup_bff6d86e03d00b14b71abaab6f955628)
+        marker_0da151c2b01083904a0221b1f9ff51d0.bindPopup(popup_b585da94dd52935798ce4076d4cd9d8e)
         ;
 
         
     
     
-                marker_17884c0dada44af15c77fee9a2685968.setIcon(icon_765a6b8f1f5fbe93e670817fda936b69);
+                marker_0da151c2b01083904a0221b1f9ff51d0.setIcon(icon_b1467a2b34aa7728e9e0b12bb6309585);
             
     
-            var marker_0c2c3ca9df8f243b8555c52cfde1ee46 = L.marker(
+            var marker_a8e9c6007439f09a6bf72e07a6fb33c9 = L.marker(
                 [34.6914, 135.1831],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_2f76732d36f78c955de29e0bdb9327b2 = L.AwesomeMarkers.icon(
+            var icon_dfdc4efb614abbdc129943f3367ef9f9 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1311,34 +1397,34 @@
             );
         
     
-        var popup_5ebf230ada0e6a25c74e4ed09db56ec1 = L.popup({
+        var popup_12f9a49a8ea6c9902d0218265d64cca0 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_ef194543bd984064ab807e5d0ba754df = $(`<div id="html_ef194543bd984064ab807e5d0ba754df" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 神戸（兵庫）</b><br>         <small style="color:#777;">ID: 950349</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.9 mm（↙️ 西南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.2 mm)     </div>     </div>`)[0];
-                popup_5ebf230ada0e6a25c74e4ed09db56ec1.setContent(html_ef194543bd984064ab807e5d0ba754df);
+                var html_d2f172f4c1885f7a98c0131a96008e9d = $(`<div id="html_d2f172f4c1885f7a98c0131a96008e9d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 神戸（兵庫）</b><br>         <small style="color:#777;">ID: 950349</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↙️ 南南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.5 mm)     </div>     </div>`)[0];
+                popup_12f9a49a8ea6c9902d0218265d64cca0.setContent(html_d2f172f4c1885f7a98c0131a96008e9d);
             
         
 
-        marker_0c2c3ca9df8f243b8555c52cfde1ee46.bindPopup(popup_5ebf230ada0e6a25c74e4ed09db56ec1)
+        marker_a8e9c6007439f09a6bf72e07a6fb33c9.bindPopup(popup_12f9a49a8ea6c9902d0218265d64cca0)
         ;
 
         
     
     
-                marker_0c2c3ca9df8f243b8555c52cfde1ee46.setIcon(icon_2f76732d36f78c955de29e0bdb9327b2);
+                marker_a8e9c6007439f09a6bf72e07a6fb33c9.setIcon(icon_dfdc4efb614abbdc129943f3367ef9f9);
             
     
-            var marker_a1b1dacb913b36dd7e1eb4976b8e9a71 = L.marker(
+            var marker_df1da09b53a2b7147707958c80eb0a78 = L.marker(
                 [34.6853, 135.8328],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_8e0975134565c25567d56496368a3bbb = L.AwesomeMarkers.icon(
+            var icon_a5412f9df5d7145fdb8d39313dd1f1b5 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1349,34 +1435,34 @@
             );
         
     
-        var popup_0254bca982b9eb30ae2dd2a3de43d2f4 = L.popup({
+        var popup_faf023990f3479ced6e0698364b0e97a = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_34635fd36f2096c9c0e0c9bc1790c1de = $(`<div id="html_34635fd36f2096c9c0e0c9bc1790c1de" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 奈良（奈良）</b><br>         <small style="color:#777;">ID: 950352</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.5 mm（⬆️ 北）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.1 mm)     </div>     </div>`)[0];
-                popup_0254bca982b9eb30ae2dd2a3de43d2f4.setContent(html_34635fd36f2096c9c0e0c9bc1790c1de);
+                var html_87906e696d313517133c9ad625bf194d = $(`<div id="html_87906e696d313517133c9ad625bf194d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 奈良（奈良）</b><br>         <small style="color:#777;">ID: 950352</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.2 mm（↖️ 西北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.4 mm)     </div>     </div>`)[0];
+                popup_faf023990f3479ced6e0698364b0e97a.setContent(html_87906e696d313517133c9ad625bf194d);
             
         
 
-        marker_a1b1dacb913b36dd7e1eb4976b8e9a71.bindPopup(popup_0254bca982b9eb30ae2dd2a3de43d2f4)
+        marker_df1da09b53a2b7147707958c80eb0a78.bindPopup(popup_faf023990f3479ced6e0698364b0e97a)
         ;
 
         
     
     
-                marker_a1b1dacb913b36dd7e1eb4976b8e9a71.setIcon(icon_8e0975134565c25567d56496368a3bbb);
+                marker_df1da09b53a2b7147707958c80eb0a78.setIcon(icon_a5412f9df5d7145fdb8d39313dd1f1b5);
             
     
-            var marker_13be68a1e291f50385af66e66083c5a8 = L.marker(
+            var marker_72797047150049406ce122a354b37f5c = L.marker(
                 [34.2261, 135.1675],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_767bb529af3f523f7c37ddd056f2ea6e = L.AwesomeMarkers.icon(
+            var icon_40e52a1d25f9d66671bc3286d665634b = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1387,34 +1473,34 @@
             );
         
     
-        var popup_47ae29abe1ee6e73ccc275c2f3064053 = L.popup({
+        var popup_4969c85a042c1db58177d46f0fb602d3 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_6108e8165f22683c662ae53b7c5680f2 = $(`<div id="html_6108e8165f22683c662ae53b7c5680f2" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 和歌山（和歌山）</b><br>         <small style="color:#777;">ID: 950355</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.9 mm（↗️ 北北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.0 mm)     </div>     </div>`)[0];
-                popup_47ae29abe1ee6e73ccc275c2f3064053.setContent(html_6108e8165f22683c662ae53b7c5680f2);
+                var html_f8fde1da55b943e92ab09037563354ea = $(`<div id="html_f8fde1da55b943e92ab09037563354ea" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 和歌山（和歌山）</b><br>         <small style="color:#777;">ID: 950355</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.7 mm（⬇️ 南）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.9 mm)     </div>     </div>`)[0];
+                popup_4969c85a042c1db58177d46f0fb602d3.setContent(html_f8fde1da55b943e92ab09037563354ea);
             
         
 
-        marker_13be68a1e291f50385af66e66083c5a8.bindPopup(popup_47ae29abe1ee6e73ccc275c2f3064053)
+        marker_72797047150049406ce122a354b37f5c.bindPopup(popup_4969c85a042c1db58177d46f0fb602d3)
         ;
 
         
     
     
-                marker_13be68a1e291f50385af66e66083c5a8.setIcon(icon_767bb529af3f523f7c37ddd056f2ea6e);
+                marker_72797047150049406ce122a354b37f5c.setIcon(icon_40e52a1d25f9d66671bc3286d665634b);
             
     
-            var marker_1fd0d81b10ac04a8f579d87488bd5ff8 = L.marker(
+            var marker_63f90d3daf14a13ed7e39587f8f02530 = L.marker(
                 [35.5011, 134.2351],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_a117d7848334b98ca9850b472c236067 = L.AwesomeMarkers.icon(
+            var icon_79c1f948caf7dc469a03c15b0e61524b = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1425,34 +1511,34 @@
             );
         
     
-        var popup_177aee05a4d1db297f4864edc81697e3 = L.popup({
+        var popup_85ff4c129682d4053eb3df9fc82728dc = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_42d7647f47f9088ffd2d28e9a655d64e = $(`<div id="html_42d7647f47f9088ffd2d28e9a655d64e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 鳥取（鳥取）</b><br>         <small style="color:#777;">ID: 950381</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.0 mm（↙️ 南南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.9 mm)     </div>     </div>`)[0];
-                popup_177aee05a4d1db297f4864edc81697e3.setContent(html_42d7647f47f9088ffd2d28e9a655d64e);
+                var html_f467d047cd158b1759a73e068ac62888 = $(`<div id="html_f467d047cd158b1759a73e068ac62888" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 鳥取（鳥取）</b><br>         <small style="color:#777;">ID: 950381</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.0 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.2 mm)     </div>     </div>`)[0];
+                popup_85ff4c129682d4053eb3df9fc82728dc.setContent(html_f467d047cd158b1759a73e068ac62888);
             
         
 
-        marker_1fd0d81b10ac04a8f579d87488bd5ff8.bindPopup(popup_177aee05a4d1db297f4864edc81697e3)
+        marker_63f90d3daf14a13ed7e39587f8f02530.bindPopup(popup_85ff4c129682d4053eb3df9fc82728dc)
         ;
 
         
     
     
-                marker_1fd0d81b10ac04a8f579d87488bd5ff8.setIcon(icon_a117d7848334b98ca9850b472c236067);
+                marker_63f90d3daf14a13ed7e39587f8f02530.setIcon(icon_79c1f948caf7dc469a03c15b0e61524b);
             
     
-            var marker_40702678a63dc8d2e08634a0fcd89fcf = L.marker(
+            var marker_d07de2ac76a13c5c5bbd98db3f3a81b3 = L.marker(
                 [35.4722, 133.0506],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_32e2fa320e1a4c6d305c4f702a4e50eb = L.AwesomeMarkers.icon(
+            var icon_497fa061d059f7df4847853513954e23 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1463,34 +1549,34 @@
             );
         
     
-        var popup_a70caa99f2748d91a3bcd93d3e3d61a5 = L.popup({
+        var popup_cdeefd024127a42023fd317eeeddfc0f = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_334a1383dd0a0fad141322134137d369 = $(`<div id="html_334a1383dd0a0fad141322134137d369" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 松江（島根）</b><br>         <small style="color:#777;">ID: 950383</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.7 mm（↙️ 西南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.3 mm)     </div>     </div>`)[0];
-                popup_a70caa99f2748d91a3bcd93d3e3d61a5.setContent(html_334a1383dd0a0fad141322134137d369);
+                var html_ddf911114cd1380f8abe7878e6f6245d = $(`<div id="html_ddf911114cd1380f8abe7878e6f6245d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 松江（島根）</b><br>         <small style="color:#777;">ID: 950383</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.1 mm（↗️ 東北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.5 mm)     </div>     </div>`)[0];
+                popup_cdeefd024127a42023fd317eeeddfc0f.setContent(html_ddf911114cd1380f8abe7878e6f6245d);
             
         
 
-        marker_40702678a63dc8d2e08634a0fcd89fcf.bindPopup(popup_a70caa99f2748d91a3bcd93d3e3d61a5)
+        marker_d07de2ac76a13c5c5bbd98db3f3a81b3.bindPopup(popup_cdeefd024127a42023fd317eeeddfc0f)
         ;
 
         
     
     
-                marker_40702678a63dc8d2e08634a0fcd89fcf.setIcon(icon_32e2fa320e1a4c6d305c4f702a4e50eb);
+                marker_d07de2ac76a13c5c5bbd98db3f3a81b3.setIcon(icon_497fa061d059f7df4847853513954e23);
             
     
-            var marker_0f7e5b205e9fea1ca804cdc090c2b259 = L.marker(
+            var marker_5297ebc26a9fa01a708bd00788d905e9 = L.marker(
                 [34.6617, 133.935],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_0d4e0be1eb4747a9ee9eabdd8197c8c1 = L.AwesomeMarkers.icon(
+            var icon_58bd9e119a68c463a75748d1cf65543f = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1501,34 +1587,34 @@
             );
         
     
-        var popup_df6e8b226d123596ce4fca623405a847 = L.popup({
+        var popup_4b626f434f944387b50aae3f049f692b = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_c0b4f5648eabacff66208d9c7a0fca03 = $(`<div id="html_c0b4f5648eabacff66208d9c7a0fca03" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 岡山（岡山）</b><br>         <small style="color:#777;">ID: 950385</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.8 mm（↘️ 南南東）<br>         <b>↕️ 垂直変動:</b> 変動なし (0.0 mm)     </div>     </div>`)[0];
-                popup_df6e8b226d123596ce4fca623405a847.setContent(html_c0b4f5648eabacff66208d9c7a0fca03);
+                var html_80fc784bacdebcaea5a72eb37e468ea6 = $(`<div id="html_80fc784bacdebcaea5a72eb37e468ea6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 岡山（岡山）</b><br>         <small style="color:#777;">ID: 950385</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.6 mm（↙️ 南西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.6 mm)     </div>     </div>`)[0];
+                popup_4b626f434f944387b50aae3f049f692b.setContent(html_80fc784bacdebcaea5a72eb37e468ea6);
             
         
 
-        marker_0f7e5b205e9fea1ca804cdc090c2b259.bindPopup(popup_df6e8b226d123596ce4fca623405a847)
+        marker_5297ebc26a9fa01a708bd00788d905e9.bindPopup(popup_4b626f434f944387b50aae3f049f692b)
         ;
 
         
     
     
-                marker_0f7e5b205e9fea1ca804cdc090c2b259.setIcon(icon_0d4e0be1eb4747a9ee9eabdd8197c8c1);
+                marker_5297ebc26a9fa01a708bd00788d905e9.setIcon(icon_58bd9e119a68c463a75748d1cf65543f);
             
     
-            var marker_b1f222ebc495bdcc11099ddd09947fdf = L.marker(
+            var marker_cf11f8d4124e4b20086efae54ca4b4b3 = L.marker(
                 [34.3964, 132.4594],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_2dce438e4ca46475633ee46943843258 = L.AwesomeMarkers.icon(
+            var icon_691c8a6b75aed565e810f538debe22a9 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1539,34 +1625,34 @@
             );
         
     
-        var popup_57dd3d4a260587b9ed89ea52b37d0ee1 = L.popup({
+        var popup_23bdfa588c435d2d148615e106338721 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_d43ed441b06a1d8c85ad321d326f0064 = $(`<div id="html_d43ed441b06a1d8c85ad321d326f0064" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 広島（広島）</b><br>         <small style="color:#777;">ID: 950387</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.9 mm（↗️ 北北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.6 mm)     </div>     </div>`)[0];
-                popup_57dd3d4a260587b9ed89ea52b37d0ee1.setContent(html_d43ed441b06a1d8c85ad321d326f0064);
+                var html_aa324b9b83b9784afa18d5508b3fda36 = $(`<div id="html_aa324b9b83b9784afa18d5508b3fda36" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 広島（広島）</b><br>         <small style="color:#777;">ID: 950387</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.3 mm（➡️ 東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.6 mm)     </div>     </div>`)[0];
+                popup_23bdfa588c435d2d148615e106338721.setContent(html_aa324b9b83b9784afa18d5508b3fda36);
             
         
 
-        marker_b1f222ebc495bdcc11099ddd09947fdf.bindPopup(popup_57dd3d4a260587b9ed89ea52b37d0ee1)
+        marker_cf11f8d4124e4b20086efae54ca4b4b3.bindPopup(popup_23bdfa588c435d2d148615e106338721)
         ;
 
         
     
     
-                marker_b1f222ebc495bdcc11099ddd09947fdf.setIcon(icon_2dce438e4ca46475633ee46943843258);
+                marker_cf11f8d4124e4b20086efae54ca4b4b3.setIcon(icon_691c8a6b75aed565e810f538debe22a9);
             
     
-            var marker_b7920aaeaf691972e274c1d59671beaa = L.marker(
+            var marker_a7beeac3679728e68e9523e0662d1584 = L.marker(
                 [34.1783, 131.4736],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_b2bfd5a6ca800729cd427ab9ac895fcb = L.AwesomeMarkers.icon(
+            var icon_978550f51e0375fe0a71b35ad5facaff = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1577,34 +1663,34 @@
             );
         
     
-        var popup_131de3f21f205c8c0b5b356bd43bc5e3 = L.popup({
+        var popup_d0c63c3b42524a226a4acce8166b301d = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_1b4db09bc4d4ad0c3cb809a2575b2d41 = $(`<div id="html_1b4db09bc4d4ad0c3cb809a2575b2d41" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 山口（山口）</b><br>         <small style="color:#777;">ID: 950390</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.7 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.1 mm)     </div>     </div>`)[0];
-                popup_131de3f21f205c8c0b5b356bd43bc5e3.setContent(html_1b4db09bc4d4ad0c3cb809a2575b2d41);
+                var html_751fdcdcb583bead34dca3d61b2a435d = $(`<div id="html_751fdcdcb583bead34dca3d61b2a435d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 山口（山口）</b><br>         <small style="color:#777;">ID: 950390</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.1 mm（↙️ 南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.7 mm)     </div>     </div>`)[0];
+                popup_d0c63c3b42524a226a4acce8166b301d.setContent(html_751fdcdcb583bead34dca3d61b2a435d);
             
         
 
-        marker_b7920aaeaf691972e274c1d59671beaa.bindPopup(popup_131de3f21f205c8c0b5b356bd43bc5e3)
+        marker_a7beeac3679728e68e9523e0662d1584.bindPopup(popup_d0c63c3b42524a226a4acce8166b301d)
         ;
 
         
     
     
-                marker_b7920aaeaf691972e274c1d59671beaa.setIcon(icon_b2bfd5a6ca800729cd427ab9ac895fcb);
+                marker_a7beeac3679728e68e9523e0662d1584.setIcon(icon_978550f51e0375fe0a71b35ad5facaff);
             
     
-            var marker_8e38d552d28b67ec4660c35d2d11caa2 = L.marker(
+            var marker_d93f055b056fb7bab23aa2be6a100d84 = L.marker(
                 [33.6125, 134.3541],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_fd73ce9b8303d7348aee0c5e4da27ee1 = L.AwesomeMarkers.icon(
+            var icon_d535fc1af1acc7c75dc3798611583d06 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1615,34 +1701,34 @@
             );
         
     
-        var popup_9998e945739a92e7feecdcf1715435d8 = L.popup({
+        var popup_f8725d6cfc6be723dc5d44a7fa816860 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_b7bb0a7abd6a6b36e364985d8cd7ee0e = $(`<div id="html_b7bb0a7abd6a6b36e364985d8cd7ee0e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 徳島（徳島）</b><br>         <small style="color:#777;">ID: 950468</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.0 mm（➡️ 東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.6 mm)     </div>     </div>`)[0];
-                popup_9998e945739a92e7feecdcf1715435d8.setContent(html_b7bb0a7abd6a6b36e364985d8cd7ee0e);
+                var html_9800ead2da604fdd37396feaeb6b335f = $(`<div id="html_9800ead2da604fdd37396feaeb6b335f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 徳島（徳島）</b><br>         <small style="color:#777;">ID: 950468</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.1 mm（↙️ 南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.6 mm)     </div>     </div>`)[0];
+                popup_f8725d6cfc6be723dc5d44a7fa816860.setContent(html_9800ead2da604fdd37396feaeb6b335f);
             
         
 
-        marker_8e38d552d28b67ec4660c35d2d11caa2.bindPopup(popup_9998e945739a92e7feecdcf1715435d8)
+        marker_d93f055b056fb7bab23aa2be6a100d84.bindPopup(popup_f8725d6cfc6be723dc5d44a7fa816860)
         ;
 
         
     
     
-                marker_8e38d552d28b67ec4660c35d2d11caa2.setIcon(icon_fd73ce9b8303d7348aee0c5e4da27ee1);
+                marker_d93f055b056fb7bab23aa2be6a100d84.setIcon(icon_d535fc1af1acc7c75dc3798611583d06);
             
     
-            var marker_8f1ac77fc7b365d2c6114d8b229d5659 = L.marker(
+            var marker_d1ecd15c2e198536c271e03798396adf = L.marker(
                 [34.3403, 134.0433],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_3e2257dea9f4ea7179ca0885aa97e23a = L.AwesomeMarkers.icon(
+            var icon_e1647334632a063b9045053f3b422b6b = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1653,34 +1739,34 @@
             );
         
     
-        var popup_b44128d6206b8916b6dbae1147537a36 = L.popup({
+        var popup_03fdc14bdb938a9f63a5b86d8cbd4a62 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_370a0adbf4e1e958828581c35e30cb8e = $(`<div id="html_370a0adbf4e1e958828581c35e30cb8e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 高松（香川）</b><br>         <small style="color:#777;">ID: 950458</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.0 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.6 mm)     </div>     </div>`)[0];
-                popup_b44128d6206b8916b6dbae1147537a36.setContent(html_370a0adbf4e1e958828581c35e30cb8e);
+                var html_76aaaeb71bb86e21a50260159d7100d4 = $(`<div id="html_76aaaeb71bb86e21a50260159d7100d4" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 高松（香川）</b><br>         <small style="color:#777;">ID: 950458</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.0 mm（↙️ 西南西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.6 mm)     </div>     </div>`)[0];
+                popup_03fdc14bdb938a9f63a5b86d8cbd4a62.setContent(html_76aaaeb71bb86e21a50260159d7100d4);
             
         
 
-        marker_8f1ac77fc7b365d2c6114d8b229d5659.bindPopup(popup_b44128d6206b8916b6dbae1147537a36)
+        marker_d1ecd15c2e198536c271e03798396adf.bindPopup(popup_03fdc14bdb938a9f63a5b86d8cbd4a62)
         ;
 
         
     
     
-                marker_8f1ac77fc7b365d2c6114d8b229d5659.setIcon(icon_3e2257dea9f4ea7179ca0885aa97e23a);
+                marker_d1ecd15c2e198536c271e03798396adf.setIcon(icon_e1647334632a063b9045053f3b422b6b);
             
     
-            var marker_d05042e049299a0695b8b922cabe7a3e = L.marker(
+            var marker_622e131851b4c0061af6edc1ab2d4384 = L.marker(
                 [33.8417, 132.7661],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_b27595c100a45141f20e6311a4d7e9db = L.AwesomeMarkers.icon(
+            var icon_c59d09324c02b23d163ca73858e93e8e = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1691,34 +1777,34 @@
             );
         
     
-        var popup_59dc539430893efba2a5058e6ebb578d = L.popup({
+        var popup_704898dab3a10d2cf36fc3427761550f = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_18767b0d95e6d94b8606d1c4907c543b = $(`<div id="html_18767b0d95e6d94b8606d1c4907c543b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 松山（愛媛）</b><br>         <small style="color:#777;">ID: 950460</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.9 mm（↙️ 西南西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.0 mm)     </div>     </div>`)[0];
-                popup_59dc539430893efba2a5058e6ebb578d.setContent(html_18767b0d95e6d94b8606d1c4907c543b);
+                var html_0f5aa5528613277ffd929eb770f1090b = $(`<div id="html_0f5aa5528613277ffd929eb770f1090b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 松山（愛媛）</b><br>         <small style="color:#777;">ID: 950460</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.3 mm（↗️ 北北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.9 mm)     </div>     </div>`)[0];
+                popup_704898dab3a10d2cf36fc3427761550f.setContent(html_0f5aa5528613277ffd929eb770f1090b);
             
         
 
-        marker_d05042e049299a0695b8b922cabe7a3e.bindPopup(popup_59dc539430893efba2a5058e6ebb578d)
+        marker_622e131851b4c0061af6edc1ab2d4384.bindPopup(popup_704898dab3a10d2cf36fc3427761550f)
         ;
 
         
     
     
-                marker_d05042e049299a0695b8b922cabe7a3e.setIcon(icon_b27595c100a45141f20e6311a4d7e9db);
+                marker_622e131851b4c0061af6edc1ab2d4384.setIcon(icon_c59d09324c02b23d163ca73858e93e8e);
             
     
-            var marker_e10088b1b56eec0b15612ca2cd8eddc6 = L.marker(
+            var marker_cdb010108ddda8b5c0468d18ed9b065c = L.marker(
                 [33.2478, 134.175],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_d9bf767dda8ea135400a12535dc9f19b = L.AwesomeMarkers.icon(
+            var icon_3ecc5f2c40cee58fc88a2b8792458f72 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1729,34 +1815,34 @@
             );
         
     
-        var popup_7beb2eb00eccc020999d721835d56ec9 = L.popup({
+        var popup_fbcbf692b5be53e40daa83b00bf2523d = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_58d25dd91b55b7933b5b2c14dfc11949 = $(`<div id="html_58d25dd91b55b7933b5b2c14dfc11949" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 高知（高知）</b><br>         <small style="color:#777;">ID: 950462</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.0 mm（↘️ 南南東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.7 mm)     </div>     </div>`)[0];
-                popup_7beb2eb00eccc020999d721835d56ec9.setContent(html_58d25dd91b55b7933b5b2c14dfc11949);
+                var html_70b033639cdfb4c403a1e6ebe8a450d9 = $(`<div id="html_70b033639cdfb4c403a1e6ebe8a450d9" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 高知（高知）</b><br>         <small style="color:#777;">ID: 950462</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.9 mm（↘️ 南東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.8 mm)     </div>     </div>`)[0];
+                popup_fbcbf692b5be53e40daa83b00bf2523d.setContent(html_70b033639cdfb4c403a1e6ebe8a450d9);
             
         
 
-        marker_e10088b1b56eec0b15612ca2cd8eddc6.bindPopup(popup_7beb2eb00eccc020999d721835d56ec9)
+        marker_cdb010108ddda8b5c0468d18ed9b065c.bindPopup(popup_fbcbf692b5be53e40daa83b00bf2523d)
         ;
 
         
     
     
-                marker_e10088b1b56eec0b15612ca2cd8eddc6.setIcon(icon_d9bf767dda8ea135400a12535dc9f19b);
+                marker_cdb010108ddda8b5c0468d18ed9b065c.setIcon(icon_3ecc5f2c40cee58fc88a2b8792458f72);
             
     
-            var marker_d541761ce3d7ff5f64a1f725517f9307 = L.marker(
+            var marker_29c583a9a2e3cd4f26cf2279c9fd93a0 = L.marker(
                 [33.6067, 130.4183],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_b907716a354c5475f3df746e4ec89847 = L.AwesomeMarkers.icon(
+            var icon_f0f7d49498f25f4d2928856d4a705104 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1767,34 +1853,34 @@
             );
         
     
-        var popup_c746c153a26842f35a4b04b142e662a1 = L.popup({
+        var popup_bd9a149ea1eacf6bc68cc7adaa20d8b9 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_c7c07266ede94b8728ba474d7a8695b6 = $(`<div id="html_c7c07266ede94b8728ba474d7a8695b6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 福岡（福岡）</b><br>         <small style="color:#777;">ID: 950473</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.3 mm（↖️ 北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.4 mm)     </div>     </div>`)[0];
-                popup_c746c153a26842f35a4b04b142e662a1.setContent(html_c7c07266ede94b8728ba474d7a8695b6);
+                var html_1b2f2ba703588c43d1cd8b1c7e55b572 = $(`<div id="html_1b2f2ba703588c43d1cd8b1c7e55b572" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 福岡（福岡）</b><br>         <small style="color:#777;">ID: 950473</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.1 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.7 mm)     </div>     </div>`)[0];
+                popup_bd9a149ea1eacf6bc68cc7adaa20d8b9.setContent(html_1b2f2ba703588c43d1cd8b1c7e55b572);
             
         
 
-        marker_d541761ce3d7ff5f64a1f725517f9307.bindPopup(popup_c746c153a26842f35a4b04b142e662a1)
+        marker_29c583a9a2e3cd4f26cf2279c9fd93a0.bindPopup(popup_bd9a149ea1eacf6bc68cc7adaa20d8b9)
         ;
 
         
     
     
-                marker_d541761ce3d7ff5f64a1f725517f9307.setIcon(icon_b907716a354c5475f3df746e4ec89847);
+                marker_29c583a9a2e3cd4f26cf2279c9fd93a0.setIcon(icon_f0f7d49498f25f4d2928856d4a705104);
             
     
-            var marker_9dd88056c2e6c33400f2c9663ebf08cb = L.marker(
+            var marker_3d8af1d20d174d76d28bd3584e4f0a21 = L.marker(
                 [33.2494, 130.2989],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_84ba81a733a515f98bd47cd3d278813d = L.AwesomeMarkers.icon(
+            var icon_35c408f7dd77730d118a0d6f21daf84b = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1805,34 +1891,34 @@
             );
         
     
-        var popup_fcedea5716f97711c91052adb5f964a6 = L.popup({
+        var popup_7bce65e2e8da9507500fe86d777d7f9e = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_6dbc13e4adf5918f6c5787345ed65129 = $(`<div id="html_6dbc13e4adf5918f6c5787345ed65129" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 佐賀（佐賀）</b><br>         <small style="color:#777;">ID: 950475</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.2 mm（↖️ 北北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.5 mm)     </div>     </div>`)[0];
-                popup_fcedea5716f97711c91052adb5f964a6.setContent(html_6dbc13e4adf5918f6c5787345ed65129);
+                var html_e3f1da8748683b997cd1df220240728d = $(`<div id="html_e3f1da8748683b997cd1df220240728d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 佐賀（佐賀）</b><br>         <small style="color:#777;">ID: 950475</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.7 mm（↖️ 西北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.7 mm)     </div>     </div>`)[0];
+                popup_7bce65e2e8da9507500fe86d777d7f9e.setContent(html_e3f1da8748683b997cd1df220240728d);
             
         
 
-        marker_9dd88056c2e6c33400f2c9663ebf08cb.bindPopup(popup_fcedea5716f97711c91052adb5f964a6)
+        marker_3d8af1d20d174d76d28bd3584e4f0a21.bindPopup(popup_7bce65e2e8da9507500fe86d777d7f9e)
         ;
 
         
     
     
-                marker_9dd88056c2e6c33400f2c9663ebf08cb.setIcon(icon_84ba81a733a515f98bd47cd3d278813d);
+                marker_3d8af1d20d174d76d28bd3584e4f0a21.setIcon(icon_35c408f7dd77730d118a0d6f21daf84b);
             
     
-            var marker_8e0758f8d42fffca0dd7ceaa723109da = L.marker(
+            var marker_9d940d440ad58207933b77ec0561efde = L.marker(
                 [32.7447, 129.8736],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_7c09408e25b61ad3ae809231a304338a = L.AwesomeMarkers.icon(
+            var icon_fa3340b485faad8c117ae8d43e366a6c = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1843,34 +1929,34 @@
             );
         
     
-        var popup_f7f2737a5f2f205f7bb550891e828e0a = L.popup({
+        var popup_bc93e178202caa4a2cf387422ee9ec0d = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_31409ef8dc00aa37ae06cfe56986995b = $(`<div id="html_31409ef8dc00aa37ae06cfe56986995b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 長崎（長崎）</b><br>         <small style="color:#777;">ID: 950477</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.7 mm（↙️ 南西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+3.0 mm)     </div>     </div>`)[0];
-                popup_f7f2737a5f2f205f7bb550891e828e0a.setContent(html_31409ef8dc00aa37ae06cfe56986995b);
+                var html_8fbaf73ec3c6ea6ee1264bd304dffbe4 = $(`<div id="html_8fbaf73ec3c6ea6ee1264bd304dffbe4" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 長崎（長崎）</b><br>         <small style="color:#777;">ID: 950477</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.5 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.2 mm)     </div>     </div>`)[0];
+                popup_bc93e178202caa4a2cf387422ee9ec0d.setContent(html_8fbaf73ec3c6ea6ee1264bd304dffbe4);
             
         
 
-        marker_8e0758f8d42fffca0dd7ceaa723109da.bindPopup(popup_f7f2737a5f2f205f7bb550891e828e0a)
+        marker_9d940d440ad58207933b77ec0561efde.bindPopup(popup_bc93e178202caa4a2cf387422ee9ec0d)
         ;
 
         
     
     
-                marker_8e0758f8d42fffca0dd7ceaa723109da.setIcon(icon_7c09408e25b61ad3ae809231a304338a);
+                marker_9d940d440ad58207933b77ec0561efde.setIcon(icon_fa3340b485faad8c117ae8d43e366a6c);
             
     
-            var marker_5bee24626fc8ef8212a49fdd9ef5f591 = L.marker(
+            var marker_b8827799c93d22116e0defb5cd57ed5b = L.marker(
                 [32.7897, 130.7417],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_2140ff5c564ba26e2a96d4b37f2474eb = L.AwesomeMarkers.icon(
+            var icon_9516e65b39454de3cbbb3f73fd4ca6d3 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1881,34 +1967,34 @@
             );
         
     
-        var popup_77dde5a0fe9fa1d4b5e2c8f842c9df60 = L.popup({
+        var popup_506f5f8196262df5f5b4ce0af5b69536 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_76816798a22cf4d3b380d096bf617867 = $(`<div id="html_76816798a22cf4d3b380d096bf617867" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 熊本（熊本）</b><br>         <small style="color:#777;">ID: 950479</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.9 mm（↖️ 北北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.2 mm)     </div>     </div>`)[0];
-                popup_77dde5a0fe9fa1d4b5e2c8f842c9df60.setContent(html_76816798a22cf4d3b380d096bf617867);
+                var html_1f1ab519cc6d5c65c9764e86ab54b600 = $(`<div id="html_1f1ab519cc6d5c65c9764e86ab54b600" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 熊本（熊本）</b><br>         <small style="color:#777;">ID: 950479</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.5 mm（↙️ 西南西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.7 mm)     </div>     </div>`)[0];
+                popup_506f5f8196262df5f5b4ce0af5b69536.setContent(html_1f1ab519cc6d5c65c9764e86ab54b600);
             
         
 
-        marker_5bee24626fc8ef8212a49fdd9ef5f591.bindPopup(popup_77dde5a0fe9fa1d4b5e2c8f842c9df60)
+        marker_b8827799c93d22116e0defb5cd57ed5b.bindPopup(popup_506f5f8196262df5f5b4ce0af5b69536)
         ;
 
         
     
     
-                marker_5bee24626fc8ef8212a49fdd9ef5f591.setIcon(icon_2140ff5c564ba26e2a96d4b37f2474eb);
+                marker_b8827799c93d22116e0defb5cd57ed5b.setIcon(icon_9516e65b39454de3cbbb3f73fd4ca6d3);
             
     
-            var marker_f92ebe96429cae86dfade4f00823cff4 = L.marker(
+            var marker_210fc2dd8995af21d3ceea3d6c0669a4 = L.marker(
                 [33.2381, 131.6125],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_44679892fec78a40ea7a596b57368796 = L.AwesomeMarkers.icon(
+            var icon_85d8f1478728702b75744850cadfa45c = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1919,34 +2005,34 @@
             );
         
     
-        var popup_208189d4c6c0bc58af3277145c3cd701 = L.popup({
+        var popup_f6f9e16d1eb56f7e605565aad2c7797e = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_da818d0409176b42040a37749ed6902f = $(`<div id="html_da818d0409176b42040a37749ed6902f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 大分（大分）</b><br>         <small style="color:#777;">ID: 950481</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 0.4 mm（⬇️ 南）<br>         <b>↕️ 垂直変動:</b> 変動なし (0.0 mm)     </div>     </div>`)[0];
-                popup_208189d4c6c0bc58af3277145c3cd701.setContent(html_da818d0409176b42040a37749ed6902f);
+                var html_002068745d430ae98ad95adb69186670 = $(`<div id="html_002068745d430ae98ad95adb69186670" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 大分（大分）</b><br>         <small style="color:#777;">ID: 950481</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.0 mm（↖️ 北北西）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+2.8 mm)     </div>     </div>`)[0];
+                popup_f6f9e16d1eb56f7e605565aad2c7797e.setContent(html_002068745d430ae98ad95adb69186670);
             
         
 
-        marker_f92ebe96429cae86dfade4f00823cff4.bindPopup(popup_208189d4c6c0bc58af3277145c3cd701)
+        marker_210fc2dd8995af21d3ceea3d6c0669a4.bindPopup(popup_f6f9e16d1eb56f7e605565aad2c7797e)
         ;
 
         
     
     
-                marker_f92ebe96429cae86dfade4f00823cff4.setIcon(icon_44679892fec78a40ea7a596b57368796);
+                marker_210fc2dd8995af21d3ceea3d6c0669a4.setIcon(icon_85d8f1478728702b75744850cadfa45c);
             
     
-            var marker_c9f1df1c39a27ea1b019fde0a6368183 = L.marker(
+            var marker_63fb419ff435ae56fc18fd66b48649f0 = L.marker(
                 [31.9111, 131.4239],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_254516c50f92f38e5dba4f2881931736 = L.AwesomeMarkers.icon(
+            var icon_e675a80af20e49653b769a33aeddc03c = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1957,34 +2043,34 @@
             );
         
     
-        var popup_ebce346780ad730750674460de86fd48 = L.popup({
+        var popup_e693801a9405e4fecebe76f4e3bd974a = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_c62c9e8f00c2cb3f0ba9c5cf7032ec4b = $(`<div id="html_c62c9e8f00c2cb3f0ba9c5cf7032ec4b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 宮崎（宮崎）</b><br>         <small style="color:#777;">ID: 950480</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.3 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+1.7 mm)     </div>     </div>`)[0];
-                popup_ebce346780ad730750674460de86fd48.setContent(html_c62c9e8f00c2cb3f0ba9c5cf7032ec4b);
+                var html_2d39b580bb20530d85667e4c39c82431 = $(`<div id="html_2d39b580bb20530d85667e4c39c82431" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 宮崎（宮崎）</b><br>         <small style="color:#777;">ID: 950480</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 2.2 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.7 mm)     </div>     </div>`)[0];
+                popup_e693801a9405e4fecebe76f4e3bd974a.setContent(html_2d39b580bb20530d85667e4c39c82431);
             
         
 
-        marker_c9f1df1c39a27ea1b019fde0a6368183.bindPopup(popup_ebce346780ad730750674460de86fd48)
+        marker_63fb419ff435ae56fc18fd66b48649f0.bindPopup(popup_e693801a9405e4fecebe76f4e3bd974a)
         ;
 
         
     
     
-                marker_c9f1df1c39a27ea1b019fde0a6368183.setIcon(icon_254516c50f92f38e5dba4f2881931736);
+                marker_63fb419ff435ae56fc18fd66b48649f0.setIcon(icon_e675a80af20e49653b769a33aeddc03c);
             
     
-            var marker_acc8aa385c585ea5a23557e26f8c7f92 = L.marker(
+            var marker_c7e8d0a42330fd20e99c3d7bacff155d = L.marker(
                 [31.5969, 130.5571],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_d381572035e1c710557bbace8bcb9cda = L.AwesomeMarkers.icon(
+            var icon_747d12893d4d2904e9385296a8629422 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -1995,34 +2081,34 @@
             );
         
     
-        var popup_958561e40dd2dae713815e3a1b9fecc6 = L.popup({
+        var popup_a63ad5c16a66273cb0c345763c560416 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_e5f003773291b34708af7f650908e1d4 = $(`<div id="html_e5f003773291b34708af7f650908e1d4" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 鹿児島（鹿児島）</b><br>         <small style="color:#777;">ID: 950482</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.9 mm（↖️ 西北西）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-2.3 mm)     </div>     </div>`)[0];
-                popup_958561e40dd2dae713815e3a1b9fecc6.setContent(html_e5f003773291b34708af7f650908e1d4);
+                var html_3694445df358c83875be594a89f9d93d = $(`<div id="html_3694445df358c83875be594a89f9d93d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 鹿児島（鹿児島）</b><br>         <small style="color:#777;">ID: 950482</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.8 mm（➡️ 東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-0.3 mm)     </div>     </div>`)[0];
+                popup_a63ad5c16a66273cb0c345763c560416.setContent(html_3694445df358c83875be594a89f9d93d);
             
         
 
-        marker_acc8aa385c585ea5a23557e26f8c7f92.bindPopup(popup_958561e40dd2dae713815e3a1b9fecc6)
+        marker_c7e8d0a42330fd20e99c3d7bacff155d.bindPopup(popup_a63ad5c16a66273cb0c345763c560416)
         ;
 
         
     
     
-                marker_acc8aa385c585ea5a23557e26f8c7f92.setIcon(icon_d381572035e1c710557bbace8bcb9cda);
+                marker_c7e8d0a42330fd20e99c3d7bacff155d.setIcon(icon_747d12893d4d2904e9385296a8629422);
             
     
-            var marker_3ad89a901e40560e37a5e284cda208e9 = L.marker(
+            var marker_543e1bc2bc691dd9432a3f7628fed78b = L.marker(
                 [26.2125, 127.6811],
                 {
 }
-            ).addTo(map_bce6849eace98ec60699457563044905);
+            ).addTo(map_5de67b24d57cce503b296b64197a2d37);
         
     
-            var icon_2a04cb2b6711dc39462b43b1e01974df = L.AwesomeMarkers.icon(
+            var icon_7461b884e682e337a0bee7f05ff6a85a = L.AwesomeMarkers.icon(
                 {
   "markerColor": "blue",
   "iconColor": "white",
@@ -2033,24 +2119,256 @@
             );
         
     
-        var popup_00f3c827909dc2d7c7a3fffb24591d0f = L.popup({
+        var popup_e468d134183dac47562f052901f4da06 = L.popup({
   "maxWidth": 280,
 });
 
         
             
-                var html_8092ebfbaa558a50f8ec12320e906a9b = $(`<div id="html_8092ebfbaa558a50f8ec12320e906a9b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 那覇/石垣（沖縄）</b><br>         <small style="color:#777;">ID: 950495</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.8 mm（↗️ 北東）<br>         <b>↕️ 垂直変動:</b> ⬇️ 沈下 (-1.0 mm)     </div>     </div>`)[0];
-                popup_00f3c827909dc2d7c7a3fffb24591d0f.setContent(html_8092ebfbaa558a50f8ec12320e906a9b);
+                var html_7bd4d9ec71f70718a7d2185c97e02033 = $(`<div id="html_7bd4d9ec71f70718a7d2185c97e02033" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; font-size:12px; line-height:1.5; min-width:180px;">         <b style="font-size:13px; color:#333;">観測点: 那覇/石垣（沖縄）</b><br>         <small style="color:#777;">ID: 950495</small><hr style="margin:5px 0;">         <b>↔️ 水平変動:</b> 1.5 mm（↘️ 東南東）<br>         <b>↕️ 垂直変動:</b> ⬆️ 隆起 (+0.4 mm)     </div>     </div>`)[0];
+                popup_e468d134183dac47562f052901f4da06.setContent(html_7bd4d9ec71f70718a7d2185c97e02033);
             
         
 
-        marker_3ad89a901e40560e37a5e284cda208e9.bindPopup(popup_00f3c827909dc2d7c7a3fffb24591d0f)
+        marker_543e1bc2bc691dd9432a3f7628fed78b.bindPopup(popup_e468d134183dac47562f052901f4da06)
         ;
 
         
     
     
-                marker_3ad89a901e40560e37a5e284cda208e9.setIcon(icon_2a04cb2b6711dc39462b43b1e01974df);
+                marker_543e1bc2bc691dd9432a3f7628fed78b.setIcon(icon_7461b884e682e337a0bee7f05ff6a85a);
             
 </script>
+
+<script>
+(function() {
+  const MAP = map_5de67b24d57cce503b296b64197a2d37;
+  const DATA_URL = 'GEONET_national_monitoring_candidates.json?_=' + Date.now();
+  const HISTORY_URL = 'earthquake_history.json?_=' + Date.now();
+  const LATEST_URL = 'latest_earthquake.json?_=' + Date.now();
+
+  const panel = document.createElement('div');
+  panel.id = 'cristal-monitor-panel';
+  panel.innerHTML = `
+    <div class="cm-card" id="cm-monitor-card">
+      <div class="cm-title">重点監視候補 TOP 5</div>
+      <div class="cm-sub">GNSS年間移動量＋極性境界近接度</div>
+      <div id="cm-monitor-list">読み込み中…</div>
+      <div class="cm-note">地震発生場所の確定予測ではなく、監視優先度の候補表示です。</div>
+    </div>
+    <div class="cm-card" id="cm-quake-card">
+      <div class="cm-title">地震発生情報（最新5件）</div>
+      <div class="cm-sub">履歴JSONが利用できる場合は過去7日分を地図に保持</div>
+      <div id="cm-quake-list">読み込み中…</div>
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  const monitorLayer = L.layerGroup().addTo(MAP);
+  const quakeLayer = L.layerGroup().addTo(MAP);
+
+  // GSI Active Fault Map tile. Available at zoom 11-16.
+  const activeFaultLayer = L.tileLayer(
+    'https://cyberjapandata.gsi.go.jp/xyz/afm/{z}/{x}/{y}.png',
+    {
+      minZoom: 11,
+      maxZoom: 16,
+      opacity: 0.72,
+      attribution: '© 国土地理院 活断層図'
+    }
+  ).addTo(MAP);
+
+  const overlay = {
+    '重点監視候補': monitorLayer,
+    '地震（7日）': quakeLayer,
+    '活断層図（GSI）': activeFaultLayer
+  };
+  L.control.layers(null, overlay, {collapsed: true, position: 'topright'}).addTo(MAP);
+
+  function esc(v) {
+    return String(v ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  }
+
+  function num(v, d=0) {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : d;
+  }
+
+  function asArray(x) {
+    if (Array.isArray(x)) return x;
+    if (!x || typeof x !== 'object') return [];
+    if (Array.isArray(x.events)) return x.events;
+    if (Array.isArray(x.earthquakes)) return x.earthquakes;
+    if (Array.isArray(x.data)) return x.data;
+    if (x.earthquake) return [x];
+    return [];
+  }
+
+  function quakeParts(ev) {
+    const q = ev && ev.earthquake ? ev.earthquake : ev;
+    const h = q && (q.hypocenter || q.hypocenterInfo || q.location || q) || {};
+    const timeRaw = ev.time || ev.datetime || ev.created_at || ev.createdAt || q.time || q.datetime || '';
+    const name = h.name || h.area || h.region || q.name || ev.name || '';
+    let lat = num(h.latitude, NaN);
+    let lon = num(h.longitude, NaN);
+    if (!Number.isFinite(lat)) lat = num(ev.latitude, NaN);
+    if (!Number.isFinite(lon)) lon = num(ev.longitude, NaN);
+    const mag = num(h.magnitude ?? q.magnitude ?? ev.magnitude, NaN);
+    let depth = h.depth ?? q.depth ?? ev.depth ?? '';
+    if (typeof depth === 'object' && depth !== null) depth = depth.value ?? depth.depth ?? '';
+    let maxInt = ev.maxIntensity ?? q.maxIntensity ?? ev.maxIntensityJma ?? q.maxScale ?? '';
+    if (ev.points && Array.isArray(ev.points)) {
+      // P2PQuake: calc max scale label from points if present
+      const scales = ev.points.map(p => Number(p.scale)).filter(Number.isFinite);
+      if (scales.length) maxInt = Math.max(...scales);
+    }
+    return {timeRaw, name, lat, lon, mag, depth, maxInt};
+  }
+
+  function formatTime(s) {
+    if (!s) return '時刻不明';
+    const d = new Date(s);
+    if (Number.isNaN(d.getTime())) return String(s);
+    return d.toLocaleString('ja-JP', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  }
+
+  async function getJson(url) {
+    const r = await fetch(url, {cache:'no-store'});
+    if (!r.ok) throw new Error(r.status + ' ' + url);
+    return await r.json();
+  }
+
+  function renderMonitors(data) {
+    const all = Array.isArray(data) ? data : (data.top10 || data.all || []);
+    const top = all.slice(0,5);
+    const list = document.getElementById('cm-monitor-list');
+
+    monitorLayer.clearLayers();
+
+    if (!top.length) {
+      list.innerHTML = '<div class="cm-muted">重点監視候補データなし</div>';
+      return;
+    }
+
+    list.innerHTML = top.map((r, i) => `
+      <div class="cm-row">
+        <span class="cm-badge">${i+1}</span>
+        <div>
+          <b>${esc(r.station)}</b>
+          <div class="cm-muted">Net3D ${num(r.net_3d_mm_per_year).toFixed(1)} mm/年 ・境界 ${num(r.nearest_boundary_distance_km).toFixed(2)} km</div>
+        </div>
+        <span class="cm-score">${num(r.score).toFixed(2)}</span>
+      </div>
+    `).join('');
+
+    top.forEach((r, i) => {
+      const marker = L.circleMarker(
+        [num(r.lat), num(r.lon)],
+        {
+          radius: 9,
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.84
+        }
+      ).addTo(monitorLayer);
+
+      marker.bindPopup(`
+        <div style="font-family:sans-serif;font-size:12px;line-height:1.55;min-width:210px;">
+          <b style="font-size:14px;">重点監視候補 #${i+1}</b><hr style="margin:5px 0;">
+          <b>観測点:</b> ${esc(r.station)}<br>
+          <b>総合Score:</b> ${num(r.score).toFixed(2)}<br>
+          <b>年間Net 3D:</b> ${num(r.net_3d_mm_per_year).toFixed(2)} mm/年<br>
+          <b>年間累積3D:</b> ${num(r.cumulative_3d_mm_per_year).toFixed(2)} mm/年<br>
+          <b>極性境界距離:</b> ${num(r.nearest_boundary_distance_km).toFixed(2)} km<br>
+          <b>観測期間:</b> ${esc(r.start_date)} → ${esc(r.end_date)}<br>
+          <b>判定:</b> ${esc(r.label || '重点監視候補')}
+        </div>
+      `);
+
+      // clicking the list row is intentionally simple and mobile-friendly
+    });
+  }
+
+  function renderQuakes(raw) {
+    let events = asArray(raw);
+    if (!events.length) {
+      document.getElementById('cm-quake-list').innerHTML = '<div class="cm-muted">地震履歴JSONが未取得です</div>';
+      return;
+    }
+
+    const parsed = events.map(quakeParts)
+      .filter(e => Number.isFinite(e.lat) && Number.isFinite(e.lon))
+      .sort((a,b) => new Date(b.timeRaw || 0) - new Date(a.timeRaw || 0));
+
+    quakeLayer.clearLayers();
+
+    parsed.forEach((e) => {
+      const marker = L.circleMarker([e.lat, e.lon], {
+        radius: Math.max(4, Math.min(9, Number.isFinite(e.mag) ? 3 + e.mag : 5)),
+        weight: 1.5,
+        opacity: 0.9,
+        fillOpacity: 0.55
+      }).addTo(quakeLayer);
+
+      marker.bindPopup(`
+        <div style="font-family:sans-serif;font-size:12px;line-height:1.5;min-width:200px;">
+          <b>地震発生情報</b><hr style="margin:5px 0;">
+          <b>時刻:</b> ${esc(formatTime(e.timeRaw))}<br>
+          <b>震源:</b> ${esc(e.name || '不明')}<br>
+          <b>M:</b> ${Number.isFinite(e.mag) ? e.mag.toFixed(1) : '不明'}<br>
+          <b>深さ:</b> ${esc(e.depth === '' ? '不明' : e.depth + (String(e.depth).includes('km') ? '' : ' km'))}<br>
+          <b>最大震度:</b> ${esc(e.maxInt === '' ? '不明' : e.maxInt)}
+        </div>
+      `);
+    });
+
+    document.getElementById('cm-quake-list').innerHTML =
+      parsed.slice(0,5).map((e) => `
+        <div class="cm-quake">
+          <span class="cm-quake-dot"></span>
+          <div>
+            <b>${esc(e.name || '震源不明')}</b>
+            <div class="cm-muted">${esc(formatTime(e.timeRaw))}</div>
+          </div>
+          <span><b>${Number.isFinite(e.mag) ? 'M'+e.mag.toFixed(1) : 'M-'}</b></span>
+        </div>
+      `).join('');
+  }
+
+  async function loadMonitor() {
+    try {
+      const data = await getJson(DATA_URL);
+      renderMonitors(data);
+    } catch (err) {
+      document.getElementById('cm-monitor-list').innerHTML =
+        '<div class="cm-muted">重点監視データを取得できませんでした</div>';
+      console.warn('monitor JSON:', err);
+    }
+  }
+
+  async function loadQuakes() {
+    try {
+      const hist = await getJson(HISTORY_URL);
+      renderQuakes(hist);
+      return;
+    } catch (err) {}
+
+    try {
+      const latest = await getJson(LATEST_URL);
+      renderQuakes(latest);
+    } catch (err) {
+      document.getElementById('cm-quake-list').innerHTML =
+        '<div class="cm-muted">地震データを取得できませんでした</div>';
+    }
+  }
+
+  loadMonitor();
+  loadQuakes();
+
+  // refresh dynamic feeds every 5 minutes
+  setInterval(loadMonitor, 300000);
+  setInterval(loadQuakes, 300000);
+})();
+</script>
+
 </html>
