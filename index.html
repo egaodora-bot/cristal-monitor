@@ -2144,7 +2144,6 @@
 (function() {
   const MAP = map_5de67b24d57cce503b296b64197a2d37;
   const DATA_URL = 'GEONET_national_monitoring_candidates.json?_=' + Date.now();
-  const HISTORY_URL = 'earthquake_history.json?_=' + Date.now();
   const LATEST_URL = 'latest_earthquake.json?_=' + Date.now();
 
   const panel = document.createElement('div');
@@ -2158,7 +2157,7 @@
     </div>
     <div class="cm-card" id="cm-quake-card">
       <div class="cm-title">地震発生情報（最新5件）</div>
-      <div class="cm-sub">履歴JSONが利用できる場合は過去7日分を地図に保持</div>
+      <div class="cm-sub">GitHub上の最新地震データを自動取得</div>
       <div id="cm-quake-list">読み込み中…</div>
     </div>
   `;
@@ -2348,17 +2347,12 @@
 
   async function loadQuakes() {
     try {
-      const hist = await getJson(HISTORY_URL);
-      renderQuakes(hist);
-      return;
-    } catch (err) {}
-
-    try {
       const latest = await getJson(LATEST_URL);
       renderQuakes(latest);
     } catch (err) {
       document.getElementById('cm-quake-list').innerHTML =
-        '<div class="cm-muted">地震データを取得できませんでした</div>';
+        '<div class="cm-muted">最新地震データを取得できませんでした</div>';
+      console.warn('latest earthquake JSON:', err);
     }
   }
 
@@ -2368,7 +2362,7 @@
   // refresh dynamic feeds every 5 minutes
   setInterval(loadMonitor, 300000);
   setInterval(loadQuakes, 300000);
-})();
+  })();
 </script>
 
 </html>
