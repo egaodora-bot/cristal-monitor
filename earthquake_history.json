@@ -1,0 +1,10 @@
+{
+  "source": "JMA/P2PQuake",
+  "earthquake_time": "2026/09/04 01:23:00",
+  "place": "福島県沖",
+  "lat": 37.7,
+  "lon": 141.8,
+  "depth_km": 50.0,
+  "magnitude": 3.8,
+  "max_intensity": ""
+}
