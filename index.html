@@ -47,7 +47,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 <div id="actions" class="floating">
  <button id="infoBtn">☰ 情報</button>
  <button id="gnssBtn" class="active">GNSS</button>
- <button id="emBtn">⚡ 電磁波/電磁気</button>
+ <button id="emBtn">⚡ 電磁波</button><button id="magBtn">🧲 地磁気</button>
  <button id="faultBtn">活断層</button>
  <button id="boundaryBtn">極性境界</button>
  <button id="eqBtn">地震</button>
@@ -68,10 +68,10 @@ button:disabled{opacity:.45;cursor:not-allowed}
 
  <h3>⚡ 全国の電磁波</h3>
  <div class="card em">
-   <b>全国の電磁波・電波伝搬の監視</b>
+   <b>全国の電磁波・電離圏の監視</b>
    <div id="emSummary" class="small">観測情報を確認中…</div>
    <div id="emTable" style="margin-top:7px"></div>
-   <div class="source">※ここでいう「電磁波」は、NICTが国内4地点で定常観測する電離圏・電波伝搬関連情報を中心に扱います。「電磁気（地磁気）」とは別レイヤーです。</div>
+   <div class="source">※「電磁波」はNICTの電離圏・電波伝搬関連情報。「地磁気」は国土地理院の磁場観測で、別レイヤーです。</div>
    <div style="margin-top:7px">
     <a href="https://wdc.nict.go.jp/Ionosphere/realtime/ISDJ/ionospheric-signal.html" target="_blank" rel="noopener">NICT 電離圏信号情報</a>
     ／
@@ -101,7 +101,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
    <div>地震：<code>earthquake_history.json</code> → <code>latest_earthquake.json</code></div>
    <div>GNSS：<code>GEONET_national_annual_movement.csv</code></div>
    <div>監視候補：<code>GEONET_national_monitoring_candidates.json/csv</code></div>
-   <div>電磁気：国土地理院 地磁気連続観測公開データ</div>
+   <div>電磁波：NICT 電離圏・電波伝搬関連情報</div><div>地磁気：国土地理院 地磁気連続観測</div>
    <div>サイト更新：HTMLを上書きせず、データ層だけ再取得</div>
  </div>
 
@@ -109,7 +109,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
  <div class="small">
   <div>↑ GNSS水平移動方向</div>
   <div>● 隆起 / ● 沈降（上下成分がデータにある場合のみ）</div>
-  <div><span class="em-dot"></span> 電磁気観測点</div>
+  <div><span class="em-dot"></span> 電磁波・電離圏観測点</div><div>● 地磁気観測点（別レイヤー）</div>
   <div>赤リング：重要監視1～3位　橙リング：4～7位</div>
  </div>
 </aside>
@@ -128,6 +128,7 @@ const faultLayer=L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/afm/{z}/{x}/{
 
 const gnssLayer=L.layerGroup().addTo(map);
 const emLayer=L.layerGroup();
+const magLayer=L.layerGroup();
 const boundaryLayer=L.layerGroup();
 const eqLayer=L.layerGroup();
 const monitorLayer=L.layerGroup().addTo(map);
@@ -170,21 +171,34 @@ document.getElementById('infoBtn').onclick=()=>document.getElementById('drawer')
 document.getElementById('closeBtn').onclick=()=>document.getElementById('drawer').classList.remove('open');
 document.getElementById('gnssBtn').onclick=function(){toggle(this,gnssLayer)};
 document.getElementById('emBtn').onclick=function(){toggle(this,emLayer)};
+document.getElementById('magBtn').onclick=function(){toggle(this,magLayer)};
 document.getElementById('faultBtn').onclick=function(){toggle(this,faultLayer)};
 document.getElementById('boundaryBtn').onclick=function(){toggle(this,boundaryLayer)};
 document.getElementById('eqBtn').onclick=function(){toggle(this,eqLayer)};
 
 const EM=[
- ['WAK','稚内',45.40,141.68],
- ['KOK','国分寺',35.71,139.48],
- ['YAM','山川',31.20,130.62],
- ['OGI','大宜味',26.70,128.12]
+ ['WAK','稚内',45.40,141.68],['KOK','国分寺',35.71,139.48],['YAM','山川',31.20,130.62],['OGI','大宜味',26.70,128.12]
 ];
 EM.forEach(d=>{
- const m=L.circleMarker([d[2],d[3]],{radius:7,color:'#7b3fb1',fillColor:'#9b5cc6',fillOpacity:.92,weight:2});
- m.bindPopup('<b>⚡ 電磁波観測 '+esc(d[0])+'</b><br>'+esc(d[1])+'<br>NICT 電離圏観測<br><a href="https://wdc.nict.go.jp/Ionosphere/realtime/ISDJ/ionospheric-signal.html" target="_blank" rel="noopener">最新観測を見る</a>');
+ const m=L.circleMarker([d[2],d[3]],{radius:8,color:'#8a3fa8',fillColor:'#b05ac9',fillOpacity:.92,weight:2});
+ m.bindPopup('<b>⚡ 電磁波・電離圏 '+esc(d[1])+'</b><br>NICT観測<br><span id="emPopup_'+esc(d[0])+'">現在値を確認中…</span><br><a href="https://wdc.nict.go.jp/Ionosphere/realtime/ISDJ/ionospheric-signal.html" target="_blank" rel="noopener">詳細観測</a>');
  emLayer.addLayer(m);
 });
+
+/* 地磁気は電磁波とは別レイヤー。国土地理院の連続観測点を表示 */
+const MAG=[
+ ['鹿野山',35.256,139.956],['水沢',39.112,141.204],['江刺',39.237,141.355],
+ ['赤井川',43.072,140.815],['横浜',40.993,141.240],['原町',37.626,140.905],
+ ['志賀',37.082,136.773],['大多喜',35.292,140.230],['萩原',35.985,137.185],
+ ['吉和',34.475,132.177],['十津川',33.932,135.802],['室戸',33.318,134.122],
+ ['久住',33.060,131.260],['沖縄',26.630,128.127],['富士市',35.160,138.680],['富士吉田',35.490,138.800]
+];
+MAG.forEach(d=>{
+ const m=L.circleMarker([d[1],d[2]],{radius:6,color:'#526b85',fillColor:'#6f89a2',fillOpacity:.88,weight:2});
+ m.bindPopup('<b>🧲 地磁気観測 '+esc(d[0])+'</b><br>国土地理院の地磁気連続観測<br><a href="https://vldb.gsi.go.jp/sokuchi/geomag/menu_03/observatory_data.html" target="_blank" rel="noopener">公開データ</a>');
+ magLayer.addLayer(m);
+});
+
 async function loadEmValues(){
  const summary=document.getElementById('emSummary'), table=document.getElementById('emTable');
  try{
@@ -193,7 +207,7 @@ async function loadEmValues(){
   const d=await r.json();
   const rows=Array.isArray(d)?d:(d.stations||d.data||[]);
   if(!rows.length)throw Error();
-  summary.innerHTML='最終更新: '+esc(d.updated_at||rows[0].updated_at||'—')+' ／ 実測値と前回値の比較';
+  summary.innerHTML='最終更新: '+esc(d.updated_at||rows[0].updated_at||'—')+' ／ <b>今回値・前回値・差分</b>';
   table.innerHTML=rows.slice(0,10).map(x=>{
    const cur=num(x.current),prev=num(x.previous),delta=(cur!==null&&prev!==null)?cur-prev:null;
    return '<div class="card small"><b>'+esc(x.station||x.name||'—')+'</b><br>今回: <b>'+esc(cur??'—')+'</b> '+esc(x.unit||'')+'　前回: '+esc(prev??'—')+' '+esc(x.unit||'')+'<br>差分: '+(delta===null?'—':(delta>=0?'+':'')+delta.toFixed(2)+' '+esc(x.unit||''))+'　状態: '+esc(x.status||'—')+'<br><span class="source">'+esc(x.time||'')+'</span></div>';
@@ -205,13 +219,13 @@ async function loadEmValues(){
 }
 
 const FALLBACK_TOP7=[
- {station:'950171',score:90.05,net_3d_mm_per_year:134.27},
- {station:'020899',score:89.61,net_3d_mm_per_year:144.53},
- {station:'07S066',score:89.50,net_3d_mm_per_year:131.51},
- {station:'950158',score:88.43,net_3d_mm_per_year:219.04},
- {station:'950163',score:88.15,net_3d_mm_per_year:156.54},
- {station:'950153',score:87.92,net_3d_mm_per_year:140.99},
- {station:'960543',score:87.91,net_3d_mm_per_year:157.81}
+ {station:'950171',name:'大船渡',pref:'岩手県',area:'大船渡市',lat:39.0238,lon:141.7399,score:90.05,net_3d_mm_per_year:134.27},
+ {station:'020899',name:'十和田湖1',pref:'青森県',area:'十和田市・十和田湖周辺',lat:40.5800,lon:141.1060,score:89.61,net_3d_mm_per_year:144.53},
+ {station:'07S066',name:'S陸前高田',pref:'岩手県',area:'陸前高田市',lat:38.9862,lon:141.6698,score:89.50,net_3d_mm_per_year:131.51},
+ {station:'950158',name:'種市',pref:'岩手県',area:'洋野町',lat:40.4052,lon:141.7131,score:88.43,net_3d_mm_per_year:219.04},
+ {station:'950163',name:'玉山',pref:'岩手県',area:'盛岡市・玉山区周辺',lat:39.8512,lon:141.1649,score:88.15,net_3d_mm_per_year:156.54},
+ {station:'950153',name:'十和田',pref:'青森県',area:'十和田市',lat:40.6251,lon:141.1978,score:87.92,net_3d_mm_per_year:140.99},
+ {station:'960543',name:'岩手松尾',pref:'岩手県',area:'八幡平市・岩手松尾周辺',lat:39.9531,lon:141.0663,score:87.91,net_3d_mm_per_year:157.81}
 ];
 function regionOf(lat,lon){
  if(lat===null||lon===null)return '地域不明';
@@ -240,7 +254,7 @@ async function loadMonitoring(){
  if(!arr||!arr.length){
    arr=FALLBACK_TOP7.map(x=>{
      const pos=positions.find(r=>String(r.station||'')===x.station)||{};
-     return Object.assign({},x,{lat:pos.lat,lon:pos.lon});
+     return Object.assign({},x,{lat:pos.lat??x.lat,lon:pos.lon??x.lon});
    });
    list.innerHTML='<div class="small" style="margin-bottom:6px">監視候補ファイルを取得できないため、直近の計算結果TOP7を表示しています。</div>';
  }else{
@@ -253,10 +267,10 @@ async function loadMonitoring(){
   const lat=num(d.lat??d.latitude),lon=num(d.lon??d.longitude);
   if(lat!==null&&lon!==null){
    const r=L.circleMarker([lat,lon],{radius:i<3?12:10,weight:3,color:i<3?'#a00':'#b66a00',fillOpacity:.04});
-   r.bindPopup('<b>重要監視 '+(i+1)+'位</b><br>局 '+esc(d.station||d.name||'')+'<br>'+esc(regionOf(lat,lon))+'<br>Score '+esc(d.score??'—'));
+   r.bindPopup('<b>重要監視 '+(i+1)+'位</b><br>'+esc(d.pref||'')+' '+esc(d.area||d.name||'')+'<br>GEONET '+esc(d.station||'')+'<br>Score '+esc(d.score??'—'));
    monitorLayer.addLayer(r);
   }
-  return '<div class="card monitor '+(i<3?'top3':'top7')+'"><span class="rank">'+(i+1)+'</span><div style="flex:1"><b>'+esc(d.station||d.name||'—')+'</b><br><span class="small">'+esc(regionOf(lat,lon))+' ／ Score '+esc(d.score??'—')+' ／ 年間3D '+esc(d.net_3d_mm_per_year??'—')+' mm/yr</span></div><span class="badge">'+(i<3?'最重要':'重要')+'</span></div>';
+  return '<div class="card monitor '+(i<3?'top3':'top7')+'"><span class="rank">'+(i+1)+'</span><div style="flex:1"><b>'+esc(d.station||d.name||'—')+'</b><br><span class="small">'+esc(d.area ? d.pref+'・'+d.area : (d.pref ? d.pref+'・'+(d.name||'') : regionOf(lat,lon)))+' ／ Score '+esc(d.score??'—')+' ／ 年間3D '+esc(d.net_3d_mm_per_year??'—')+' mm/yr</span></div><span class="badge">'+(i<3?'最重要':'重要')+'</span></div>';
  }).join(''))||'<div class="card">重要監視候補を表示できません。</div>';
 }
 
