@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/04 21:10:00",
-  "place": "宮城県沖",
-  "lat": 38.8,
-  "lon": 141.7,
-  "depth_km": 70.0,
-  "magnitude": 3.8,
+  "earthquake_time": "2026/09/04 23:52:00",
+  "place": "釧路沖",
+  "lat": 42.8,
+  "lon": 144.7,
+  "depth_km": 50.0,
+  "magnitude": 3.5,
   "max_intensity": ""
 }
