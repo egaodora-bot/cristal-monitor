@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>CRISTAL MONITOR v8</title>
+<title>CRISTAL MONITOR v9</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 *{box-sizing:border-box}
@@ -47,7 +47,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 <div id="actions" class="floating">
  <button id="infoBtn">☰ 情報</button>
  <button id="gnssBtn" class="active">GNSS</button>
- <button id="emBtn">⚡ 電磁気</button>
+ <button id="emBtn">⚡ 電磁波/電磁気</button>
  <button id="faultBtn">活断層</button>
  <button id="boundaryBtn">極性境界</button>
  <button id="eqBtn">地震</button>
@@ -66,13 +66,19 @@ button:disabled{opacity:.45;cursor:not-allowed}
  <h3>重要監視 TOP7</h3>
  <div id="monitorList"><div class="card">候補データを確認中…</div></div>
 
- <h3>⚡ 全国の電磁気観測</h3>
+ <h3>⚡ 全国の電磁波</h3>
  <div class="card em">
-   <b>地磁気・地球電磁気連続観測</b>
-   <div class="small">国土地理院が公開する全国の連続観測点を地図に表示します。観測点をクリックすると公開データへ移動できます。</div>
-   <div style="margin-top:7px"><b id="emCount">17</b>観測点を表示</div>
-   <div class="source">※これは「電磁気観測」であり、地震発生を予測する異常判定ではありません。</div>
-   <div style="margin-top:7px"><a href="https://vldb.gsi.go.jp/sokuchi/geomag/menu_03/observatory_data.html" target="_blank" rel="noopener">国土地理院 地磁気連続観測データ</a></div>
+   <b>全国の電磁波・電波伝搬の監視</b>
+   <div id="emSummary" class="small">観測情報を確認中…</div>
+   <div id="emTable" style="margin-top:7px"></div>
+   <div class="source">※ここでいう「電磁波」は、NICTが国内4地点で定常観測する電離圏・電波伝搬関連情報を中心に扱います。「電磁気（地磁気）」とは別レイヤーです。</div>
+   <div style="margin-top:7px">
+    <a href="https://wdc.nict.go.jp/Ionosphere/realtime/ISDJ/ionospheric-signal.html" target="_blank" rel="noopener">NICT 電離圏信号情報</a>
+    ／
+    <a href="https://wdc.nict.go.jp/Ionosphere/en/realtime/" target="_blank" rel="noopener">NICT Real-Time Data</a>
+    ／
+    <a href="https://emc.nict.go.jp/mnt/gis_map.html" target="_blank" rel="noopener">NICT 電界強度マップ</a>
+   </div>
  </div>
 
  <h3>地震発生状況 TOP10</h3>
@@ -169,33 +175,59 @@ document.getElementById('boundaryBtn').onclick=function(){toggle(this,boundaryLa
 document.getElementById('eqBtn').onclick=function(){toggle(this,eqLayer)};
 
 const EM=[
- ['MIZ','水沢',39.112,141.204,'GSI'],
- ['ESA','江刺',39.237,141.355,'GSI'],
- ['KNZ','鹿野山',35.256,139.956,'GSI'],
- ['AKA','赤井川',43.072,140.815,'GSI'],
- ['YOK','横浜',40.993,141.240,'GSI'],
- ['HAR','原町',37.626,140.905,'GSI'],
- ['SIK','志賀',37.082,136.773,'GSI'],
- ['OTA','大多喜',35.292,140.230,'GSI'],
- ['HAG','萩原',35.985,137.185,'GSI'],
- ['YOS','吉和',34.475,132.177,'GSI'],
- ['TTK','十津川',33.932,135.802,'GSI'],
- ['MUR','室戸',33.318,134.122,'GSI'],
- ['KUJ','久住',33.060,131.260,'GSI'],
- ['OKI','沖縄',26.630,128.127,'GSI'],
- ['KAK','柿岡',36.2322,140.1864,'JMA'],
- ['MMB','女満別',43.9100,144.1886,'JMA'],
- ['KNY','鹿屋',31.4242,130.8800,'JMA']
+ ['WAK','稚内',45.40,141.68],
+ ['KOK','国分寺',35.71,139.48],
+ ['YAM','山川',31.20,130.62],
+ ['OGI','大宜味',26.70,128.12]
 ];
 EM.forEach(d=>{
- const m=L.circleMarker([d[2],d[3]],{radius:6,color:'#8a4bb3',fillColor:'#8a4bb3',fillOpacity:.9,weight:2});
- m.bindPopup('<b>⚡ 電磁気観測 '+esc(d[0])+'</b><br>'+esc(d[1])+'<br>機関: '+esc(d[4])+'<br><a href="https://vldb.gsi.go.jp/sokuchi/geomag/menu_03/observatory_data.html" target="_blank" rel="noopener">公開データ</a>');
+ const m=L.circleMarker([d[2],d[3]],{radius:7,color:'#7b3fb1',fillColor:'#9b5cc6',fillOpacity:.92,weight:2});
+ m.bindPopup('<b>⚡ 電磁波観測 '+esc(d[0])+'</b><br>'+esc(d[1])+'<br>NICT 電離圏観測<br><a href="https://wdc.nict.go.jp/Ionosphere/realtime/ISDJ/ionospheric-signal.html" target="_blank" rel="noopener">最新観測を見る</a>');
  emLayer.addLayer(m);
 });
-document.getElementById('emCount').textContent=EM.length;
+async function loadEmValues(){
+ const summary=document.getElementById('emSummary'), table=document.getElementById('emTable');
+ try{
+  const r=await fetch('electromagnetic_observation.json',{cache:'no-store'});
+  if(!r.ok)throw Error();
+  const d=await r.json();
+  const rows=Array.isArray(d)?d:(d.stations||d.data||[]);
+  if(!rows.length)throw Error();
+  summary.innerHTML='最終更新: '+esc(d.updated_at||rows[0].updated_at||'—')+' ／ 実測値と前回値の比較';
+  table.innerHTML=rows.slice(0,10).map(x=>{
+   const cur=num(x.current),prev=num(x.previous),delta=(cur!==null&&prev!==null)?cur-prev:null;
+   return '<div class="card small"><b>'+esc(x.station||x.name||'—')+'</b><br>今回: <b>'+esc(cur??'—')+'</b> '+esc(x.unit||'')+'　前回: '+esc(prev??'—')+' '+esc(x.unit||'')+'<br>差分: '+(delta===null?'—':(delta>=0?'+':'')+delta.toFixed(2)+' '+esc(x.unit||''))+'　状態: '+esc(x.status||'—')+'<br><span class="source">'+esc(x.time||'')+'</span></div>';
+  }).join('');
+ }catch(e){
+  summary.innerHTML='<b>自動取得データなし</b><br>ここは「異常なし」ではありません。実測値を取得できないため、判定しません。';
+  table.innerHTML='<div class="card small">今回値／前回値の比較欄は、<code>electromagnetic_observation.json</code>を生成した時点から実値表示になります。</div>';
+ }
+}
 
+const FALLBACK_TOP7=[
+ {station:'950171',score:90.05,net_3d_mm_per_year:134.27},
+ {station:'020899',score:89.61,net_3d_mm_per_year:144.53},
+ {station:'07S066',score:89.50,net_3d_mm_per_year:131.51},
+ {station:'950158',score:88.43,net_3d_mm_per_year:219.04},
+ {station:'950163',score:88.15,net_3d_mm_per_year:156.54},
+ {station:'950153',score:87.92,net_3d_mm_per_year:140.99},
+ {station:'960543',score:87.91,net_3d_mm_per_year:157.81}
+];
+function regionOf(lat,lon){
+ if(lat===null||lon===null)return '地域不明';
+ if(lat>=41.5)return '北海道';
+ if(lat>=38.0)return '東北';
+ if(lat>=35.0)return '関東・甲信';
+ if(lat>=33.0)return '東海・北陸・近畿';
+ if(lat>=31.0)return '中国・四国・九州北部';
+ return '南西諸島・九州南部';
+}
+async function loadStationPositions(){
+ try{return csv(await getText('GEONET_national_annual_movement.csv'))}catch(e){return []}
+}
 async function loadMonitoring(){
  const list=document.getElementById('monitorList');
+ const positions=await loadStationPositions();
  let arr=null;
  for(const file of ['GEONET_national_monitoring_candidates.json','GEONET_national_monitoring_candidates.csv']){
   try{
@@ -205,22 +237,27 @@ async function loadMonitoring(){
    if(Array.isArray(arr)&&arr.length)break;
   }catch(e){arr=null}
  }
- monitorLayer.clearLayers();
  if(!arr||!arr.length){
-  list.innerHTML='<div class="card">候補データを取得できません。<br><span class="small">「候補なし」ではなく「取得できない」と表示しています。</span></div>';
-  return;
+   arr=FALLBACK_TOP7.map(x=>{
+     const pos=positions.find(r=>String(r.station||'')===x.station)||{};
+     return Object.assign({},x,{lat:pos.lat,lon:pos.lon});
+   });
+   list.innerHTML='<div class="small" style="margin-bottom:6px">監視候補ファイルを取得できないため、直近の計算結果TOP7を表示しています。</div>';
+ }else{
+   list.innerHTML='';
  }
+ monitorLayer.clearLayers();
  arr.sort((a,b)=>(num(b.score)||0)-(num(a.score)||0));
  const top=arr.slice(0,7);
- list.innerHTML=top.map((d,i)=>{
+ list.innerHTML+=(top.map((d,i)=>{
   const lat=num(d.lat??d.latitude),lon=num(d.lon??d.longitude);
   if(lat!==null&&lon!==null){
    const r=L.circleMarker([lat,lon],{radius:i<3?12:10,weight:3,color:i<3?'#a00':'#b66a00',fillOpacity:.04});
-   r.bindPopup('<b>重要監視 '+(i+1)+'位</b><br>局 '+esc(d.station||d.name||'')+'<br>Score '+esc(d.score??'—'));
+   r.bindPopup('<b>重要監視 '+(i+1)+'位</b><br>局 '+esc(d.station||d.name||'')+'<br>'+esc(regionOf(lat,lon))+'<br>Score '+esc(d.score??'—'));
    monitorLayer.addLayer(r);
   }
-  return '<div class="card monitor '+(i<3?'top3':'top7')+'"><span class="rank">'+(i+1)+'</span><div style="flex:1"><b>'+esc(d.station||d.name||'—')+'</b><br><span class="small">Score '+esc(d.score??'—')+' ／ 年間3D '+esc(d.net_3d_mm_per_year??'—')+' mm/yr</span></div><span class="badge">'+(i<3?'最重要':'重要')+'</span></div>';
- }).join('');
+  return '<div class="card monitor '+(i<3?'top3':'top7')+'"><span class="rank">'+(i+1)+'</span><div style="flex:1"><b>'+esc(d.station||d.name||'—')+'</b><br><span class="small">'+esc(regionOf(lat,lon))+' ／ Score '+esc(d.score??'—')+' ／ 年間3D '+esc(d.net_3d_mm_per_year??'—')+' mm/yr</span></div><span class="badge">'+(i<3?'最重要':'重要')+'</span></div>';
+ }).join(''))||'<div class="card">重要監視候補を表示できません。</div>';
 }
 
 async function loadGnss(period){
@@ -303,8 +340,8 @@ document.querySelectorAll('.pbtn').forEach(b=>b.onclick=async()=>{
 });
 document.getElementById('periodBtn').onclick=()=>document.getElementById('drawer').classList.add('open');
 
-Promise.allSettled([loadMonitoring(),loadGnss('1y'),loadBoundary(),loadEq()]);
-setInterval(()=>{loadMonitoring();loadEq()},10*60*1000);
+Promise.allSettled([loadMonitoring(),loadGnss('1y'),loadBoundary(),loadEq(),loadEmValues()]);
+setInterval(()=>{loadMonitoring();loadEq();loadEmValues()},10*60*1000);
 })();
 </script>
 </body>
