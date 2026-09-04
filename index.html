@@ -3,44 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>CRISTAL MONITOR v7</title>
+<title>CRISTAL MONITOR v8</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 *{box-sizing:border-box}
 html,body,#map{margin:0;width:100%;height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif}
 #map{position:fixed;inset:0;background:#dfe8ee}
-.floating{position:fixed;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:1px solid rgba(0,0,0,.12);box-shadow:0 3px 16px rgba(0,0,0,.16);border-radius:12px}
-#brand{top:12px;left:12px;padding:8px 12px;font-weight:800;font-size:14px;letter-spacing:.04em}
-#status{top:12px;right:12px;padding:7px 10px;font-size:12px}
-#actions{left:12px;bottom:14px;display:flex;gap:7px;flex-wrap:wrap;padding:7px}
-button{border:1px solid #bbb;background:#fff;border-radius:9px;padding:7px 10px;font-size:12px;cursor:pointer}
+.floating{position:fixed;z-index:1000;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid rgba(0,0,0,.12);box-shadow:0 3px 16px rgba(0,0,0,.16);border-radius:12px}
+#brand{top:10px;left:10px;padding:8px 12px;font-weight:800;font-size:14px}
+#status{top:10px;right:10px;padding:7px 10px;font-size:12px}
+#actions{left:10px;bottom:10px;display:flex;gap:6px;flex-wrap:wrap;padding:6px;max-width:calc(100vw - 20px)}
+button{border:1px solid #bbb;background:#fff;border-radius:9px;padding:7px 9px;font-size:12px;cursor:pointer}
 button.active{background:#222;color:#fff;border-color:#222}
-#drawer{position:fixed;z-index:1100;top:0;right:0;height:100%;width:min(390px,92vw);background:rgba(250,252,254,.97);box-shadow:-8px 0 28px rgba(0,0,0,.22);transform:translateX(102%);transition:transform .22s ease;overflow:auto;padding:16px}
+button:disabled{opacity:.45;cursor:not-allowed}
+#drawer{position:fixed;z-index:1100;top:0;right:0;height:100%;width:min(410px,93vw);background:rgba(250,252,254,.98);box-shadow:-8px 0 28px rgba(0,0,0,.22);transform:translateX(102%);transition:transform .22s ease;overflow:auto;padding:14px}
 #drawer.open{transform:translateX(0)}
 #drawer h2{font-size:18px;margin:0 0 12px}
 #drawer h3{font-size:14px;margin:18px 0 8px}
-.close{float:right;font-size:20px;padding:4px 9px}
-.card{background:#fff;border:1px solid #ddd;border-radius:11px;padding:10px;margin:8px 0}
-.small{font-size:11px;color:#555;line-height:1.55}
-.monitor{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #eee}
-.rank{font-weight:800;width:28px}
-.badge{font-size:10px;padding:3px 6px;border-radius:8px;background:#eee}
-.top3{border-left:4px solid #d33}
-.top7{border-left:4px solid #e89a20}
-.legend-row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:12px}
-.dot{width:13px;height:13px;border-radius:50%;display:inline-block;border:1px solid #777}
-.arrow{font-size:18px}
-#nictFrame{width:100%;height:360px;border:1px solid #ddd;border-radius:9px;background:#fff}
-a{color:#075a9e}
-.leaflet-control-attribution{font-size:9px}
+.close{float:right;font-size:20px;padding:3px 9px}
+.card{background:#fff;border:1px solid #ddd;border-radius:11px;padding:9px;margin:7px 0}
+.small{font-size:11px;color:#555;line-height:1.5}
+.monitor{display:flex;gap:8px;align-items:center;padding:8px;border-left:4px solid #aaa}
+.top3{border-left-color:#b00000}.top7{border-left-color:#d88918}
+.rank{font-weight:800;width:25px}.badge{font-size:10px;padding:3px 6px;border-radius:8px;background:#eee;white-space:nowrap}
 .notice{padding:8px;background:#fff8df;border:1px solid #e6cf82;border-radius:9px;font-size:11px;line-height:1.5}
+.em{border-left:4px solid #8a4bb3}
+.em-dot{display:inline-block;width:13px;height:13px;border-radius:50%;background:#8a4bb3;border:2px solid #fff;box-shadow:0 0 0 2px #8a4bb3}
+.eqrow{font-size:12px}.eqrow b{font-size:13px}
+.source{font-size:10px;color:#666}
 @media(max-width:600px){
- #brand{top:8px;left:8px}
- #status{top:8px;right:8px;max-width:190px}
- #actions{left:8px;bottom:8px}
+ #brand{top:7px;left:7px}.status{top:7px;right:7px}
+ #actions{left:7px;bottom:7px}
  button{padding:8px 9px}
- #drawer{width:94vw;padding:12px}
- #nictFrame{height:330px}
+ #drawer{width:94vw;padding:11px}
 }
 </style>
 </head>
@@ -50,59 +45,67 @@ a{color:#075a9e}
 <div id="status" class="floating">🟢 地図稼働中</div>
 
 <div id="actions" class="floating">
-  <button id="infoBtn">☰ 情報</button>
-  <button id="gnssBtn" class="active">GNSS</button>
-  <button id="tecBtn">⚡ 電離層/TEC</button>
-  <button id="faultBtn">活断層</button>
-  <button id="boundaryBtn">極性境界</button>
-  <button id="eqBtn">地震</button>
-  <button id="modeBtn">年間</button>
+ <button id="infoBtn">☰ 情報</button>
+ <button id="gnssBtn" class="active">GNSS</button>
+ <button id="emBtn">⚡ 電磁気</button>
+ <button id="faultBtn">活断層</button>
+ <button id="boundaryBtn">極性境界</button>
+ <button id="eqBtn">地震</button>
+ <button id="periodBtn">1年</button>
 </div>
 
 <aside id="drawer">
-  <button class="close" id="closeBtn">×</button>
-  <h2>監視情報</h2>
-  <div class="notice">
-    電磁・電離層情報はGNSSの重要監視スコアとは別系統で表示します。
-    電離層の変化は地震原因を意味するものではありません。
-  </div>
+ <button class="close" id="closeBtn">×</button>
+ <h2>監視情報</h2>
 
-  <h3>重要監視 TOP7</h3>
-  <div id="monitorList"><div class="card">読み込み中…</div></div>
+ <div class="notice">
+   <b>電磁気情報は独立レイヤーです。</b><br>
+   GNSSの重要監視スコアには混ぜません。電磁気観測値を取得できない場合は「異常なし」と判定せず、取得状態をそのまま表示します。
+ </div>
 
-  <h3>電磁・電離層</h3>
-  <div class="card">
-    <b>全国4観測点</b><br>
-    稚内（北海道）／国分寺（東京）／山川（鹿児島）／大宜味（沖縄）
-    <div class="small">NICTイオノゾンデ観測。5分間隔の観測情報を利用できます。</div>
-    <div style="margin-top:8px">
-      <a href="https://wdc.nict.go.jp/Ionosphere/realtime/ISDJ/ionospheric-alert.html" target="_blank" rel="noopener">NICT 電離圏概況を開く</a>
-      ／
-      <a href="https://aer-nc-web.nict.go.jp/GPS/QR_GEONET/index_e.html" target="_blank" rel="noopener">GEONET TECを開く</a>
-    </div>
-  </div>
-  <iframe id="nictFrame" title="NICT電離圏概況" src="https://wdc.nict.go.jp/Ionosphere/realtime/ISDJ/ionospheric-alert.html"></iframe>
+ <h3>重要監視 TOP7</h3>
+ <div id="monitorList"><div class="card">候補データを確認中…</div></div>
 
-  <h3>最新地震 TOP10</h3>
-  <div id="eqList"><div class="card">読み込み中…</div></div>
+ <h3>⚡ 全国の電磁気観測</h3>
+ <div class="card em">
+   <b>地磁気・地球電磁気連続観測</b>
+   <div class="small">国土地理院が公開する全国の連続観測点を地図に表示します。観測点をクリックすると公開データへ移動できます。</div>
+   <div style="margin-top:7px"><b id="emCount">17</b>観測点を表示</div>
+   <div class="source">※これは「電磁気観測」であり、地震発生を予測する異常判定ではありません。</div>
+   <div style="margin-top:7px"><a href="https://vldb.gsi.go.jp/sokuchi/geomag/menu_03/observatory_data.html" target="_blank" rel="noopener">国土地理院 地磁気連続観測データ</a></div>
+ </div>
 
-  <h3>データ状態</h3>
-  <div class="card small">
-    <div>地震：GitHub上の <code>latest_earthquake.json</code> / <code>earthquake_history.json</code></div>
-    <div>GNSS：<code>GEONET_national_annual_movement.csv</code></div>
-    <div>監視候補：<code>GEONET_national_monitoring_candidates.json</code></div>
-    <div>電離層TEC：NICT公開の準リアルタイム画像</div>
-    <div>活断層：GSI公開タイル</div>
-  </div>
+ <h3>地震発生状況 TOP10</h3>
+ <div id="eqList"><div class="card">地震データを確認中…</div></div>
 
-  <h3>凡例</h3>
-  <div class="legend-row"><span class="arrow">→</span> GNSS水平移動</div>
-  <div class="legend-row"><span class="dot" style="background:#e44"></span> 隆起</div>
-  <div class="legend-row"><span class="dot" style="background:#2878d8"></span> 沈降</div>
-  <div class="legend-row"><span class="arrow">⚡</span> 電離層/TEC情報</div>
-  <div class="legend-row"><span class="dot" style="background:#e44;border:3px solid #a00"></span> 最重要監視 TOP3</div>
-  <div class="legend-row"><span class="dot" style="background:#f3a23a;border:3px solid #b66a00"></span> 重要監視 4–7位</div>
-  <div class="small">地図を主役にし、情報は必要なときだけ展開します。</div>
+ <h3>期間設定</h3>
+ <div class="card">
+   <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <button data-period="1d" class="pbtn">24時間</button>
+    <button data-period="7d" class="pbtn">7日</button>
+    <button data-period="30d" class="pbtn">30日</button>
+    <button data-period="90d" class="pbtn">90日</button>
+    <button data-period="1y" class="pbtn active">1年</button>
+   </div>
+   <div id="periodMsg" class="small" style="margin-top:7px">現在は1年データを表示。</div>
+ </div>
+
+ <h3>データ状態</h3>
+ <div class="card small">
+   <div>地震：<code>earthquake_history.json</code> → <code>latest_earthquake.json</code></div>
+   <div>GNSS：<code>GEONET_national_annual_movement.csv</code></div>
+   <div>監視候補：<code>GEONET_national_monitoring_candidates.json/csv</code></div>
+   <div>電磁気：国土地理院 地磁気連続観測公開データ</div>
+   <div>サイト更新：HTMLを上書きせず、データ層だけ再取得</div>
+ </div>
+
+ <h3>凡例</h3>
+ <div class="small">
+  <div>↑ GNSS水平移動方向</div>
+  <div>● 隆起 / ● 沈降（上下成分がデータにある場合のみ）</div>
+  <div><span class="em-dot"></span> 電磁気観測点</div>
+  <div>赤リング：重要監視1～3位　橙リング：4～7位</div>
+ </div>
 </aside>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -110,185 +113,198 @@ a{color:#075a9e}
 (function(){
 'use strict';
 
-const map = L.map('map',{zoomControl:true,preferCanvas:true}).setView([36.2,138.2],5.5);
-
-const relief = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/relief/{z}/{x}/{y}.png',{
-  maxZoom:17,attribution:'<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">国土地理院</a>'
+const map=L.map('map',{zoomControl:true,preferCanvas:true}).setView([36.2,138.2],5.5);
+L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/relief/{z}/{x}/{y}.png',{
+ maxZoom:17,attribution:'<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">国土地理院</a>'
 }).addTo(map);
-L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',{
-  maxZoom:18,opacity:.34,attribution:''
-}).addTo(map);
-const faultLayer=L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/afm/{z}/{x}/{y}.png',{maxZoom:18,opacity:.75});
+L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',{maxZoom:18,opacity:.30}).addTo(map);
+const faultLayer=L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/afm/{z}/{x}/{y}.png',{maxZoom:18,opacity:.72});
 
 const gnssLayer=L.layerGroup().addTo(map);
-const tecLayer=L.layerGroup();
+const emLayer=L.layerGroup();
 const boundaryLayer=L.layerGroup();
 const eqLayer=L.layerGroup();
-
 const monitorLayer=L.layerGroup().addTo(map);
-
-const infoBtn=document.getElementById('infoBtn');
-const drawer=document.getElementById('drawer');
-document.getElementById('closeBtn').onclick=()=>drawer.classList.remove('open');
-infoBtn.onclick=()=>drawer.classList.toggle('open');
-
-function toggleLayer(btn,layer){
-  if(map.hasLayer(layer)){map.removeLayer(layer);btn.classList.remove('active')}
-  else{map.addLayer(layer);btn.classList.add('active')}
-}
-document.getElementById('gnssBtn').onclick=function(){toggleLayer(this,gnssLayer)};
-document.getElementById('faultBtn').onclick=function(){toggleLayer(this,faultLayer)};
-document.getElementById('boundaryBtn').onclick=function(){toggleLayer(this,boundaryLayer)};
-document.getElementById('eqBtn').onclick=function(){toggleLayer(this,eqLayer)};
-document.getElementById('tecBtn').onclick=function(){toggleLayer(this,tecLayer)};
 
 const status=document.getElementById('status');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=v=>{const n=Number(v);return Number.isFinite(n)?n:null};
 
 function csv(text){
-  const rows=[]; let row=[], cell='', q=false;
-  for(let i=0;i<text.length;i++){
-    const c=text[i], n=text[i+1];
-    if(c==='"' && q && n==='"'){cell+='"';i++;continue}
-    if(c==='"'){q=!q;continue}
-    if(c===',' && !q){row.push(cell);cell='';continue}
-    if((c==='\\n'||c==='\\r') && !q){
-      if(c==='\\r'&&n==='\\n')i++;
-      row.push(cell);cell='';
-      if(row.some(v=>v!==''))rows.push(row);
-      row=[];continue
-    }
-    cell+=c;
+ const rows=[];let row=[],cell='',q=false;
+ for(let i=0;i<text.length;i++){
+  const c=text[i],n=text[i+1];
+  if(c==='"'&&q&&n==='"'){cell+='"';i++;continue}
+  if(c==='"'){q=!q;continue}
+  if(c===','&&!q){row.push(cell);cell='';continue}
+  if((c==='\\n'||c==='\\r')&&!q){
+   if(c==='\\r'&&n==='\\n')i++;
+   row.push(cell);cell='';
+   if(row.some(v=>v!==''))rows.push(row);
+   row=[];continue;
   }
-  if(cell!==''||row.length){row.push(cell);if(row.some(v=>v!==''))rows.push(row)}
-  if(!rows.length)return [];
-  const head=rows.shift().map(x=>x.trim());
-  return rows.map(r=>Object.fromEntries(head.map((h,i)=>[h,(r[i]??'').trim()])));
+  cell+=c;
+ }
+ if(cell!==''||row.length){row.push(cell);if(row.some(v=>v!==''))rows.push(row)}
+ if(!rows.length)return[];
+ const head=rows.shift().map(x=>x.trim());
+ return rows.map(r=>Object.fromEntries(head.map((h,i)=>[h,(r[i]??'').trim()])));
 }
-function num(v){const n=Number(v);return Number.isFinite(n)?n:null}
+async function getText(url){
+ const r=await fetch(url,{cache:'no-store'});
+ if(!r.ok)throw Error('HTTP '+r.status);
+ return await r.text();
+}
+function toggle(btn,layer){
+ if(map.hasLayer(layer)){map.removeLayer(layer);btn.classList.remove('active')}
+ else{map.addLayer(layer);btn.classList.add('active')}
+}
+
+document.getElementById('infoBtn').onclick=()=>document.getElementById('drawer').classList.toggle('open');
+document.getElementById('closeBtn').onclick=()=>document.getElementById('drawer').classList.remove('open');
+document.getElementById('gnssBtn').onclick=function(){toggle(this,gnssLayer)};
+document.getElementById('emBtn').onclick=function(){toggle(this,emLayer)};
+document.getElementById('faultBtn').onclick=function(){toggle(this,faultLayer)};
+document.getElementById('boundaryBtn').onclick=function(){toggle(this,boundaryLayer)};
+document.getElementById('eqBtn').onclick=function(){toggle(this,eqLayer)};
+
+const EM=[
+ ['MIZ','水沢',39.112,141.204,'GSI'],
+ ['ESA','江刺',39.237,141.355,'GSI'],
+ ['KNZ','鹿野山',35.256,139.956,'GSI'],
+ ['AKA','赤井川',43.072,140.815,'GSI'],
+ ['YOK','横浜',40.993,141.240,'GSI'],
+ ['HAR','原町',37.626,140.905,'GSI'],
+ ['SIK','志賀',37.082,136.773,'GSI'],
+ ['OTA','大多喜',35.292,140.230,'GSI'],
+ ['HAG','萩原',35.985,137.185,'GSI'],
+ ['YOS','吉和',34.475,132.177,'GSI'],
+ ['TTK','十津川',33.932,135.802,'GSI'],
+ ['MUR','室戸',33.318,134.122,'GSI'],
+ ['KUJ','久住',33.060,131.260,'GSI'],
+ ['OKI','沖縄',26.630,128.127,'GSI'],
+ ['KAK','柿岡',36.2322,140.1864,'JMA'],
+ ['MMB','女満別',43.9100,144.1886,'JMA'],
+ ['KNY','鹿屋',31.4242,130.8800,'JMA']
+];
+EM.forEach(d=>{
+ const m=L.circleMarker([d[2],d[3]],{radius:6,color:'#8a4bb3',fillColor:'#8a4bb3',fillOpacity:.9,weight:2});
+ m.bindPopup('<b>⚡ 電磁気観測 '+esc(d[0])+'</b><br>'+esc(d[1])+'<br>機関: '+esc(d[4])+'<br><a href="https://vldb.gsi.go.jp/sokuchi/geomag/menu_03/observatory_data.html" target="_blank" rel="noopener">公開データ</a>');
+ emLayer.addLayer(m);
+});
+document.getElementById('emCount').textContent=EM.length;
 
 async function loadMonitoring(){
+ const list=document.getElementById('monitorList');
+ let arr=null;
+ for(const file of ['GEONET_national_monitoring_candidates.json','GEONET_national_monitoring_candidates.csv']){
   try{
-    const r=await fetch('GEONET_national_monitoring_candidates.json',{cache:'no-store'});
-    if(!r.ok)throw Error('monitoring http '+r.status);
-    const data=await r.json();
-    const arr=Array.isArray(data)?data:(data.candidates||data.rows||[]);
-    const top=arr.slice().sort((a,b)=>(num(b.score)||0)-(num(a.score)||0)).slice(0,7);
-    document.getElementById('monitorList').innerHTML=top.map((d,i)=>{
-      const cls=i<3?'top3':'top7';
-      const lat=num(d.lat),lon=num(d.lon);
-      if(lat!==null&&lon!==null){
-        const ring=L.circleMarker([lat,lon],{radius:i<3?12:10,weight:3,fillOpacity:.05,color:i<3?'#a00':'#b66a00'});
-        ring.bindPopup('<b>重要監視 '+(i+1)+'位</b><br>局 '+esc(d.station||d.name||'')+'<br>Score '+esc(d.score));
-        monitorLayer.addLayer(ring);
-      }
-      return '<div class="card monitor '+cls+'"><div class="rank">'+(i+1)+'</div><div><b>'+esc(d.station||d.name||'—')+'</b><br><span class="small">Score '+esc(d.score??'—')+' ／ 年間3D '+esc(d.net_3d_mm_per_year??'—')+' mm/yr</span></div><span class="badge">'+(i<3?'最重要':'重要')+'</span></div>'
-    }).join('')||'<div class="card">候補データなし</div>';
-  }catch(e){
-    document.getElementById('monitorList').innerHTML='<div class="card">監視候補データを取得できません。地図は継続表示します。</div>';
+   const text=await getText(file);
+   arr=file.endsWith('.json')?JSON.parse(text):csv(text);
+   if(!Array.isArray(arr))arr=arr.candidates||arr.rows||arr.data||[];
+   if(Array.isArray(arr)&&arr.length)break;
+  }catch(e){arr=null}
+ }
+ monitorLayer.clearLayers();
+ if(!arr||!arr.length){
+  list.innerHTML='<div class="card">候補データを取得できません。<br><span class="small">「候補なし」ではなく「取得できない」と表示しています。</span></div>';
+  return;
+ }
+ arr.sort((a,b)=>(num(b.score)||0)-(num(a.score)||0));
+ const top=arr.slice(0,7);
+ list.innerHTML=top.map((d,i)=>{
+  const lat=num(d.lat??d.latitude),lon=num(d.lon??d.longitude);
+  if(lat!==null&&lon!==null){
+   const r=L.circleMarker([lat,lon],{radius:i<3?12:10,weight:3,color:i<3?'#a00':'#b66a00',fillOpacity:.04});
+   r.bindPopup('<b>重要監視 '+(i+1)+'位</b><br>局 '+esc(d.station||d.name||'')+'<br>Score '+esc(d.score??'—'));
+   monitorLayer.addLayer(r);
   }
+  return '<div class="card monitor '+(i<3?'top3':'top7')+'"><span class="rank">'+(i+1)+'</span><div style="flex:1"><b>'+esc(d.station||d.name||'—')+'</b><br><span class="small">Score '+esc(d.score??'—')+' ／ 年間3D '+esc(d.net_3d_mm_per_year??'—')+' mm/yr</span></div><span class="badge">'+(i<3?'最重要':'重要')+'</span></div>';
+ }).join('');
 }
 
-function drawGnss(rows,mode){
+async function loadGnss(period){
+ const file=period==='1y'?'GEONET_national_annual_movement.csv':null;
+ if(!file){
+  document.getElementById('periodMsg').textContent='この期間のGNSS集計ファイルはまだ生成されていません。架空の値は表示しません。';
+  return;
+ }
+ try{
+  const rows=csv(await getText(file));
   gnssLayer.clearLayers();
-  let count=0;
+  let n=0;
   for(const d of rows){
-    const lat=num(d.lat),lon=num(d.lon);
-    if(lat===null||lon===null)continue;
-    const east=num(d.net_east_mm_per_year),north=num(d.net_north_mm_per_year),up=num(d.net_up_mm_per_year);
-    const dir=(num(d.direction_deg)!==null?num(d.direction_deg):null);
-    const speed=num(d.net_2d_mm_per_year);
-    if(east!==null||north!==null||speed!==null){
-      let angle=dir;
-      if(angle===null && east!==null && north!==null) angle=(Math.atan2(east,north)*180/Math.PI+360)%360;
-      const label=(speed!==null?'水平 '+speed.toFixed(1)+' mm/yr':'水平');
-      const arrow=L.marker([lat,lon],{
-        icon:L.divIcon({className:'',html:'<div style="font-size:24px;line-height:1;transform:rotate('+(angle??0)+'deg);text-shadow:0 1px 2px #fff">↑</div>',iconSize:[28,28],iconAnchor:[14,14]})
-      }).bindPopup('<b>GEONET '+esc(d.station||'')+'</b><br>'+esc(label)+(up!==null?'<br>上下 '+up.toFixed(1)+' mm/yr':'')+(mode==='30d'?'<br>期間: 直近30日':'<br>期間: 年間'));
-      gnssLayer.addLayer(arrow); count++;
-    }
-    if(up!==null){
-      const c=L.circleMarker([lat,lon],{radius:Math.min(12,4+Math.abs(up)/15),weight:1,color:up>=0?'#b00000':'#1455a0',fillColor:up>=0?'#e44':'#2878d8',fillOpacity:.72});
-      c.bindTooltip((up>=0?'隆起 ':'沈降 ')+up.toFixed(1)+' mm/yr');
-      gnssLayer.addLayer(c);
-    }
+   const lat=num(d.lat),lon=num(d.lon); if(lat===null||lon===null)continue;
+   const east=num(d.net_east_mm_per_year),north=num(d.net_north_mm_per_year),up=num(d.net_up_mm_per_year),speed=num(d.net_2d_mm_per_year);
+   if(east!==null||north!==null||speed!==null){
+    let angle=num(d.direction_deg);
+    if(angle===null&&east!==null&&north!==null)angle=(Math.atan2(east,north)*180/Math.PI+360)%360;
+    const mk=L.marker([lat,lon],{icon:L.divIcon({className:'',html:'<div style="font-size:21px;line-height:1;transform:rotate('+(angle??0)+'deg);text-shadow:0 1px 2px #fff">↑</div>',iconSize:[24,24],iconAnchor:[12,12]})});
+    mk.bindPopup('<b>GEONET '+esc(d.station||'')+'</b><br>水平 '+esc(speed??'—')+' mm/yr'+(up!==null?'<br>上下 '+up.toFixed(1)+' mm/yr':''));
+    gnssLayer.addLayer(mk);n++;
+   }
+   if(up!==null){
+    const c=L.circleMarker([lat,lon],{radius:Math.min(12,4+Math.abs(up)/15),color:up>=0?'#b00000':'#1455a0',fillColor:up>=0?'#e44':'#2878d8',fillOpacity:.72,weight:1});
+    c.bindTooltip((up>=0?'隆起 ':'沈降 ')+up.toFixed(1)+' mm/yr');gnssLayer.addLayer(c);
+   }
   }
-  status.textContent='🟢 GNSS '+count+'点';
+  status.textContent='🟢 GNSS '+n+'点';
+  document.getElementById('periodMsg').textContent='1年：'+n+'点。上下成分など、ファイルに存在する項目だけ表示します。';
+ }catch(e){status.textContent='🟡 GNSSデータ取得待ち'}
 }
 
-async function loadGnss(mode){
-  const file=mode==='30d'?'GEONET_national_recent30d_movement.csv':'GEONET_national_annual_movement.csv';
-  try{
-    const r=await fetch(file,{cache:'no-store'}); if(!r.ok)throw Error();
-    drawGnss(csv(await r.text()),mode);
-  }catch(e){
-    // Current annual file may not contain optional ENU fields; never throw.
-    status.textContent='🟡 GNSSデータ確認中';
-  }
+async function loadBoundary(){
+ try{
+  const rows=csv(await getText('GEONET_national_polarity_boundary_candidates.csv'));
+  boundaryLayer.clearLayers();
+  rows.forEach(d=>{
+   const a=[num(d.plus_lat),num(d.plus_lon)],b=[num(d.minus_lat),num(d.minus_lon)];
+   if(a.some(x=>x===null)||b.some(x=>x===null))return;
+   const p=L.polyline([a,b],{weight:2,color:'#7a3b9e',opacity:.65});
+   p.bindPopup('<b>極性境界候補</b><br>'+esc(d.plus_station||'')+' ↔ '+esc(d.minus_station||'')+'<br>'+esc(d.distance_km||'—')+' km');
+   boundaryLayer.addLayer(p);
+  });
+ }catch(e){}
 }
 
-async function loadBoundaries(){
-  try{
-    const r=await fetch('GEONET_national_polarity_boundary_candidates.csv',{cache:'no-store'});
-    if(!r.ok)throw Error();
-    const rows=csv(await r.text());
-    for(const d of rows){
-      const a=[num(d.plus_lat),num(d.plus_lon)],b=[num(d.minus_lat),num(d.minus_lon)];
-      if(a.some(x=>x===null)||b.some(x=>x===null))continue;
-      const line=L.polyline([a,b],{weight:2,color:'#7a3b9e',opacity:.65});
-      line.bindPopup('<b>極性境界候補</b><br>'+esc(d.plus_station||'')+' ↔ '+esc(d.minus_station||'')+'<br>距離 '+esc(d.distance_km||'—')+' km');
-      boundaryLayer.addLayer(line);
-    }
-  }catch(e){}
+function formatDate(v){
+ if(!v)return '';
+ const s=String(v);
+ const m=s.match(/(20\\d\\d)[\\/-](\\d\\d?)[\\/-](\\d\\d?)[ T](\\d\\d?):?(\\d\\d)?/);
+ if(m)return m[1]+'/'+String(m[2]).padStart(2,'0')+'/'+String(m[3]).padStart(2,'0')+' '+String(m[4]).padStart(2,'0')+':'+String(m[5]||'00').padStart(2,'0');
+ return s;
+}
+async function loadEq(){
+ try{
+  let data;
+  try{data=JSON.parse(await getText('earthquake_history.json'))}catch(e){data=JSON.parse(await getText('latest_earthquake.json'))}
+  const arr=(Array.isArray(data)?data:(data.history||data.earthquakes||data.items||[data])).slice(0,10);
+  eqLayer.clearLayers();
+  document.getElementById('eqList').innerHTML=arr.map((q,i)=>{
+   const lat=num(q.latitude??q.lat),lon=num(q.longitude??q.lon),mag=q.magnitude??q.mag??q.M;
+   const place=q.hypocenter??q.location??q.name??q.place??'震源情報';
+   const when=q.time??q.datetime??q.occurred_at??q.date??'';
+   if(lat!==null&&lon!==null){
+    const c=L.circleMarker([lat,lon],{radius:Math.max(5,Math.min(14,(num(mag)||1)*3)),color:i<5?'#a00':'#666',fillColor:i<5?'#e44':'#aaa',fillOpacity:.72,weight:i<5?2:1});
+    c.bindPopup('<b>地震</b><br>'+esc(place)+'<br>M '+esc(mag??'—')+'<br>'+esc(formatDate(when)));
+    eqLayer.addLayer(c);
+   }
+   return '<div class="card eqrow"><b>'+(i+1)+'. '+esc(place)+'</b><br>M '+esc(mag??'—')+'　'+esc(formatDate(when))+'</div>';
+  }).join('')||'<div class="card">地震履歴なし</div>';
+ }catch(e){document.getElementById('eqList').innerHTML='<div class="card">地震データを取得できません。</div>'}
 }
 
-async function loadEarthquakes(){
-  try{
-    let r=await fetch('earthquake_history.json',{cache:'no-store'});
-    if(!r.ok)r=await fetch('latest_earthquake.json',{cache:'no-store'});
-    if(!r.ok)throw Error();
-    const data=await r.json();
-    const arr=(Array.isArray(data)?data:(data.history||data.earthquakes||data.items||[data])).slice(0,10);
-    eqLayer.clearLayers();
-    document.getElementById('eqList').innerHTML=arr.map((q,i)=>{
-      const lat=num(q.latitude??q.lat),lon=num(q.longitude??q.lon);
-      const mag=q.magnitude??q.mag??q.M;
-      const place=q.hypocenter??q.location??q.name??q.place??'震源情報';
-      if(lat!==null&&lon!==null){
-        const m=Math.max(5,Math.min(14,(num(mag)||1)*3));
-        const c=L.circleMarker([lat,lon],{radius:m,color:i<5?'#a00':'#666',fillColor:i<5?'#e44':'#aaa',fillOpacity:.72,weight:i<5?2:1});
-        c.bindPopup('<b>地震</b><br>'+esc(place)+'<br>M '+esc(mag??'—'));
-        eqLayer.addLayer(c);
-      }
-      return '<div class="card"><b>'+(i+1)+'. '+esc(place)+'</b><br><span class="small">M '+esc(mag??'—')+' ／ '+esc(q.time??q.datetime??q.occurred_at??'')+'</span></div>'
-    }).join('')||'<div class="card">地震履歴なし</div>';
-  }catch(e){
-    document.getElementById('eqList').innerHTML='<div class="card">地震データを取得できません。地図は継続表示します。</div>';
-  }
-}
+const periods=['1d','7d','30d','90d','1y'];
+document.querySelectorAll('.pbtn').forEach(b=>b.onclick=async()=>{
+ document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+ const p=b.dataset.period;
+ document.getElementById('periodBtn').textContent=b.textContent;
+ await loadGnss(p);
+});
+document.getElementById('periodBtn').onclick=()=>document.getElementById('drawer').classList.add('open');
 
-/* NICT GEONET quasi-realtime TEC map.
-   Bounds are deliberately kept broad and the overlay can be hidden.
-   If NICT changes the image URL, the error handler removes the overlay
-   instead of generating a JavaScript error. */
-const tecBounds=[[24.0,122.0],[46.5,146.5]];
-const tecImage=L.imageOverlay('https://aer-nc-web.nict.go.jp/GPS/QR_GEONET/Latest_6hours_Amap.gif',tecBounds,{opacity:.58,interactive:false});
-tecImage.on('error',()=>{try{tecLayer.removeLayer(tecImage)}catch(e){}});
-tecLayer.addLayer(tecImage);
-
-const modeBtn=document.getElementById('modeBtn');
-let mode='annual';
-modeBtn.onclick=async function(){
-  mode=mode==='annual'?'30d':'annual';
-  this.textContent=mode==='annual'?'年間':'30日';
-  await loadGnss(mode);
-};
-
-Promise.allSettled([loadMonitoring(),loadGnss('annual'),loadBoundaries(),loadEarthquakes()]);
-
-/* Refresh only the data layers; never replace the HTML document. */
-setInterval(()=>{loadMonitoring();loadGnss(mode);loadEarthquakes()},10*60*1000);
-
+Promise.allSettled([loadMonitoring(),loadGnss('1y'),loadBoundary(),loadEq()]);
+setInterval(()=>{loadMonitoring();loadEq()},10*60*1000);
 })();
 </script>
 </body>
