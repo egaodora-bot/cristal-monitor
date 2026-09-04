@@ -59,16 +59,16 @@ button:disabled{opacity:.45;cursor:not-allowed}
  <h2>監視情報</h2>
 
  <div class="notice">
-   <b>電磁気情報は独立レイヤーです。</b><br>
-   GNSSの重要監視スコアには混ぜません。電磁気観測値を取得できない場合は「異常なし」と判定せず、取得状態をそのまま表示します。
+   <b>⚡電磁波と🧲地磁気は別レイヤーです。</b><br>
+   GNSSの重要監視スコアには混ぜません。電磁波の実測値を取得できない場合は「異常なし」と判定せず、取得状態をそのまま表示します。
  </div>
 
  <h3>重要監視 TOP7</h3>
  <div id="monitorList"><div class="card">候補データを確認中…</div></div>
 
- <h3>⚡ 全国の電磁波</h3>
+ <h3>⚡ 全国の電磁波監視</h3>
  <div class="card em">
-   <b>全国の電磁波・電離圏の監視</b>
+   <b>全国の電磁波・電離圏監視</b>
    <div id="emSummary" class="small">観測情報を確認中…</div>
    <div id="emTable" style="margin-top:7px"></div>
    <div class="source">※「電磁波」はNICTの電離圏・電波伝搬関連情報。「地磁気」は国土地理院の磁場観測で、別レイヤーです。</div>
@@ -181,7 +181,7 @@ const EM=[
 ];
 EM.forEach(d=>{
  const m=L.circleMarker([d[2],d[3]],{radius:8,color:'#8a3fa8',fillColor:'#b05ac9',fillOpacity:.92,weight:2});
- m.bindPopup('<b>⚡ 電磁波・電離圏 '+esc(d[1])+'</b><br>NICT観測<br><span id="emPopup_'+esc(d[0])+'">現在値を確認中…</span><br><a href="https://wdc.nict.go.jp/Ionosphere/realtime/ISDJ/ionospheric-signal.html" target="_blank" rel="noopener">詳細観測</a>');
+ m.bindPopup('<b>⚡ 電磁波監視 '+esc(d[1])+'</b><br>NICT GEONET TEC<br>最新6時間・10分間隔<br>対象: TEC / TEC変動(60分・15分) / ROTI / GPSロック損失率<br><span id="emPopup_'+esc(d[0])+'">実測値: NICT公開ページで確認</span><br><a href="https://www2.nict.go.jp/spe/gps/REALTIME_GEONET/" target="_blank" rel="noopener">最新の観測データを開く</a>');
  emLayer.addLayer(m);
 });
 
@@ -267,10 +267,10 @@ async function loadMonitoring(){
   const lat=num(d.lat??d.latitude),lon=num(d.lon??d.longitude);
   if(lat!==null&&lon!==null){
    const r=L.circleMarker([lat,lon],{radius:i<3?12:10,weight:3,color:i<3?'#a00':'#b66a00',fillOpacity:.04});
-   r.bindPopup('<b>重要監視 '+(i+1)+'位</b><br>'+esc(d.pref||'')+' '+esc(d.area||d.name||'')+'<br>GEONET '+esc(d.station||'')+'<br>Score '+esc(d.score??'—'));
+   r.bindPopup('<b>重要監視 '+(i+1)+'位</b><br><b>'+esc(d.pref||'')+' '+esc(d.area||d.name||'')+'</b><br>GEONET '+esc(d.station||'')+'<br>Score '+esc(d.score??'—'));
    monitorLayer.addLayer(r);
   }
-  return '<div class="card monitor '+(i<3?'top3':'top7')+'"><span class="rank">'+(i+1)+'</span><div style="flex:1"><b>'+esc(d.station||d.name||'—')+'</b><br><span class="small">'+esc(d.area ? d.pref+'・'+d.area : (d.pref ? d.pref+'・'+(d.name||'') : regionOf(lat,lon)))+' ／ Score '+esc(d.score??'—')+' ／ 年間3D '+esc(d.net_3d_mm_per_year??'—')+' mm/yr</span></div><span class="badge">'+(i<3?'最重要':'重要')+'</span></div>';
+  return '<div class="card monitor '+(i<3?'top3':'top7')+'"><span class="rank">'+(i+1)+'</span><div style="flex:1"><b>'+esc(d.area ? d.pref+'・'+d.area : (d.pref ? d.pref+'・'+(d.name||'') : regionOf(lat,lon)))+'</b><br><span class="small">GEONET '+esc(d.station||'—')+' ／ '+esc(d.name||'')+' ／ Score '+esc(d.score??'—')+' ／ 年間3D '+esc(d.net_3d_mm_per_year??'—')+' mm/yr</span></div><span class="badge">'+(i<3?'最重要':'重要')+'</span></div>';
  }).join(''))||'<div class="card">重要監視候補を表示できません。</div>';
 }
 
