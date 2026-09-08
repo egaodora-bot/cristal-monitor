@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/08 21:02:00",
-  "place": "熊本県熊本地方",
-  "lat": 32.5,
-  "lon": 130.6,
-  "depth_km": 10.0,
-  "magnitude": 3.3,
+  "earthquake_time": "2026/09/08 22:23:00",
+  "place": "根室半島南東沖",
+  "lat": 43.0,
+  "lon": 145.7,
+  "depth_km": 80.0,
+  "magnitude": 3.7,
   "max_intensity": ""
 }
