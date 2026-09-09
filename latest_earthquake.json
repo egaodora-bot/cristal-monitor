@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/09 17:38:00",
-  "place": "秋田県内陸北部",
-  "lat": 40.0,
-  "lon": 140.6,
-  "depth_km": 10.0,
-  "magnitude": 2.7,
+  "earthquake_time": "2026/09/10 02:11:00",
+  "place": "宮古島近海",
+  "lat": 24.9,
+  "lon": 125.4,
+  "depth_km": 40.0,
+  "magnitude": 3.4,
   "max_intensity": ""
 }
