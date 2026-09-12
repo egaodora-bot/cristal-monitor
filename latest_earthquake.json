@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/13 01:03:00",
-  "place": "富山県東部",
-  "lat": 36.4,
-  "lon": 137.6,
-  "depth_km": 0.0,
-  "magnitude": 2.9,
+  "earthquake_time": "2026/09/13 04:18:00",
+  "place": "三宅島近海",
+  "lat": 33.8,
+  "lon": 139.4,
+  "depth_km": 20.0,
+  "magnitude": 4.3,
   "max_intensity": ""
 }
