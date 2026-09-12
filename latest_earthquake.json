@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/12 16:49:00",
-  "place": "千葉県南部",
-  "lat": 35.2,
-  "lon": 140.3,
-  "depth_km": 20.0,
-  "magnitude": 3.2,
+  "earthquake_time": "2026/09/13 01:03:00",
+  "place": "富山県東部",
+  "lat": 36.4,
+  "lon": 137.6,
+  "depth_km": 0.0,
+  "magnitude": 2.9,
   "max_intensity": ""
 }
