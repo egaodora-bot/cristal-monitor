@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/13 17:31:00",
-  "place": "津軽海峡",
-  "lat": 41.5,
-  "lon": 141.3,
-  "depth_km": 120.0,
-  "magnitude": 4.5,
+  "earthquake_time": "2026/09/13 19:17:00",
+  "place": "熊本県天草・芦北地方",
+  "lat": 32.3,
+  "lon": 130.5,
+  "depth_km": 10.0,
+  "magnitude": 2.3,
   "max_intensity": ""
 }
