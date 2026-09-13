@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/13 12:50:00",
-  "place": "父島近海",
-  "lat": 26.5,
-  "lon": 142.9,
-  "depth_km": 10.0,
-  "magnitude": 4.6,
+  "earthquake_time": "2026/09/13 13:53:00",
+  "place": "宮城県沖",
+  "lat": 38.8,
+  "lon": 142.0,
+  "depth_km": 50.0,
+  "magnitude": 3.4,
   "max_intensity": ""
 }
