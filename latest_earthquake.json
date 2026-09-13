@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/13 20:19:00",
-  "place": "岩手県沖",
-  "lat": 40.4,
-  "lon": 142.1,
-  "depth_km": 50.0,
-  "magnitude": 3.7,
+  "earthquake_time": "2026/09/14 07:17:00",
+  "place": "岩手県沿岸北部",
+  "lat": 40.1,
+  "lon": 141.7,
+  "depth_km": 10.0,
+  "magnitude": 2.9,
   "max_intensity": ""
 }
