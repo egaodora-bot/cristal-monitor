@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/16 14:23:00",
-  "place": "遠州灘",
-  "lat": 34.4,
-  "lon": 137.3,
-  "depth_km": 30.0,
-  "magnitude": 3.3,
+  "earthquake_time": "2026/09/16 17:21:00",
+  "place": "栃木県北部",
+  "lat": 36.8,
+  "lon": 139.4,
+  "depth_km": 0.0,
+  "magnitude": 2.7,
   "max_intensity": ""
 }
