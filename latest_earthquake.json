@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/21 08:07:00",
-  "place": "熊本県天草・芦北地方",
-  "lat": 32.2,
-  "lon": 130.4,
-  "depth_km": 10.0,
-  "magnitude": 2.1,
+  "earthquake_time": "2026/09/21 08:25:00",
+  "place": "根室半島南東沖",
+  "lat": 43.5,
+  "lon": 146.3,
+  "depth_km": 50.0,
+  "magnitude": 4.7,
   "max_intensity": ""
 }
