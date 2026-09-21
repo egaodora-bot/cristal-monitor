@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/22 07:30:00",
-  "place": "福島県沖",
-  "lat": 37.5,
-  "lon": 142.1,
-  "depth_km": 30.0,
-  "magnitude": 4.5,
+  "earthquake_time": "2026/09/22 08:27:00",
+  "place": "熊本県熊本地方",
+  "lat": 32.5,
+  "lon": 130.6,
+  "depth_km": 10.0,
+  "magnitude": 3.0,
   "max_intensity": ""
 }
