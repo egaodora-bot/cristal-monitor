@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/21 22:38:00",
-  "place": "日向灘",
-  "lat": 32.6,
-  "lon": 132.1,
-  "depth_km": 30.0,
-  "magnitude": 4.8,
+  "earthquake_time": "2026/09/21 23:32:00",
+  "place": "茨城県沖",
+  "lat": 36.6,
+  "lon": 141.0,
+  "depth_km": 40.0,
+  "magnitude": 3.5,
   "max_intensity": ""
 }
