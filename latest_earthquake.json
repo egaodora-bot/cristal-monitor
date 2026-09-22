@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/22 18:49:00",
-  "place": "奄美大島近海",
-  "lat": 27.6,
-  "lon": 128.9,
-  "depth_km": 10.0,
-  "magnitude": 3.4,
+  "earthquake_time": "2026/09/22 19:46:00",
+  "place": "奄美大島北西沖",
+  "lat": 29.0,
+  "lon": 128.7,
+  "depth_km": 20.0,
+  "magnitude": 4.9,
   "max_intensity": ""
 }
