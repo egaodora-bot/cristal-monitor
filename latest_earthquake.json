@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/24 09:51:00",
-  "place": "茨城県沖",
-  "lat": 36.4,
-  "lon": 141.1,
-  "depth_km": 40.0,
-  "magnitude": 3.7,
+  "earthquake_time": "2026/09/24 12:39:00",
+  "place": "岐阜県美濃東部",
+  "lat": 35.5,
+  "lon": 137.4,
+  "depth_km": 10.0,
+  "magnitude": 3.0,
   "max_intensity": ""
 }
