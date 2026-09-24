@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/24 12:39:00",
-  "place": "岐阜県美濃東部",
-  "lat": 35.5,
-  "lon": 137.4,
-  "depth_km": 10.0,
-  "magnitude": 3.0,
+  "earthquake_time": "2026/09/24 17:27:00",
+  "place": "千葉県北東部",
+  "lat": 35.7,
+  "lon": 140.6,
+  "depth_km": 50.0,
+  "magnitude": 3.6,
   "max_intensity": ""
 }
