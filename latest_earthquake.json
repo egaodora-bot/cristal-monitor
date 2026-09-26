@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/26 21:07:00",
-  "place": "伊勢湾",
-  "lat": 34.8,
-  "lon": 136.8,
-  "depth_km": 40.0,
-  "magnitude": 3.2,
+  "earthquake_time": "2026/09/27 01:23:00",
+  "place": "茨城県北部",
+  "lat": 36.7,
+  "lon": 140.6,
+  "depth_km": 10.0,
+  "magnitude": 2.7,
   "max_intensity": ""
 }
