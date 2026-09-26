@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/26 06:23:00",
-  "place": "ローヤリティー諸島",
-  "lat": -21.2,
-  "lon": 168.5,
-  "depth_km": -1.0,
-  "magnitude": 7.0,
+  "earthquake_time": "2026/09/26 12:17:00",
+  "place": "熊本県天草・芦北地方",
+  "lat": 32.2,
+  "lon": 130.4,
+  "depth_km": 0.0,
+  "magnitude": 2.2,
   "max_intensity": ""
 }
