@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/28 21:04:00",
-  "place": "宮城県沖",
-  "lat": 38.9,
-  "lon": 142.0,
+  "earthquake_time": "2026/09/29 04:45:00",
+  "place": "茨城県南部",
+  "lat": 36.1,
+  "lon": 139.9,
   "depth_km": 50.0,
-  "magnitude": 3.5,
+  "magnitude": 4.9,
   "max_intensity": ""
 }
