@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/29 22:48:00",
-  "place": "千葉県北東部",
-  "lat": 35.7,
-  "lon": 140.6,
-  "depth_km": 50.0,
-  "magnitude": 3.0,
+  "earthquake_time": "2026/09/30 14:00:00",
+  "place": "与那国島近海",
+  "lat": 23.8,
+  "lon": 122.9,
+  "depth_km": 10.0,
+  "magnitude": 6.0,
   "max_intensity": ""
 }
