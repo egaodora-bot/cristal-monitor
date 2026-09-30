@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/09/30 21:28:00",
-  "place": "トカラ列島近海",
-  "lat": 29.7,
-  "lon": 129.8,
-  "depth_km": 10.0,
-  "magnitude": 2.5,
+  "earthquake_time": "2026/10/01 00:58:00",
+  "place": "福島県会津",
+  "lat": 37.4,
+  "lon": 139.4,
+  "depth_km": 0.0,
+  "magnitude": 2.9,
   "max_intensity": ""
 }
