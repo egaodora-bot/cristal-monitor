@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/01 10:32:00",
-  "place": "埼玉県南部",
-  "lat": 36.0,
-  "lon": 139.5,
-  "depth_km": 50.0,
-  "magnitude": 3.2,
+  "earthquake_time": "2026/10/02 01:20:00",
+  "place": "茨城県北部",
+  "lat": 36.6,
+  "lon": 140.6,
+  "depth_km": 0.0,
+  "magnitude": 2.6,
   "max_intensity": ""
 }
