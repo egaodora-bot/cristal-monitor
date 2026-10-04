@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/05 05:02:00",
-  "place": "播磨灘",
-  "lat": 34.4,
-  "lon": 134.7,
+  "earthquake_time": "2026/10/05 07:28:00",
+  "place": "香川県西部",
+  "lat": 34.2,
+  "lon": 133.8,
   "depth_km": 10.0,
-  "magnitude": 2.5,
+  "magnitude": 3.0,
   "max_intensity": ""
 }
