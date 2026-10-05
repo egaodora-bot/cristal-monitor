@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/05 12:39:00",
-  "place": "鹿児島県薩摩地方",
-  "lat": 32.0,
-  "lon": 130.2,
-  "depth_km": 0.0,
-  "magnitude": 2.0,
+  "earthquake_time": "2026/10/05 22:31:00",
+  "place": "石垣島北西沖",
+  "lat": 25.1,
+  "lon": 123.4,
+  "depth_km": 150.0,
+  "magnitude": 4.6,
   "max_intensity": ""
 }
