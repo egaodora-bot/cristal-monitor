@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/06 10:48:00",
-  "place": "浦河沖",
-  "lat": 42.0,
-  "lon": 142.3,
-  "depth_km": 70.0,
-  "magnitude": 3.6,
+  "earthquake_time": "2026/10/06 13:47:00",
+  "place": "熊本県熊本地方",
+  "lat": 32.6,
+  "lon": 130.7,
+  "depth_km": 10.0,
+  "magnitude": 2.9,
   "max_intensity": ""
 }
