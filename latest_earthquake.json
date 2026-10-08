@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/09 00:31:00",
-  "place": "新島・神津島近海",
-  "lat": 34.2,
-  "lon": 139.2,
-  "depth_km": 10.0,
-  "magnitude": 2.2,
+  "earthquake_time": "2026/10/09 07:14:00",
+  "place": "根室半島南東沖",
+  "lat": 43.2,
+  "lon": 145.7,
+  "depth_km": 60.0,
+  "magnitude": 3.3,
   "max_intensity": ""
 }
