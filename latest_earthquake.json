@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/12 05:05:00",
-  "place": "熊本県天草・芦北地方",
-  "lat": 32.3,
-  "lon": 130.5,
-  "depth_km": 10.0,
-  "magnitude": 1.9,
+  "earthquake_time": "2026/10/12 12:45:00",
+  "place": "釧路沖",
+  "lat": 42.5,
+  "lon": 144.3,
+  "depth_km": 70.0,
+  "magnitude": 4.0,
   "max_intensity": ""
 }
