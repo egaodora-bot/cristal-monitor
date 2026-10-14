@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/15 02:02:00",
-  "place": "宮崎県南部山沿い",
-  "lat": 32.1,
-  "lon": 131.0,
+  "earthquake_time": "2026/10/15 07:41:00",
+  "place": "熊本県天草・芦北地方",
+  "lat": 32.5,
+  "lon": 130.5,
   "depth_km": 0.0,
-  "magnitude": 2.6,
+  "magnitude": 3.6,
   "max_intensity": ""
 }
