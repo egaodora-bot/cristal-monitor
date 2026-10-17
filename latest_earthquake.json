@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/17 11:54:00",
-  "place": "紀伊水道",
-  "lat": 34.1,
-  "lon": 135.1,
+  "earthquake_time": "2026/10/17 17:42:00",
+  "place": "和歌山県北部",
+  "lat": 33.9,
+  "lon": 135.2,
   "depth_km": 10.0,
-  "magnitude": 2.6,
+  "magnitude": 2.8,
   "max_intensity": ""
 }
