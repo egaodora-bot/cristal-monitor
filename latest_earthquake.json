@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/19 22:41:00",
-  "place": "沖縄本島近海",
-  "lat": 27.3,
-  "lon": 128.4,
-  "depth_km": 50.0,
-  "magnitude": 3.6,
+  "earthquake_time": "2026/10/20 05:50:00",
+  "place": "釧路沖",
+  "lat": 42.4,
+  "lon": 144.7,
+  "depth_km": 30.0,
+  "magnitude": 4.0,
   "max_intensity": ""
 }
