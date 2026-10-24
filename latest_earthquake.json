@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/24 21:08:00",
-  "place": "薩摩半島西方沖",
-  "lat": 31.2,
-  "lon": 129.9,
-  "depth_km": 0.0,
-  "magnitude": 3.6,
+  "earthquake_time": "2026/10/25 07:53:00",
+  "place": "熊本県熊本地方",
+  "lat": 32.8,
+  "lon": 130.9,
+  "depth_km": 10.0,
+  "magnitude": 2.1,
   "max_intensity": ""
 }
