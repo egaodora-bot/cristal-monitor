@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/24 12:44:00",
-  "place": "陸奥湾",
-  "lat": 41.0,
-  "lon": 141.1,
-  "depth_km": 10.0,
-  "magnitude": 2.9,
+  "earthquake_time": "2026/10/24 21:08:00",
+  "place": "薩摩半島西方沖",
+  "lat": 31.2,
+  "lon": 129.9,
+  "depth_km": 0.0,
+  "magnitude": 3.6,
   "max_intensity": ""
 }
