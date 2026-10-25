@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/26 06:46:00",
-  "place": "福島県会津",
-  "lat": 37.4,
-  "lon": 139.4,
-  "depth_km": 0.0,
-  "magnitude": 3.2,
+  "earthquake_time": "2026/10/26 07:15:00",
+  "place": "小笠原諸島西方沖",
+  "lat": 27.9,
+  "lon": 140.0,
+  "depth_km": 500.0,
+  "magnitude": 5.6,
   "max_intensity": ""
 }
