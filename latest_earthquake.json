@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/28 00:28:00",
-  "place": "福島県沖",
-  "lat": 37.4,
-  "lon": 141.3,
-  "depth_km": 80.0,
-  "magnitude": 4.0,
+  "earthquake_time": "2026/10/28 03:32:00",
+  "place": "熊本県天草・芦北地方",
+  "lat": 32.2,
+  "lon": 130.4,
+  "depth_km": 10.0,
+  "magnitude": 2.2,
   "max_intensity": ""
 }
