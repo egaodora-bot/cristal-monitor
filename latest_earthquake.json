@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/29 08:14:00",
-  "place": "釧路地方中南部",
-  "lat": 43.1,
-  "lon": 144.5,
-  "depth_km": 120.0,
-  "magnitude": 4.4,
+  "earthquake_time": "2026/10/30 01:06:00",
+  "place": "岐阜県飛騨地方",
+  "lat": 35.7,
+  "lon": 137.2,
+  "depth_km": 10.0,
+  "magnitude": 2.3,
   "max_intensity": ""
 }
