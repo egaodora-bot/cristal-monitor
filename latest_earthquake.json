@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/30 01:06:00",
-  "place": "岐阜県飛騨地方",
-  "lat": 35.7,
-  "lon": 137.2,
-  "depth_km": 10.0,
-  "magnitude": 2.3,
+  "earthquake_time": "2026/10/30 17:45:00",
+  "place": "根室半島南東沖",
+  "lat": 43.3,
+  "lon": 146.3,
+  "depth_km": 50.0,
+  "magnitude": 4.2,
   "max_intensity": ""
 }
