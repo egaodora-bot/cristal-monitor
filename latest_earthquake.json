@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/30 23:11:00",
-  "place": "島根県東部",
-  "lat": 35.3,
-  "lon": 133.2,
+  "earthquake_time": "2026/10/31 05:47:00",
+  "place": "天草灘",
+  "lat": 32.0,
+  "lon": 130.1,
   "depth_km": 10.0,
-  "magnitude": 3.5,
+  "magnitude": 3.0,
   "max_intensity": ""
 }
