@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/10/31 05:47:00",
-  "place": "天草灘",
-  "lat": 32.0,
-  "lon": 130.1,
-  "depth_km": 10.0,
-  "magnitude": 3.0,
+  "earthquake_time": "2026/10/31 06:15:00",
+  "place": "種子島近海",
+  "lat": 30.3,
+  "lon": 131.2,
+  "depth_km": 30.0,
+  "magnitude": 4.0,
   "max_intensity": ""
 }
