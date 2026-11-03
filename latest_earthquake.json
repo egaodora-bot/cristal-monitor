@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/03 14:40:00",
-  "place": "千葉県北東部",
-  "lat": 35.7,
-  "lon": 140.6,
-  "depth_km": 50.0,
-  "magnitude": 4.7,
+  "earthquake_time": "2026/11/04 01:48:00",
+  "place": "硫黄島近海",
+  "lat": 24.3,
+  "lon": 141.3,
+  "depth_km": 150.0,
+  "magnitude": 5.4,
   "max_intensity": ""
 }
