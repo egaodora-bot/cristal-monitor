@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/06 03:05:00",
-  "place": "福島県沖",
-  "lat": 37.8,
-  "lon": 141.5,
-  "depth_km": 80.0,
-  "magnitude": 4.3,
+  "earthquake_time": "2026/11/06 09:06:00",
+  "place": "相模湾",
+  "lat": 35.2,
+  "lon": 139.5,
+  "depth_km": 140.0,
+  "magnitude": 3.7,
   "max_intensity": ""
 }
