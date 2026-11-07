@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/07 20:07:00",
-  "place": "茨城県沖",
-  "lat": 36.2,
-  "lon": 141.6,
-  "depth_km": 20.0,
-  "magnitude": 5.6,
+  "earthquake_time": "2026/11/08 02:31:00",
+  "place": "渡島地方東部",
+  "lat": 41.9,
+  "lon": 140.7,
+  "depth_km": 0.0,
+  "magnitude": 2.9,
   "max_intensity": ""
 }
