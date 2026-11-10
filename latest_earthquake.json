@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/10 16:53:00",
-  "place": "愛媛県南予",
-  "lat": 33.4,
-  "lon": 132.4,
-  "depth_km": 40.0,
-  "magnitude": 3.0,
+  "earthquake_time": "2026/11/10 22:23:00",
+  "place": "熊本県天草・芦北地方",
+  "lat": 32.3,
+  "lon": 130.5,
+  "depth_km": 10.0,
+  "magnitude": 2.5,
   "max_intensity": ""
 }
