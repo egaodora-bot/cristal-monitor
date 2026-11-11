@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/11 08:33:00",
-  "place": "熊本県熊本地方",
-  "lat": 32.8,
-  "lon": 130.8,
-  "depth_km": 0.0,
-  "magnitude": 2.7,
+  "earthquake_time": "2026/11/11 15:21:00",
+  "place": "熊本県阿蘇地方",
+  "lat": 33.0,
+  "lon": 131.1,
+  "depth_km": 10.0,
+  "magnitude": 2.4,
   "max_intensity": ""
 }
