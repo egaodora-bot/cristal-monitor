@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/14 00:03:00",
-  "place": "島根県西部",
-  "lat": 35.2,
-  "lon": 132.6,
+  "earthquake_time": "2026/11/14 11:16:00",
+  "place": "富山県西部",
+  "lat": 36.3,
+  "lon": 137.0,
   "depth_km": 10.0,
-  "magnitude": 3.5,
+  "magnitude": 3.0,
   "max_intensity": ""
 }
