@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/15 01:50:00",
-  "place": "茨城県沖",
-  "lat": 36.7,
-  "lon": 140.8,
-  "depth_km": 90.0,
-  "magnitude": 3.7,
+  "earthquake_time": "2026/11/15 06:31:00",
+  "place": "熊本県天草・芦北地方",
+  "lat": 32.3,
+  "lon": 130.4,
+  "depth_km": 10.0,
+  "magnitude": 2.3,
   "max_intensity": ""
 }
