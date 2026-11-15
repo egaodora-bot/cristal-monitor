@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/16 04:34:00",
+  "earthquake_time": "2026/11/16 06:08:00",
   "place": "愛知県東部",
   "lat": 35.0,
-  "lon": 137.6,
+  "lon": 137.7,
   "depth_km": 40.0,
-  "magnitude": 2.6,
+  "magnitude": 3.4,
   "max_intensity": ""
 }
