@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/16 13:28:00",
-  "place": "静岡県東部",
-  "lat": 35.3,
-  "lon": 139.0,
-  "depth_km": 0.0,
-  "magnitude": 2.8,
+  "earthquake_time": "2026/11/17 01:45:00",
+  "place": "宮古島近海",
+  "lat": 24.3,
+  "lon": 125.2,
+  "depth_km": 30.0,
+  "magnitude": 3.9,
   "max_intensity": ""
 }
