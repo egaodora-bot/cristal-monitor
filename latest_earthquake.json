@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/17 01:45:00",
-  "place": "宮古島近海",
-  "lat": 24.3,
-  "lon": 125.2,
-  "depth_km": 30.0,
-  "magnitude": 3.9,
+  "earthquake_time": "2026/11/17 10:40:00",
+  "place": "熊本県天草・芦北地方",
+  "lat": 32.3,
+  "lon": 130.5,
+  "depth_km": 10.0,
+  "magnitude": 2.6,
   "max_intensity": ""
 }
