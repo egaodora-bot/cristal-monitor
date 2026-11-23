@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/23 04:32:00",
-  "place": "鳥取県東部",
-  "lat": 35.5,
-  "lon": 134.3,
-  "depth_km": 10.0,
-  "magnitude": 2.7,
+  "earthquake_time": "2026/11/23 08:50:00",
+  "place": "沖縄本島近海",
+  "lat": 26.4,
+  "lon": 127.4,
+  "depth_km": 50.0,
+  "magnitude": 3.5,
   "max_intensity": ""
 }
