@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/23 08:50:00",
-  "place": "沖縄本島近海",
-  "lat": 26.4,
-  "lon": 127.4,
-  "depth_km": 50.0,
-  "magnitude": 3.5,
+  "earthquake_time": "2026/11/23 14:14:00",
+  "place": "長野県中部",
+  "lat": 36.1,
+  "lon": 137.7,
+  "depth_km": 0.0,
+  "magnitude": 3.9,
   "max_intensity": ""
 }
