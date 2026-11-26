@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/26 19:40:00",
-  "place": "陸奥湾",
-  "lat": 40.9,
-  "lon": 140.7,
-  "depth_km": 20.0,
-  "magnitude": 3.6,
+  "earthquake_time": "2026/11/27 04:33:00",
+  "place": "父島近海",
+  "lat": 28.4,
+  "lon": 141.2,
+  "depth_km": 30.0,
+  "magnitude": 5.5,
   "max_intensity": ""
 }
