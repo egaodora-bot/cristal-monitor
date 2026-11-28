@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/28 09:54:00",
-  "place": "高知県西部",
-  "lat": 33.3,
-  "lon": 132.9,
-  "depth_km": 30.0,
-  "magnitude": 3.2,
+  "earthquake_time": "2026/11/28 18:39:00",
+  "place": "熊本県天草・芦北地方",
+  "lat": 32.3,
+  "lon": 130.5,
+  "depth_km": 10.0,
+  "magnitude": 3.1,
   "max_intensity": ""
 }
