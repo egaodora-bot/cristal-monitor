@@ -1,10 +1,10 @@
 {
   "source": "JMA/P2PQuake",
-  "earthquake_time": "2026/11/28 04:32:00",
-  "place": "根室地方南部",
-  "lat": 43.3,
-  "lon": 145.3,
-  "depth_km": 80.0,
-  "magnitude": 3.1,
+  "earthquake_time": "2026/11/28 09:54:00",
+  "place": "高知県西部",
+  "lat": 33.3,
+  "lon": 132.9,
+  "depth_km": 30.0,
+  "magnitude": 3.2,
   "max_intensity": ""
 }
